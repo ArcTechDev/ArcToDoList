@@ -7,6 +7,7 @@
 //
 
 #import "SigninViewController.h"
+#import "AccountManager.h"
 
 
 @interface SigninViewController ()
@@ -21,9 +22,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+}
+
+- (void)viewDidAppear:(BOOL)animated{
     
-    [self googelPlusLoginSetup];
-    [self fbLoginSetup];
+    [super viewDidAppear:animated];
+    
+    [[AccountManager sharedManager] googlePlusLoginSetupWithLoginSuccessful:^(GTMOAuth2Authentication *auth, UserAccount *account){
+        
+        [self performSegueWithIdentifier:@"UserInfo" sender:nil];
+        
+    }WithLoginFail:^(NSError *error){
+        
+        NSLog(@"log in google account fail %@", error);
+    }];
+    
+    [[AccountManager sharedManager] facebookLoginSetupWithButton:_fbLogInButton WithLoginSuccessful:^(FBSDKLoginManagerLoginResult *result, UserAccount *account){
+        
+        [self performSegueWithIdentifier:@"UserInfo" sender:nil];
+        
+    }WithLoginFail:^(NSError *error){
+        
+        NSLog(@"log in facebook account fail %@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,37 +53,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Google plus login setup
-- (void)googelPlusLoginSetup{
-    
-    GPPSignIn *signIn = [GPPSignIn sharedInstance];
-    
-    signIn.clientID = kClientId;
-    
-    signIn.scopes = [NSArray arrayWithObjects: kGTLAuthScopePlusLogin, nil];
-    
-    signIn.delegate = self;
-}
-
-- (void)finishedWithAuth: (GTMOAuth2Authentication *)auth error: (NSError *) error{
-    
-    NSLog(@"Google login Received error %@ and auth object %@",error, auth);
-}
-
-#pragma mark - Facebook login setup
-- (void)fbLoginSetup{
-    
-    _fbLogInButton.delegate = self;
-}
-
-- (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error{
-    
-    NSLog(@"Facebook login Received error %@ and result %@", error, result);
-}
-
-- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
-    
-}
 
 /*
 #pragma mark - Navigation

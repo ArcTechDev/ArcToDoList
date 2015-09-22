@@ -17,6 +17,11 @@
 		CEC9425B1BB0F8B80085E6D1 /* ExtendNSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9425A1BB0F8B80085E6D1 /* ExtendNSLog.m */; };
 		CEC9425E1BB0F8C60085E6D1 /* SigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */; };
 		CEC942601BB0FFDC0085E6D1 /* ReadMe in Resources */ = {isa = PBXBuildFile; fileRef = CEC9425F1BB0FFDC0085E6D1 /* ReadMe */; };
+		CEC942651BB101CA0085E6D1 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942641BB101CA0085E6D1 /* AccountManager.m */; };
+		CEC942681BB101D80085E6D1 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942671BB101D80085E6D1 /* UserAccount.m */; };
+		CEC9426C1BB10B230085E6D1 /* GooglePlusAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9426B1BB10B230085E6D1 /* GooglePlusAccount.m */; };
+		CEC9426F1BB12D470085E6D1 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9426E1BB12D470085E6D1 /* UserInfoViewController.m */; };
+		CEC942731BB136BD0085E6D1 /* FacebookAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942721BB136BD0085E6D1 /* FacebookAccount.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,16 @@
 		CEC9425C1BB0F8C60085E6D1 /* SigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigninViewController.h; sourceTree = "<group>"; };
 		CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigninViewController.m; sourceTree = "<group>"; };
 		CEC9425F1BB0FFDC0085E6D1 /* ReadMe */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe; sourceTree = "<group>"; };
+		CEC942631BB101CA0085E6D1 /* AccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
+		CEC942641BB101CA0085E6D1 /* AccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
+		CEC942661BB101D80085E6D1 /* UserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccount.h; sourceTree = "<group>"; };
+		CEC942671BB101D80085E6D1 /* UserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccount.m; sourceTree = "<group>"; };
+		CEC9426A1BB10B230085E6D1 /* GooglePlusAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglePlusAccount.h; sourceTree = "<group>"; };
+		CEC9426B1BB10B230085E6D1 /* GooglePlusAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglePlusAccount.m; sourceTree = "<group>"; };
+		CEC9426D1BB12D470085E6D1 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		CEC9426E1BB12D470085E6D1 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		CEC942711BB136BD0085E6D1 /* FacebookAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookAccount.h; sourceTree = "<group>"; };
+		CEC942721BB136BD0085E6D1 /* FacebookAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookAccount.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,14 +127,16 @@
 		CEC942301BB0F78D0085E6D1 /* ArcToDoList */ = {
 			isa = PBXGroup;
 			children = (
-				CEC9425C1BB0F8C60085E6D1 /* SigninViewController.h */,
-				CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */,
+				CEC942621BB101B50085E6D1 /* AccountManager */,
+				CEC942611BB101A70085E6D1 /* SinginViewController */,
 				CEC942351BB0F78D0085E6D1 /* AppDelegate.h */,
 				CEC942361BB0F78D0085E6D1 /* AppDelegate.m */,
 				CEC9423B1BB0F78D0085E6D1 /* Main.storyboard */,
 				CEC9423E1BB0F78D0085E6D1 /* Images.xcassets */,
 				CEC942401BB0F78D0085E6D1 /* LaunchScreen.xib */,
 				CEC942311BB0F78D0085E6D1 /* Supporting Files */,
+				CEC9426D1BB12D470085E6D1 /* UserInfoViewController.h */,
+				CEC9426E1BB12D470085E6D1 /* UserInfoViewController.m */,
 			);
 			path = ArcToDoList;
 			sourceTree = "<group>";
@@ -153,6 +170,46 @@
 				CEC9424C1BB0F78D0085E6D1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEC942611BB101A70085E6D1 /* SinginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CEC9425C1BB0F8C60085E6D1 /* SigninViewController.h */,
+				CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */,
+			);
+			name = SinginViewController;
+			sourceTree = "<group>";
+		};
+		CEC942621BB101B50085E6D1 /* AccountManager */ = {
+			isa = PBXGroup;
+			children = (
+				CEC942631BB101CA0085E6D1 /* AccountManager.h */,
+				CEC942641BB101CA0085E6D1 /* AccountManager.m */,
+				CEC942661BB101D80085E6D1 /* UserAccount.h */,
+				CEC942671BB101D80085E6D1 /* UserAccount.m */,
+				CEC942691BB10B040085E6D1 /* Google+ */,
+				CEC942701BB1367F0085E6D1 /* Facebook */,
+			);
+			name = AccountManager;
+			sourceTree = "<group>";
+		};
+		CEC942691BB10B040085E6D1 /* Google+ */ = {
+			isa = PBXGroup;
+			children = (
+				CEC9426A1BB10B230085E6D1 /* GooglePlusAccount.h */,
+				CEC9426B1BB10B230085E6D1 /* GooglePlusAccount.m */,
+			);
+			name = "Google+";
+			sourceTree = "<group>";
+		};
+		CEC942701BB1367F0085E6D1 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				CEC942711BB136BD0085E6D1 /* FacebookAccount.h */,
+				CEC942721BB136BD0085E6D1 /* FacebookAccount.m */,
+			);
+			name = Facebook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,8 +349,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */,
+				CEC9426C1BB10B230085E6D1 /* GooglePlusAccount.m in Sources */,
+				CEC942731BB136BD0085E6D1 /* FacebookAccount.m in Sources */,
+				CEC942651BB101CA0085E6D1 /* AccountManager.m in Sources */,
 				CEC942341BB0F78D0085E6D1 /* main.m in Sources */,
 				CEC9425E1BB0F8C60085E6D1 /* SigninViewController.m in Sources */,
+				CEC9426F1BB12D470085E6D1 /* UserInfoViewController.m in Sources */,
+				CEC942681BB101D80085E6D1 /* UserAccount.m in Sources */,
 				CEC9425B1BB0F8B80085E6D1 /* ExtendNSLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

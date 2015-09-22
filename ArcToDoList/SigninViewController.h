@@ -8,7 +8,7 @@
 
 @class GPPSignInButton;
 
-@interface SigninViewController : UIViewController<GPPSignInDelegate, FBSDKLoginButtonDelegate>
+@interface SigninViewController : UIViewController
 
 @property (retain, nonatomic) IBOutlet GPPSignInButton *googleLogInButton;
 @property (retain, nonatomic) IBOutlet FBSDKLoginButton *fbLogInButton;
