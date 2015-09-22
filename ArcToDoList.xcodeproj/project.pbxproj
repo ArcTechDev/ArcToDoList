@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C44AE5B509AF62C60FD6A96E /* libPods-ArcToDoList.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF99D740E9A48D7D462414E4 /* libPods-ArcToDoList.a */; };
 		CEC942341BB0F78D0085E6D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942331BB0F78D0085E6D1 /* main.m */; };
 		CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942361BB0F78D0085E6D1 /* AppDelegate.m */; };
-		CEC9423A1BB0F78D0085E6D1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942391BB0F78D0085E6D1 /* ViewController.m */; };
 		CEC9423D1BB0F78D0085E6D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC9423B1BB0F78D0085E6D1 /* Main.storyboard */; };
 		CEC9423F1BB0F78D0085E6D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEC9423E1BB0F78D0085E6D1 /* Images.xcassets */; };
 		CEC942421BB0F78D0085E6D1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC942401BB0F78D0085E6D1 /* LaunchScreen.xib */; };
 		CEC9424E1BB0F78D0085E6D1 /* ArcToDoListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9424D1BB0F78D0085E6D1 /* ArcToDoListTests.m */; };
+		CEC9425B1BB0F8B80085E6D1 /* ExtendNSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9425A1BB0F8B80085E6D1 /* ExtendNSLog.m */; };
+		CEC9425E1BB0F8C60085E6D1 /* SigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,19 +29,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		59422C454A690F9FA3A47030 /* Pods-ArcToDoList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcToDoList.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArcToDoList/Pods-ArcToDoList.release.xcconfig"; sourceTree = "<group>"; };
+		77D99613F979AB47B0EDA6BD /* Pods-ArcToDoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcToDoList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArcToDoList/Pods-ArcToDoList.debug.xcconfig"; sourceTree = "<group>"; };
+		AF99D740E9A48D7D462414E4 /* libPods-ArcToDoList.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArcToDoList.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC9422E1BB0F78D0085E6D1 /* ArcToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC942321BB0F78D0085E6D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEC942331BB0F78D0085E6D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CEC942351BB0F78D0085E6D1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEC942361BB0F78D0085E6D1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CEC942381BB0F78D0085E6D1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CEC942391BB0F78D0085E6D1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CEC9423C1BB0F78D0085E6D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEC9423E1BB0F78D0085E6D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CEC942411BB0F78D0085E6D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CEC942471BB0F78D0085E6D1 /* ArcToDoListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArcToDoListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC9424C1BB0F78D0085E6D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEC9424D1BB0F78D0085E6D1 /* ArcToDoListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArcToDoListTests.m; sourceTree = "<group>"; };
+		CEC942571BB0F8AE0085E6D1 /* GooglePlus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GooglePlus.h; sourceTree = "<group>"; };
+		CEC942581BB0F8B80085E6D1 /* ToDoList-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ToDoList-Prefix.pch"; sourceTree = "<group>"; };
+		CEC942591BB0F8B80085E6D1 /* ExtendNSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendNSLog.h; sourceTree = "<group>"; };
+		CEC9425A1BB0F8B80085E6D1 /* ExtendNSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendNSLog.m; sourceTree = "<group>"; };
+		CEC9425C1BB0F8C60085E6D1 /* SigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigninViewController.h; sourceTree = "<group>"; };
+		CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigninViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C44AE5B509AF62C60FD6A96E /* libPods-ArcToDoList.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +70,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1CD14832F352BF5702DB8B6F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				77D99613F979AB47B0EDA6BD /* Pods-ArcToDoList.debug.xcconfig */,
+				59422C454A690F9FA3A47030 /* Pods-ArcToDoList.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9109BAC8A5625744EE3C1112 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF99D740E9A48D7D462414E4 /* libPods-ArcToDoList.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CEC942251BB0F78D0085E6D1 = {
 			isa = PBXGroup;
 			children = (
 				CEC942301BB0F78D0085E6D1 /* ArcToDoList */,
 				CEC9424A1BB0F78D0085E6D1 /* ArcToDoListTests */,
 				CEC9422F1BB0F78D0085E6D1 /* Products */,
+				1CD14832F352BF5702DB8B6F /* Pods */,
+				9109BAC8A5625744EE3C1112 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,10 +110,10 @@
 		CEC942301BB0F78D0085E6D1 /* ArcToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				CEC9425C1BB0F8C60085E6D1 /* SigninViewController.h */,
+				CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */,
 				CEC942351BB0F78D0085E6D1 /* AppDelegate.h */,
 				CEC942361BB0F78D0085E6D1 /* AppDelegate.m */,
-				CEC942381BB0F78D0085E6D1 /* ViewController.h */,
-				CEC942391BB0F78D0085E6D1 /* ViewController.m */,
 				CEC9423B1BB0F78D0085E6D1 /* Main.storyboard */,
 				CEC9423E1BB0F78D0085E6D1 /* Images.xcassets */,
 				CEC942401BB0F78D0085E6D1 /* LaunchScreen.xib */,
@@ -96,6 +125,10 @@
 		CEC942311BB0F78D0085E6D1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CEC942581BB0F8B80085E6D1 /* ToDoList-Prefix.pch */,
+				CEC942591BB0F8B80085E6D1 /* ExtendNSLog.h */,
+				CEC9425A1BB0F8B80085E6D1 /* ExtendNSLog.m */,
+				CEC942571BB0F8AE0085E6D1 /* GooglePlus.h */,
 				CEC942321BB0F78D0085E6D1 /* Info.plist */,
 				CEC942331BB0F78D0085E6D1 /* main.m */,
 			);
@@ -126,9 +159,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEC942511BB0F78D0085E6D1 /* Build configuration list for PBXNativeTarget "ArcToDoList" */;
 			buildPhases = (
+				848A5DCDABD50752FBF603AA /* Check Pods Manifest.lock */,
 				CEC9422A1BB0F78D0085E6D1 /* Sources */,
 				CEC9422B1BB0F78D0085E6D1 /* Frameworks */,
 				CEC9422C1BB0F78D0085E6D1 /* Resources */,
+				A5BA20216B2B8AB4D4CF82DF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,14 +249,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		848A5DCDABD50752FBF603AA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A5BA20216B2B8AB4D4CF82DF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ArcToDoList/Pods-ArcToDoList-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CEC9422A1BB0F78D0085E6D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEC9423A1BB0F78D0085E6D1 /* ViewController.m in Sources */,
 				CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */,
 				CEC942341BB0F78D0085E6D1 /* main.m in Sources */,
+				CEC9425E1BB0F8C60085E6D1 /* SigninViewController.m in Sources */,
+				CEC9425B1BB0F8B80085E6D1 /* ExtendNSLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,8 +416,10 @@
 		};
 		CEC942521BB0F78D0085E6D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77D99613F979AB47B0EDA6BD /* Pods-ArcToDoList.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "ArcToDoList/ToDoList-Prefix.pch";
 				INFOPLIST_FILE = ArcToDoList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -357,8 +428,10 @@
 		};
 		CEC942531BB0F78D0085E6D1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59422C454A690F9FA3A47030 /* Pods-ArcToDoList.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "ArcToDoList/ToDoList-Prefix.pch";
 				INFOPLIST_FILE = ArcToDoList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -418,6 +491,7 @@
 				CEC942531BB0F78D0085E6D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CEC942541BB0F78D0085E6D1 /* Build configuration list for PBXNativeTarget "ArcToDoListTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +500,7 @@
 				CEC942561BB0F78D0085E6D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
