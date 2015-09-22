@@ -16,6 +16,7 @@
 		CEC9424E1BB0F78D0085E6D1 /* ArcToDoListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9424D1BB0F78D0085E6D1 /* ArcToDoListTests.m */; };
 		CEC9425B1BB0F8B80085E6D1 /* ExtendNSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9425A1BB0F8B80085E6D1 /* ExtendNSLog.m */; };
 		CEC9425E1BB0F8C60085E6D1 /* SigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */; };
+		CEC942601BB0FFDC0085E6D1 /* ReadMe in Resources */ = {isa = PBXBuildFile; fileRef = CEC9425F1BB0FFDC0085E6D1 /* ReadMe */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		CEC9425A1BB0F8B80085E6D1 /* ExtendNSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendNSLog.m; sourceTree = "<group>"; };
 		CEC9425C1BB0F8C60085E6D1 /* SigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigninViewController.h; sourceTree = "<group>"; };
 		CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigninViewController.m; sourceTree = "<group>"; };
+		CEC9425F1BB0FFDC0085E6D1 /* ReadMe */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				CEC942571BB0F8AE0085E6D1 /* GooglePlus.h */,
 				CEC942321BB0F78D0085E6D1 /* Info.plist */,
 				CEC942331BB0F78D0085E6D1 /* main.m */,
+				CEC9425F1BB0FFDC0085E6D1 /* ReadMe */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC942601BB0FFDC0085E6D1 /* ReadMe in Resources */,
 				CEC9423D1BB0F78D0085E6D1 /* Main.storyboard in Resources */,
 				CEC942421BB0F78D0085E6D1 /* LaunchScreen.xib in Resources */,
 				CEC9423F1BB0F78D0085E6D1 /* Images.xcassets in Resources */,

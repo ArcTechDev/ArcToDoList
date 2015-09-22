@@ -1,0 +1,20 @@
+1. open terminal
+2. cd to project directory
+3. type pod init
+4. type pod install
+5. open project with .xcworkspace
+6. locate Podfile open it and insert following
+
+target 'ArcToDoList' do
+
+pod 'google-plus-ios-sdk', '~> 1.7'
+pod 'Facebook-iOS-SDK', '~> 4.1'
+
+end
+
+target 'ArcToDoListTests' do
+
+end
+
+7. close project and back to terminal at same directory type pod install
+8. open project .xcworkspace
