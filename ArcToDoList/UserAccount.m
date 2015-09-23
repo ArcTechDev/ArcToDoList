@@ -46,6 +46,8 @@
  */
 - (void)logout{
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAccountLogoutNotify object:nil];
+    
 }
 
 @end

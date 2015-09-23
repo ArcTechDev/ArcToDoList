@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zyw-4v-WUr">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -41,11 +41,34 @@
                     <connections>
                         <outlet property="fbLogInButton" destination="Jmu-NX-RlC" id="zYX-Xs-Esv"/>
                         <outlet property="googleLogInButton" destination="pps-cY-thh" id="ezI-Iv-efB"/>
-                        <segue destination="VMa-NS-GJ2" kind="presentation" identifier="UserInfo" id="Y79-88-91g"/>
+                        <segue destination="VMa-NS-GJ2" kind="presentation" identifier="UserInfoFromSignin" id="nLt-a3-5nR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="789" y="477"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="FaN-5P-un9">
+            <objects>
+                <viewController id="zyw-4v-WUr" customClass="MainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HRs-C6-nTC"/>
+                        <viewControllerLayoutGuide type="bottom" id="UXW-C3-Px5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6Ay-5m-u9F">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="Signin" id="X05-jR-geJ"/>
+                        <segue destination="VMa-NS-GJ2" kind="presentation" identifier="UserInfoFromMain" id="aOL-8s-88a"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qEn-Z2-WH9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="93" y="477"/>
         </scene>
         <!--User Info View Controller-->
         <scene sceneID="Vcs-mN-h1Q">
@@ -110,7 +133,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="99Z-nb-EXl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1475" y="477"/>
+            <point key="canvasLocation" x="789" y="1221"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="aOL-8s-88a"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -41,6 +41,50 @@ static AccountManager *instance;
 }
 
 #pragma mark - public interface
+
+- (void)tryGoogleAutoLoginWithSuccessful:(googlePlusLoginSuccessful)successful WithLoginFail:(googlePlusLoginFail)fail{
+    
+    GPPSignIn *signIn = [GPPSignIn sharedInstance];
+    
+    signIn.clientID = kClientId;
+    
+    signIn.shouldFetchGoogleUserEmail = YES;
+    
+    signIn.scopes = [NSArray arrayWithObjects: kGTLAuthScopePlusLogin, nil];
+    
+    signIn.delegate = self;
+    
+    googlePlusSigninSuccessful = successful;
+    googlePlusSigninFail = fail;
+    
+    if(![signIn trySilentAuthentication]){
+        
+        googlePlusSigninFail([NSError errorWithDomain:@"Can not auto login" code:-1 userInfo:nil]);
+    }
+}
+
+- (void)tryFacebookAutoLoginWithSuccessful:(facebookLoginSuccessful)successful WithLoginFail:(facebookLoginFail)fail{
+    
+    facebookSigninSuccessful = successful;
+    facebookSigninFail = fail;
+    
+    //auto sign in
+    if([FBSDKAccessToken currentAccessToken]){
+        
+        FacebookAccount *fAccount = [[FacebookAccount alloc] init];
+        
+        currentUserAccount = fAccount;
+        
+        if(facebookSigninSuccessful != nil)
+            facebookSigninSuccessful(nil, fAccount);
+    }
+    else{
+        
+        facebookSigninFail([NSError errorWithDomain:@"Can not auto login" code:-1 userInfo:nil]);
+    }
+
+}
+
 - (void)googlePlusLoginSetupWithLoginSuccessful:(googlePlusLoginSuccessful)successful WithLoginFail:(googlePlusLoginFail)fail{
     
     GPPSignIn *signIn = [GPPSignIn sharedInstance];
@@ -56,18 +100,25 @@ static AccountManager *instance;
     googlePlusSigninSuccessful = successful;
     googlePlusSigninFail = fail;
     
+    /*
     //uncomment to make auto sign in
     [signIn trySilentAuthentication];
+     */
 }
 
 - (void)facebookLoginSetupWithButton:(FBSDKLoginButton *)fbButton WithLoginSuccessful:(facebookLoginSuccessful)successful WithLoginFail:(facebookLoginFail)fail{
+
+    if(fbButton != nil){
+        
+        fbButton.delegate = self;
+        fbButton.readPermissions =  @[@"email"];
+    }
     
-    fbButton.delegate = self;
-    fbButton.readPermissions =  @[@"email"];
     
     facebookSigninSuccessful = successful;
     facebookSigninFail = fail;
     
+    /*
     //auto sign in
     if([FBSDKAccessToken currentAccessToken]){
         
@@ -78,8 +129,10 @@ static AccountManager *instance;
         if(facebookSigninSuccessful != nil)
             facebookSigninSuccessful(nil, fAccount);
     }
-    
+    */
 }
+
+#pragma mark - internal
 
 #pragma mark - Google+ login callback
 - (void)finishedWithAuth: (GTMOAuth2Authentication *)auth error: (NSError *) error{

@@ -85,6 +85,8 @@
      GPPSignIn *signIn = [GPPSignIn sharedInstance];
     
     [signIn signOut];
+    
+    [super logout];
 }
 
 @end

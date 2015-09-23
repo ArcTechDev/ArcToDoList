@@ -31,7 +31,7 @@
     
     [[AccountManager sharedManager] googlePlusLoginSetupWithLoginSuccessful:^(GTMOAuth2Authentication *auth, UserAccount *account){
         
-        [self performSegueWithIdentifier:@"UserInfo" sender:nil];
+        [self performSegueWithIdentifier:@"UserInfoFromSignin" sender:nil];
         
     }WithLoginFail:^(NSError *error){
         
@@ -40,7 +40,7 @@
     
     [[AccountManager sharedManager] facebookLoginSetupWithButton:_fbLogInButton WithLoginSuccessful:^(FBSDKLoginManagerLoginResult *result, UserAccount *account){
         
-        [self performSegueWithIdentifier:@"UserInfo" sender:nil];
+        [self performSegueWithIdentifier:@"UserInfoFromSignin" sender:nil];
         
     }WithLoginFail:^(NSError *error){
         

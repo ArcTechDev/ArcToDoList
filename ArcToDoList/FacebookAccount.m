@@ -108,6 +108,8 @@
     
     [FBSDKAccessToken setCurrentAccessToken:nil];
     [[[FBSDKLoginManager alloc] init] logOut];
+    
+     [super logout];
 }
 
 @end

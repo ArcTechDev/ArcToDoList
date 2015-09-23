@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#define kAccountLogoutNotify @"Logout"
 
 enum AccountType{
     

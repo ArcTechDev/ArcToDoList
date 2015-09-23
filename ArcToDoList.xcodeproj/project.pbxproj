@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C44AE5B509AF62C60FD6A96E /* libPods-ArcToDoList.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF99D740E9A48D7D462414E4 /* libPods-ArcToDoList.a */; };
+		CE7D54571BB27B6F00D5DEA6 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D54561BB27B6F00D5DEA6 /* MainViewController.m */; };
 		CEC942341BB0F78D0085E6D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942331BB0F78D0085E6D1 /* main.m */; };
 		CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942361BB0F78D0085E6D1 /* AppDelegate.m */; };
 		CEC9423D1BB0F78D0085E6D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC9423B1BB0F78D0085E6D1 /* Main.storyboard */; };
@@ -38,6 +39,8 @@
 		59422C454A690F9FA3A47030 /* Pods-ArcToDoList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcToDoList.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArcToDoList/Pods-ArcToDoList.release.xcconfig"; sourceTree = "<group>"; };
 		77D99613F979AB47B0EDA6BD /* Pods-ArcToDoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcToDoList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArcToDoList/Pods-ArcToDoList.debug.xcconfig"; sourceTree = "<group>"; };
 		AF99D740E9A48D7D462414E4 /* libPods-ArcToDoList.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArcToDoList.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE7D54551BB27B6F00D5DEA6 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		CE7D54561BB27B6F00D5DEA6 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		CEC9422E1BB0F78D0085E6D1 /* ArcToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC942321BB0F78D0085E6D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEC942331BB0F78D0085E6D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -104,6 +107,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE7D54541BB27B4E00D5DEA6 /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CE7D54551BB27B6F00D5DEA6 /* MainViewController.h */,
+				CE7D54561BB27B6F00D5DEA6 /* MainViewController.m */,
+			);
+			name = MainViewController;
+			sourceTree = "<group>";
+		};
 		CEC942251BB0F78D0085E6D1 = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				CEC942621BB101B50085E6D1 /* AccountManager */,
+				CE7D54541BB27B4E00D5DEA6 /* MainViewController */,
 				CEC942611BB101A70085E6D1 /* SinginViewController */,
 				CEC942351BB0F78D0085E6D1 /* AppDelegate.h */,
 				CEC942361BB0F78D0085E6D1 /* AppDelegate.m */,
@@ -351,6 +364,7 @@
 				CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */,
 				CEC9426C1BB10B230085E6D1 /* GooglePlusAccount.m in Sources */,
 				CEC942731BB136BD0085E6D1 /* FacebookAccount.m in Sources */,
+				CE7D54571BB27B6F00D5DEA6 /* MainViewController.m in Sources */,
 				CEC942651BB101CA0085E6D1 /* AccountManager.m in Sources */,
 				CEC942341BB0F78D0085E6D1 /* main.m in Sources */,
 				CEC9425E1BB0F8C60085E6D1 /* SigninViewController.m in Sources */,
