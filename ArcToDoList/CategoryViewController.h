@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "Helper.h"
 #import "ParentTableView.h"
 #import "PanLeftRight.h"
 #import "SingleTap.h"

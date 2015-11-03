@@ -118,6 +118,7 @@
     cell.isComplete = item.isComplete;
     cell.titleLabel.text = item.itemName;
     
+    /*
     //color mark
     UIColor *startColor = cell.startColorMark;
     UIColor *endColor = cell.endColorMark;
@@ -130,8 +131,9 @@
     a = startColorComponent[3];
     
     UIColor *color = [UIColor colorWithRed:r green:g blue:b alpha:a];
+     */
     
-    cell.colorView.backgroundColor = color;
+    cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
     
     return cell;
 }
@@ -226,7 +228,13 @@
     [_categoryItems removeObjectAtIndex:index];
     [_tableView deleteRowAtIndex:index withAnimation:UITableViewRowAnimationFade];
     
-    [_tableView reloadData];
+    //[_tableView reloadData];
+    
+    for(CategoryCell *cell in _tableView.visibleCells){
+        
+        NSInteger index = [_tableView indexPathForCell:cell].row;
+        cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
+    }
 }
 
 - (void)onPanRightAtCellIndex:(NSInteger)index{
@@ -264,13 +272,24 @@
         [_tableView moveRowAtIndex:index toIndex:[_categoryItems count]-1];
     }
     
-    [_tableView reloadData];
+    //[_tableView reloadData];
+    
+    for(CategoryCell *cell in _tableView.visibleCells){
+        
+        NSInteger index = [_tableView indexPathForCell:cell].row;
+        cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
+    }
 }
 
 #pragma mark - SingleTap delegate
 - (void)onSingleTapAtCellIndex:(NSInteger)index{
     
     NSLog(@"on tap on index %li", (long)index);
+    
+    CategoryItem *item = [_categoryItems objectAtIndex:index];
+    
+    if(item.isComplete)
+        return;
     
     UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskViewController"];
     
@@ -302,7 +321,13 @@
     
     [_tableView insertNewRowAtIndex:0 withAnimation:UITableViewRowAnimationTop];
     
-    [_tableView reloadData];
+    //[_tableView reloadData];
+    
+    for(CategoryCell *cell in _tableView.visibleCells){
+        
+        NSInteger index = [_tableView indexPathForCell:cell].row;
+        cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
+    }
 }
 
 #pragma mark - DoubleTapEdit delegate

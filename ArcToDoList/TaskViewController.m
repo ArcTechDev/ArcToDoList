@@ -36,13 +36,42 @@
         
         [_dataArray addObject:[TaskItem createTaskItemWithName:[NSString stringWithFormat:@"Task%i", i]]];
     }
+    
+    //pan left right gesture
+    PanLeftRight *panLeftRight = [[PanLeftRight alloc] initWithTableView:_tableView WithPriority:0];
+    panLeftRight.panRightSnapBackAnim = YES;
+    panLeftRight.panLeftSnapBackAnim = YES;
+    panLeftRight.delegate = self;
+    [_tableView addGestureComponent:panLeftRight];
+    
+    //single tap gesture
+    SingleTap *singleTap = [[SingleTap alloc] initWithTableView:_tableView WithPriority:0];
+    singleTap.delegate = self;
+    [_tableView addGestureComponent:singleTap];
+    
+    //double tap edit gesture
+    DoubleTapEdit *doubleTapEdit = [[DoubleTapEdit alloc] initWithTableView:_tableView WithPriority:0];
+    doubleTapEdit.delegate = self;
+    [_tableView addGestureComponent:doubleTapEdit];
+    
+    //make sure single tap happen when double tap edit fail
+    [singleTap requireGestureComponentToFail:doubleTapEdit];
+    
+    //long press move gesture
+    LongPressMove *longPressMove = [[LongPressMove alloc] initWithTableView:_tableView WithPriority:0];
+    longPressMove.delegate= self;
+    [_tableView addGestureComponent:longPressMove];
+    
+    //pull down add new gesture
+    PullDownAddNew *pullAddNew = [[PullDownAddNew alloc] initWithTableView:_tableView WithPriority:0];
+    pullAddNew.delegate = self;
+    [_tableView addGestureComponent:pullAddNew];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBarHidden = YES;
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
     [self setupDayPicker];
@@ -116,6 +145,7 @@
     cell.titleLabel.text = item.taskItemName;
     cell.isComplete = item.isComplete;
     
+    /*
     UIColor *startColor = cell.startColorMark;
     UIColor *endColor = cell.endColorMark;
     float r,g,b,a;
@@ -128,8 +158,9 @@
     a = startColorComponent[3];
     
     UIColor *color = [UIColor colorWithRed:r green:g blue:b alpha:a];
+     */
     
-    cell.titleLabel.textColor = color;
+    cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:_dataArray.count startColor:cell.startColorMark endColor:cell.endColorMark];
     
     return cell;
 }
@@ -174,6 +205,181 @@
     return 0;
 }
 
+#pragma mark - PanleftRight delegate
+//handle panning left
+- (void)onPanningLeftWithDelta:(CGFloat)delta AtCellIndex:(NSInteger)index{
+    
+    TaskCell *cell = (TaskCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    
+    
+    [cell.deleteLabel setHidden:NO];
+    
+    cell.deleteLabel.alpha = delta;
+    
+    if(delta >= 1){
+        
+        cell.deleteLabel.textColor = [UIColor redColor];
+    }
+    else{
+        
+        cell.deleteLabel.textColor = [UIColor blackColor];
+    }
+    
+}
+
+//handle panning right
+- (void)onPanningRightWithDelta:(CGFloat)delta AtCellIndex:(NSInteger)index{
+    
+    TaskCell *cell = (TaskCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    
+    
+    [cell.completeLabel setHidden:NO];
+    
+    
+    cell.completeLabel.alpha = delta;
+    
+    if(delta >= 1){
+        
+        cell.completeLabel.textColor = [UIColor greenColor];
+    }
+    else{
+        
+        cell.completeLabel.textColor = [UIColor blackColor];
+    }
+}
+
+- (BOOL)canPanLeftAtCellIndex:(NSInteger)index{
+    
+    return YES;
+}
+
+- (BOOL)canPanRightAtCellIndex:(NSInteger)index{
+    
+    return YES;
+}
+
+- (void)onPanLeftAtCellIndex:(NSInteger)index{
+    
+    NSLog(@"delete at index %li", (long)index);
+    
+    [_dataArray removeObjectAtIndex:index];
+    [_tableView deleteRowAtIndex:index withAnimation:UITableViewRowAnimationFade];
+    
+    //[_tableView reloadData];
+    
+    for(TaskCell *cell in _tableView.visibleCells){
+        
+        NSInteger index = [_tableView indexPathForCell:cell].row;
+        cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:_dataArray.count startColor:cell.startColorMark endColor:cell.endColorMark];
+    }
+}
+
+- (void)onPanRightAtCellIndex:(NSInteger)index{
+    
+    TaskItem *item = [_dataArray objectAtIndex:index];
+    
+    if(item.isComplete){
+        
+        NSLog(@"recover at index %li", (long)index);
+        
+        item.isComplete = NO;
+        
+        [_dataArray removeObjectAtIndex:index];
+        
+        [_dataArray insertObject:item atIndex:0];
+        
+        TaskCell *visualCell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+        visualCell.isComplete = NO;
+        
+        [_tableView moveRowAtIndex:index toIndex:0];
+    }
+    else{
+        
+        NSLog(@"complete at index %li", (long)index);
+        
+        id obj = [_dataArray objectAtIndex:index];
+        ((TaskItem *)obj).isComplete = YES;
+        [_dataArray removeObjectAtIndex:index];
+        [_dataArray addObject:obj];
+        
+        TaskCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+        cell.isComplete = YES;
+        
+        
+        [_tableView moveRowAtIndex:index toIndex:[_dataArray count]-1];
+    }
+    
+    //[_tableView reloadData];
+    
+    for(TaskCell *cell in _tableView.visibleCells){
+        
+        NSInteger index = [_tableView indexPathForCell:cell].row;
+        cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:_dataArray.count startColor:cell.startColorMark endColor:cell.endColorMark];
+    }
+}
+
+#pragma mark - SingleTap delegate
+- (void)onSingleTapAtCellIndex:(NSInteger)index{
+    
+    NSLog(@"on tap on index %li", (long)index);
+    
+}
+
+#pragma mark - LongPressMove delegate
+- (BOOL)canMoveItemFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex{
+    
+    TaskItem *item1 = [_dataArray objectAtIndex:fromIndex];
+    TaskItem *item2 = [_dataArray objectAtIndex:toIndex];
+    
+    if(item1.isComplete == item2.isComplete)
+        return YES;
+    
+    return NO;
+}
+
+- ( void)willMoveItemFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex{
+    
+    [_dataArray exchangeObjectAtIndex:fromIndex withObjectAtIndex:toIndex];
+}
+
+#pragma mark - PullDownAddNew delegate
+- (void)addNewItemWithText:(NSString *)text{
+    
+    NSLog(@"add new item %@", text);
+    [_dataArray insertObject:[TaskItem createTaskItemWithName:text] atIndex:0];
+    
+    [_tableView insertNewRowAtIndex:0 withAnimation:UITableViewRowAnimationTop];
+    
+    //[_tableView reloadData];
+    
+    for(TaskCell *cell in _tableView.visibleCells){
+        
+        NSInteger index = [_tableView indexPathForCell:cell].row;
+        cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:_dataArray.count startColor:cell.startColorMark endColor:cell.endColorMark];
+    }
+}
+
+#pragma mark - DoubleTapEdit delegate
+- (BOOL)canStartEditAtIndex:(NSInteger)index{
+    
+    TaskItem *item = [_dataArray objectAtIndex:index];
+    
+    return !item.isComplete;
+}
+- (NSString *)nameForItemAtIndex:(NSInteger)index{
+    
+    return ((TaskItem *)[_dataArray objectAtIndex:index]).taskItemName;
+}
+
+- (void)onDoubleTapEditCompleteAtIndex:(NSInteger)index withItemName:(NSString *)name{
+    
+    TaskItem *item = [_dataArray objectAtIndex:index];
+    item.taskItemName = name;
+    
+    TaskCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    
+    cell.titleLabel.text = name;
+}
 
 /*
 #pragma mark - Navigation

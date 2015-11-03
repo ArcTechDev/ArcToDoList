@@ -55,6 +55,7 @@
 		CEF55B3F1BE89EFE0061FD50 /* TaskItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B3E1BE89EFE0061FD50 /* TaskItem.m */; };
 		CEF55B421BE89F2A0061FD50 /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B411BE89F2A0061FD50 /* TaskCell.m */; };
 		CEF55B441BE89F770061FD50 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF55B431BE89F770061FD50 /* TaskCell.xib */; };
+		CEF55B481BE8BA2A0061FD50 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B471BE8BA2A0061FD50 /* Helper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +158,8 @@
 		CEF55B401BE89F2A0061FD50 /* TaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskCell.h; sourceTree = "<group>"; };
 		CEF55B411BE89F2A0061FD50 /* TaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskCell.m; sourceTree = "<group>"; };
 		CEF55B431BE89F770061FD50 /* TaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
+		CEF55B461BE8BA2A0061FD50 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		CEF55B471BE8BA2A0061FD50 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +263,7 @@
 		CEC942301BB0F78D0085E6D1 /* ArcToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				CEF55B451BE8BA130061FD50 /* Helper */,
 				CEF55B331BE896B00061FD50 /* MZDayPicker */,
 				CEF55AEE1BE88D130061FD50 /* SubTable */,
 				CE35A6681BE738A300757A01 /* StriketThroughLabel */,
@@ -514,6 +518,15 @@
 			path = MZDayPicker;
 			sourceTree = "<group>";
 		};
+		CEF55B451BE8BA130061FD50 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				CEF55B461BE8BA2A0061FD50 /* Helper.h */,
+				CEF55B471BE8BA2A0061FD50 /* Helper.m */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -661,6 +674,7 @@
 				CEF55B211BE88D130061FD50 /* LongPress.m in Sources */,
 				CEF55B241BE88D130061FD50 /* PDANCellHolder.m in Sources */,
 				CEF55B3A1BE896B00061FD50 /* MZDay.m in Sources */,
+				CEF55B481BE8BA2A0061FD50 /* Helper.m in Sources */,
 				CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */,
 				CEF55B231BE88D130061FD50 /* PanLeftRight.m in Sources */,
 				CE35A6B01BE7422200757A01 /* CategoryCell.m in Sources */,

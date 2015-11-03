@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskCell" id="kNq-Ba-0s3" customClass="TaskCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskCell" id="kNq-Ba-0s3" customClass="TaskCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kNq-Ba-0s3" id="1eF-1k-vzQ">
@@ -20,6 +20,18 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDx-QN-lSK" userLabel="Label-Complete">
+                        <rect key="frame" x="-72.5" y="-0.5" width="72.5" height="60"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjW-5X-Jiu" userLabel="Label-Delete">
+                        <rect key="frame" x="320" y="-0.5" width="72.5" height="60"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="zAe-up-wK4" firstAttribute="top" secondItem="1eF-1k-vzQ" secondAttribute="top" id="3Cb-cm-57u"/>
@@ -28,6 +40,14 @@
                     <constraint firstItem="zAe-up-wK4" firstAttribute="leading" secondItem="1eF-1k-vzQ" secondAttribute="leading" id="sR8-ZU-HQd"/>
                 </constraints>
             </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="wDx-QN-lSK" firstAttribute="height" secondItem="kNq-Ba-0s3" secondAttribute="height" id="7HX-5D-dhF"/>
+                <constraint firstItem="cjW-5X-Jiu" firstAttribute="centerY" secondItem="kNq-Ba-0s3" secondAttribute="centerY" id="DVe-iA-Znu"/>
+                <constraint firstItem="cjW-5X-Jiu" firstAttribute="leading" secondItem="kNq-Ba-0s3" secondAttribute="trailing" id="doE-bn-Gwt"/>
+                <constraint firstItem="cjW-5X-Jiu" firstAttribute="height" secondItem="kNq-Ba-0s3" secondAttribute="height" id="eSO-6h-Ioa"/>
+                <constraint firstItem="wDx-QN-lSK" firstAttribute="centerY" secondItem="kNq-Ba-0s3" secondAttribute="centerY" id="mRo-CZ-Cwz"/>
+                <constraint firstItem="wDx-QN-lSK" firstAttribute="trailing" secondItem="kNq-Ba-0s3" secondAttribute="leading" id="zmZ-Ub-xfC"/>
+            </constraints>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="color" keyPath="completeColor">
                     <color key="value" red="1" green="0.32856738949999997" blue="0.24292615649999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -40,6 +60,8 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="completeLabel" destination="wDx-QN-lSK" id="zPA-Mw-9qe"/>
+                <outlet property="deleteLabel" destination="cjW-5X-Jiu" id="g2Q-E0-CYL"/>
                 <outlet property="titleLabel" destination="zAe-up-wK4" id="uc0-5z-qOR"/>
             </connections>
         </tableViewCell>

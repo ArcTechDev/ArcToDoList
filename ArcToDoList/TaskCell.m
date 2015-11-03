@@ -11,12 +11,23 @@
 @implementation TaskCell
 
 @synthesize titleLabel = _titleLabel;
+@synthesize completeLabel = _completeLabel;
+@synthesize deleteLabel = _deleteLabel;
+
+- (void)awakeFromNib{
+    
+    _completeLabel.text = @"\u2713";
+    _deleteLabel.text = @"\u2717";
+    
+    
+}
 
 - (void)setIsComplete:(BOOL)isComplete{
     
     if(isComplete){
         
         self.backgroundColor = self.completeColor;
+        _completeLabel.text = @"\u238b";
     }
     else{
         
