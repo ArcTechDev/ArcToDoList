@@ -19,5 +19,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "ExtendNSLog.h"
+#import <MagicalRecord/MagicalRecord.h>
 
 #endif

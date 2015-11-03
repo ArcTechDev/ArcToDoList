@@ -15,8 +15,6 @@ typedef void(^googlePlusLoginSuccessful)(GTMOAuth2Authentication *auth, UserAcco
 typedef void(^googlePlusLoginFail)(NSError *error);
 typedef void(^facebookLoginSuccessful)(FBSDKLoginManagerLoginResult *result, UserAccount *account);
 typedef void(^facebookLoginFail)(NSError *error);
-typedef void(^AutoLoginSuccessful)(UserAccount *userAccount);
-typedef void(^AutoLoginFail)();
 
 @interface AccountManager : NSObject<GPPSignInDelegate, FBSDKLoginButtonDelegate>
 
