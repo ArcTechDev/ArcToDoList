@@ -39,14 +39,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _categoryItems = [[NSMutableArray alloc] initWithObjects:
+    _categoryItems = [[NSMutableArray alloc] init];
     
-    [CategoryItem createCategoryItemWithName:@"Things to do"],
-    [CategoryItem createCategoryItemWithName:@"Tomorrow"],
-    [CategoryItem createCategoryItemWithName:@"Next week"],
-    [CategoryItem createCategoryItemWithName:@"Extra"]
-    
-    , nil];
+    for(int i=0; i<20; i++){
+        
+        [_categoryItems addObject:[CategoryItem createCategoryItemWithName:[NSString stringWithFormat:@"Thing to do %i", i]]];
+    }
     
     //pan left right gesture
     PanLeftRight *panLeftRight = [[PanLeftRight alloc] initWithTableView:_tableView WithPriority:0];
@@ -122,13 +120,14 @@
     
     //color mark
     UIColor *startColor = cell.startColorMark;
+    UIColor *endColor = cell.endColorMark;
     float r,g,b,a;
-    const CGFloat *colorComponent = CGColorGetComponents(startColor.CGColor);
-    
-    r = colorComponent[0] + ((1.0f - colorComponent[0])/_categoryItems.count) * index;
-    g = colorComponent[1] + ((1.0f - colorComponent[1])/_categoryItems.count) * index;
-    b = colorComponent[2] + ((1.0f - colorComponent[2])/_categoryItems.count) * index;
-    a = colorComponent[3];
+    const CGFloat *startColorComponent = CGColorGetComponents(startColor.CGColor);
+    const CGFloat *endColorComponent = CGColorGetComponents(endColor.CGColor);
+    r = startColorComponent[0] + ((endColorComponent[0] - startColorComponent[0])/_categoryItems.count) * index;
+    g = startColorComponent[1] + ((endColorComponent[1] - startColorComponent[1])/_categoryItems.count) * index;
+    b = startColorComponent[2] + ((endColorComponent[2] - startColorComponent[2])/_categoryItems.count) * index;
+    a = startColorComponent[3];
     
     UIColor *color = [UIColor colorWithRed:r green:g blue:b alpha:a];
     
@@ -272,6 +271,10 @@
 - (void)onSingleTapAtCellIndex:(NSInteger)index{
     
     NSLog(@"on tap on index %li", (long)index);
+    
+    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskViewController"];
+    
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - LongPressMove delegate

@@ -48,6 +48,13 @@
 		CEF55B2C1BE88D130061FD50 /* ChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF55B181BE88D130061FD50 /* ChildTableViewCell.xib */; };
 		CEF55B2D1BE88D130061FD50 /* SubTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B1A1BE88D130061FD50 /* SubTableViewCell.m */; };
 		CEF55B2E1BE88D130061FD50 /* SubTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF55B1B1BE88D130061FD50 /* SubTableViewCell.xib */; };
+		CEF55B321BE896050061FD50 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B311BE896050061FD50 /* TaskViewController.m */; };
+		CEF55B3A1BE896B00061FD50 /* MZDay.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B351BE896B00061FD50 /* MZDay.m */; };
+		CEF55B3B1BE896B00061FD50 /* MZDayPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B371BE896B00061FD50 /* MZDayPicker.m */; };
+		CEF55B3C1BE896B00061FD50 /* MZDayPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B391BE896B00061FD50 /* MZDayPickerCell.m */; };
+		CEF55B3F1BE89EFE0061FD50 /* TaskItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B3E1BE89EFE0061FD50 /* TaskItem.m */; };
+		CEF55B421BE89F2A0061FD50 /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B411BE89F2A0061FD50 /* TaskCell.m */; };
+		CEF55B441BE89F770061FD50 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF55B431BE89F770061FD50 /* TaskCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +144,19 @@
 		CEF55B191BE88D130061FD50 /* SubTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTableViewCell.h; sourceTree = "<group>"; };
 		CEF55B1A1BE88D130061FD50 /* SubTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubTableViewCell.m; sourceTree = "<group>"; };
 		CEF55B1B1BE88D130061FD50 /* SubTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTableViewCell.xib; sourceTree = "<group>"; };
+		CEF55B301BE896050061FD50 /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
+		CEF55B311BE896050061FD50 /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
+		CEF55B341BE896B00061FD50 /* MZDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZDay.h; sourceTree = "<group>"; };
+		CEF55B351BE896B00061FD50 /* MZDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZDay.m; sourceTree = "<group>"; };
+		CEF55B361BE896B00061FD50 /* MZDayPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZDayPicker.h; sourceTree = "<group>"; };
+		CEF55B371BE896B00061FD50 /* MZDayPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZDayPicker.m; sourceTree = "<group>"; };
+		CEF55B381BE896B00061FD50 /* MZDayPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZDayPickerCell.h; sourceTree = "<group>"; };
+		CEF55B391BE896B00061FD50 /* MZDayPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZDayPickerCell.m; sourceTree = "<group>"; };
+		CEF55B3D1BE89EFE0061FD50 /* TaskItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskItem.h; sourceTree = "<group>"; };
+		CEF55B3E1BE89EFE0061FD50 /* TaskItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskItem.m; sourceTree = "<group>"; };
+		CEF55B401BE89F2A0061FD50 /* TaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskCell.h; sourceTree = "<group>"; };
+		CEF55B411BE89F2A0061FD50 /* TaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskCell.m; sourceTree = "<group>"; };
+		CEF55B431BE89F770061FD50 /* TaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +260,7 @@
 		CEC942301BB0F78D0085E6D1 /* ArcToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				CEF55B331BE896B00061FD50 /* MZDayPicker */,
 				CEF55AEE1BE88D130061FD50 /* SubTable */,
 				CE35A6681BE738A300757A01 /* StriketThroughLabel */,
 				CE7D545B1BB2A46000D5DEA6 /* CoreDataClass */,
@@ -247,6 +268,7 @@
 				CE7D54541BB27B4E00D5DEA6 /* MainViewController */,
 				CEC942611BB101A70085E6D1 /* SinginViewController */,
 				CE35A6AA1BE73ED100757A01 /* CategoryViewController */,
+				CEF55B2F1BE895C40061FD50 /* TaskViewController */,
 				CEC942351BB0F78D0085E6D1 /* AppDelegate.h */,
 				CEC942361BB0F78D0085E6D1 /* AppDelegate.m */,
 				CEC9423B1BB0F78D0085E6D1 /* Main.storyboard */,
@@ -465,6 +487,33 @@
 			path = ChildCell;
 			sourceTree = "<group>";
 		};
+		CEF55B2F1BE895C40061FD50 /* TaskViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CEF55B301BE896050061FD50 /* TaskViewController.h */,
+				CEF55B311BE896050061FD50 /* TaskViewController.m */,
+				CEF55B3D1BE89EFE0061FD50 /* TaskItem.h */,
+				CEF55B3E1BE89EFE0061FD50 /* TaskItem.m */,
+				CEF55B401BE89F2A0061FD50 /* TaskCell.h */,
+				CEF55B411BE89F2A0061FD50 /* TaskCell.m */,
+				CEF55B431BE89F770061FD50 /* TaskCell.xib */,
+			);
+			name = TaskViewController;
+			sourceTree = "<group>";
+		};
+		CEF55B331BE896B00061FD50 /* MZDayPicker */ = {
+			isa = PBXGroup;
+			children = (
+				CEF55B341BE896B00061FD50 /* MZDay.h */,
+				CEF55B351BE896B00061FD50 /* MZDay.m */,
+				CEF55B361BE896B00061FD50 /* MZDayPicker.h */,
+				CEF55B371BE896B00061FD50 /* MZDayPicker.m */,
+				CEF55B381BE896B00061FD50 /* MZDayPickerCell.h */,
+				CEF55B391BE896B00061FD50 /* MZDayPickerCell.m */,
+			);
+			path = MZDayPicker;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -550,6 +599,7 @@
 				CEF55B251BE88D130061FD50 /* PDANCellHolder.xib in Resources */,
 				CEC942601BB0FFDC0085E6D1 /* ReadMe in Resources */,
 				CEF55B2C1BE88D130061FD50 /* ChildTableViewCell.xib in Resources */,
+				CEF55B441BE89F770061FD50 /* TaskCell.xib in Resources */,
 				CEC9423D1BB0F78D0085E6D1 /* Main.storyboard in Resources */,
 				CEC942421BB0F78D0085E6D1 /* LaunchScreen.xib in Resources */,
 				CE35A6B21BE7423600757A01 /* CategoryCell.xib in Resources */,
@@ -610,6 +660,7 @@
 				CEF55B1D1BE88D130061FD50 /* DoubleTapEdit.m in Sources */,
 				CEF55B211BE88D130061FD50 /* LongPress.m in Sources */,
 				CEF55B241BE88D130061FD50 /* PDANCellHolder.m in Sources */,
+				CEF55B3A1BE896B00061FD50 /* MZDay.m in Sources */,
 				CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */,
 				CEF55B231BE88D130061FD50 /* PanLeftRight.m in Sources */,
 				CE35A6B01BE7422200757A01 /* CategoryCell.m in Sources */,
@@ -621,12 +672,15 @@
 				CEC942731BB136BD0085E6D1 /* FacebookAccount.m in Sources */,
 				CE7D54571BB27B6F00D5DEA6 /* MainViewController.m in Sources */,
 				CEC942651BB101CA0085E6D1 /* AccountManager.m in Sources */,
+				CEF55B3C1BE896B00061FD50 /* MZDayPickerCell.m in Sources */,
 				CEF55B2D1BE88D130061FD50 /* SubTableViewCell.m in Sources */,
 				CEF55B201BE88D130061FD50 /* DoubleTap.m in Sources */,
 				CEF55B261BE88D130061FD50 /* PullDownAddNew.m in Sources */,
 				CEC942341BB0F78D0085E6D1 /* main.m in Sources */,
 				CEBB59E01BB3A23D00FBBE6B /* ToDoListModel.xcdatamodeld in Sources */,
 				CEF55B221BE88D130061FD50 /* LongPressMove.m in Sources */,
+				CEF55B421BE89F2A0061FD50 /* TaskCell.m in Sources */,
+				CEF55B3F1BE89EFE0061FD50 /* TaskItem.m in Sources */,
 				CEC9425E1BB0F8C60085E6D1 /* SigninViewController.m in Sources */,
 				CEF55B281BE88D130061FD50 /* ParentTableViewCell.m in Sources */,
 				CEC942681BB101D80085E6D1 /* UserAccount.m in Sources */,
@@ -634,6 +688,8 @@
 				CEF55B271BE88D130061FD50 /* SingleTap.m in Sources */,
 				CEC9425B1BB0F8B80085E6D1 /* ExtendNSLog.m in Sources */,
 				CEF55B1E1BE88D130061FD50 /* DTECellHolder.m in Sources */,
+				CEF55B3B1BE896B00061FD50 /* MZDayPicker.m in Sources */,
+				CEF55B321BE896050061FD50 /* TaskViewController.m in Sources */,
 				CEF55B2A1BE88D130061FD50 /* ParentTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
