@@ -145,22 +145,9 @@
     cell.titleLabel.text = item.taskItemName;
     cell.isComplete = item.isComplete;
     
-    /*
-    UIColor *startColor = cell.startColorMark;
-    UIColor *endColor = cell.endColorMark;
-    float r,g,b,a;
-    const CGFloat *startColorComponent = CGColorGetComponents(startColor.CGColor);
-    const CGFloat *endColorComponent = CGColorGetComponents(endColor.CGColor);
     
-    r = startColorComponent[0] + ((endColorComponent[0] - startColorComponent[0])/_dataArray.count) * index;
-    g = startColorComponent[1] + ((endColorComponent[1]  - startColorComponent[1])/_dataArray.count) * index;
-    b = startColorComponent[2] + ((endColorComponent[2]  - startColorComponent[2])/_dataArray.count) * index;
-    a = startColorComponent[3];
-    
-    UIColor *color = [UIColor colorWithRed:r green:g blue:b alpha:a];
-     */
-    
-    cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:_dataArray.count startColor:cell.startColorMark endColor:cell.endColorMark];
+    if(!item.isComplete)
+        cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
     
     return cell;
 }
@@ -203,6 +190,29 @@
 - (CGFloat)tableView:(UITableView *)tableView childCellHeightForRowAtChildIndex:(NSInteger)childIndex underParentIndex:(NSInteger)parentIndex{
     
     return 0;
+}
+
+#pragma mark - Internal
+- (NSInteger)nonCompleteTaskCount{
+    
+    int retVal = 0;
+    
+    if(_dataArray != nil){
+        
+        for(TaskItem *item in _dataArray){
+            
+            if(!item.isComplete){
+                
+                retVal++;
+            }
+            else{
+                
+                break;
+            }
+        }
+    }
+    
+    return retVal;
 }
 
 #pragma mark - PanleftRight delegate
@@ -270,7 +280,9 @@
     for(TaskCell *cell in _tableView.visibleCells){
         
         NSInteger index = [_tableView indexPathForCell:cell].row;
-        cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:_dataArray.count startColor:cell.startColorMark endColor:cell.endColorMark];
+        
+        if(!cell.isComplete)
+            cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
     }
 }
 
@@ -314,7 +326,9 @@
     for(TaskCell *cell in _tableView.visibleCells){
         
         NSInteger index = [_tableView indexPathForCell:cell].row;
-        cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:_dataArray.count startColor:cell.startColorMark endColor:cell.endColorMark];
+        
+        if(!cell.isComplete)
+            cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
     }
 }
 
@@ -355,7 +369,9 @@
     for(TaskCell *cell in _tableView.visibleCells){
         
         NSInteger index = [_tableView indexPathForCell:cell].row;
-        cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:_dataArray.count startColor:cell.startColorMark endColor:cell.endColorMark];
+        
+        if(!cell.isComplete)
+            cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
     }
 }
 

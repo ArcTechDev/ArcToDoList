@@ -13,8 +13,8 @@
 		CE35A6B21BE7423600757A01 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE35A6B11BE7423600757A01 /* CategoryCell.xib */; };
 		CE35A6B51BE743ED00757A01 /* CategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE35A6B41BE743ED00757A01 /* CategoryItem.m */; };
 		CE7D54571BB27B6F00D5DEA6 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D54561BB27B6F00D5DEA6 /* MainViewController.m */; };
+		CE9DA0421BE9A94C005742D8 /* GenericCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9DA0411BE9A94C005742D8 /* GenericCell.m */; };
 		CEBB59E01BB3A23D00FBBE6B /* ToDoListModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEBB59DE1BB3A23D00FBBE6B /* ToDoListModel.xcdatamodeld */; };
-		CEBB59F61BB3D81D00FBBE6B /* StriketThroughLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBB59F51BB3D81D00FBBE6B /* StriketThroughLabel.m */; };
 		CEC942341BB0F78D0085E6D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942331BB0F78D0085E6D1 /* main.m */; };
 		CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942361BB0F78D0085E6D1 /* AppDelegate.m */; };
 		CEC9423D1BB0F78D0085E6D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC9423B1BB0F78D0085E6D1 /* Main.storyboard */; };
@@ -81,9 +81,9 @@
 		CE35A6B41BE743ED00757A01 /* CategoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItem.m; sourceTree = "<group>"; };
 		CE7D54551BB27B6F00D5DEA6 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		CE7D54561BB27B6F00D5DEA6 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		CE9DA0401BE9A94C005742D8 /* GenericCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericCell.h; sourceTree = "<group>"; };
+		CE9DA0411BE9A94C005742D8 /* GenericCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericCell.m; sourceTree = "<group>"; };
 		CEBB59DF1BB3A23D00FBBE6B /* ToDoListModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoListModel.xcdatamodel; sourceTree = "<group>"; };
-		CEBB59F41BB3D81D00FBBE6B /* StriketThroughLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StriketThroughLabel.h; sourceTree = "<group>"; };
-		CEBB59F51BB3D81D00FBBE6B /* StriketThroughLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StriketThroughLabel.m; sourceTree = "<group>"; };
 		CEC9422E1BB0F78D0085E6D1 /* ArcToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC942321BB0F78D0085E6D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEC942331BB0F78D0085E6D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -201,15 +201,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CE35A6681BE738A300757A01 /* StriketThroughLabel */ = {
-			isa = PBXGroup;
-			children = (
-				CEBB59F41BB3D81D00FBBE6B /* StriketThroughLabel.h */,
-				CEBB59F51BB3D81D00FBBE6B /* StriketThroughLabel.m */,
-			);
-			name = StriketThroughLabel;
-			sourceTree = "<group>";
-		};
 		CE35A6AA1BE73ED100757A01 /* CategoryViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +231,24 @@
 			name = CoreDataClass;
 			sourceTree = "<group>";
 		};
+		CE9DA03F1BE9A924005742D8 /* GenericCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE9DA0401BE9A94C005742D8 /* GenericCell.h */,
+				CE9DA0411BE9A94C005742D8 /* GenericCell.m */,
+			);
+			name = GenericCell;
+			sourceTree = "<group>";
+		};
+		CE9DA0431BE9B179005742D8 /* ThridParty */ = {
+			isa = PBXGroup;
+			children = (
+				CEF55AEE1BE88D130061FD50 /* SubTable */,
+				CEF55B331BE896B00061FD50 /* MZDayPicker */,
+			);
+			name = ThridParty;
+			sourceTree = "<group>";
+		};
 		CEC942251BB0F78D0085E6D1 = {
 			isa = PBXGroup;
 			children = (
@@ -263,14 +272,13 @@
 		CEC942301BB0F78D0085E6D1 /* ArcToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				CE9DA0431BE9B179005742D8 /* ThridParty */,
 				CEF55B451BE8BA130061FD50 /* Helper */,
-				CEF55B331BE896B00061FD50 /* MZDayPicker */,
-				CEF55AEE1BE88D130061FD50 /* SubTable */,
-				CE35A6681BE738A300757A01 /* StriketThroughLabel */,
 				CE7D545B1BB2A46000D5DEA6 /* CoreDataClass */,
 				CEC942621BB101B50085E6D1 /* AccountManager */,
 				CE7D54541BB27B4E00D5DEA6 /* MainViewController */,
 				CEC942611BB101A70085E6D1 /* SinginViewController */,
+				CE9DA03F1BE9A924005742D8 /* GenericCell */,
 				CE35A6AA1BE73ED100757A01 /* CategoryViewController */,
 				CEF55B2F1BE895C40061FD50 /* TaskViewController */,
 				CEC942351BB0F78D0085E6D1 /* AppDelegate.h */,
@@ -675,11 +683,11 @@
 				CEF55B241BE88D130061FD50 /* PDANCellHolder.m in Sources */,
 				CEF55B3A1BE896B00061FD50 /* MZDay.m in Sources */,
 				CEF55B481BE8BA2A0061FD50 /* Helper.m in Sources */,
+				CE9DA0421BE9A94C005742D8 /* GenericCell.m in Sources */,
 				CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */,
 				CEF55B231BE88D130061FD50 /* PanLeftRight.m in Sources */,
 				CE35A6B01BE7422200757A01 /* CategoryCell.m in Sources */,
 				CEF55B1C1BE88D130061FD50 /* GestureComponent.m in Sources */,
-				CEBB59F61BB3D81D00FBBE6B /* StriketThroughLabel.m in Sources */,
 				CEC9426C1BB10B230085E6D1 /* GooglePlusAccount.m in Sources */,
 				CEF55B2B1BE88D130061FD50 /* ChildTableViewCell.m in Sources */,
 				CE35A6B51BE743ED00757A01 /* CategoryItem.m in Sources */,

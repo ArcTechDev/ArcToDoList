@@ -10,17 +10,14 @@
 
 @implementation CategoryCell
 
-@synthesize titleLabel = _titleLabel;
-@synthesize completeLabel = _completeLabel;
-@synthesize deleteLabel = _deleteLabel;
 @synthesize colorView = _colorView;
 @synthesize numberLabel = _numberLabel;
 @synthesize isComplete = _isComplete;
 
 - (void)awakeFromNib{
     
-    _completeLabel.text = @"\u2713";
-    _deleteLabel.text = @"\u2717";
+    self.completeLabel.text = @"\u2713";
+    self.deleteLabel.text = @"\u2717";
     
     
 }
@@ -29,8 +26,7 @@
     
     if(isComplete){
         
-        self.backgroundColor = self.completeColor;
-        _completeLabel.text = @"\u238b";
+        self.completeLabel.text = @"\u238b";
     }
     else{
         

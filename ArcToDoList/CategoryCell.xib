@@ -85,8 +85,8 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="colorView" destination="wGo-vf-g9x" id="z8a-aL-hbh"/>
-                <outlet property="completeLabel" destination="kxG-IJ-6TK" id="72q-9j-bfm"/>
-                <outlet property="deleteLabel" destination="piG-Oz-GXb" id="OHW-Wc-Ivs"/>
+                <outlet property="completeLabel" destination="kxG-IJ-6TK" id="FmQ-EZ-VdB"/>
+                <outlet property="deleteLabel" destination="piG-Oz-GXb" id="n5g-pL-NBB"/>
                 <outlet property="numberLabel" destination="8tb-Ek-gI0" id="t1x-7A-Cb8"/>
                 <outlet property="titleLabel" destination="Lz5-kb-1g6" id="m6q-jL-d5P"/>
             </connections>

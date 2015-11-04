@@ -9,7 +9,7 @@
         <!--Signin View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SigninViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SigninViewController" id="BYZ-38-t0r" customClass="SigninViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -52,7 +52,7 @@
         <!--Navigation Controller-->
         <scene sceneID="EiW-hb-p4I">
             <objects>
-                <navigationController id="J5Y-6x-vrD" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CategoryNaviViewController" id="J5Y-6x-vrD" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="heB-9Y-lS0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -68,7 +68,7 @@
         <!--The Delegate-->
         <scene sceneID="38b-1W-H3k">
             <objects>
-                <viewController id="ZU1-bU-P82" customClass="CategoryViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryViewController" id="ZU1-bU-P82" customClass="CategoryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="C5q-qq-v0T"/>
                         <viewControllerLayoutGuide type="bottom" id="d1h-tE-GrT"/>
@@ -190,7 +190,7 @@
         <!--Main View Controller-->
         <scene sceneID="FaN-5P-un9">
             <objects>
-                <viewController id="zyw-4v-WUr" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="zyw-4v-WUr" customClass="MainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HRs-C6-nTC"/>
                         <viewControllerLayoutGuide type="bottom" id="UXW-C3-Px5"/>
@@ -209,25 +209,8 @@
             </objects>
             <point key="canvasLocation" x="93" y="477"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="vvi-JU-fso">
-            <objects>
-                <viewController id="MYk-mm-sqO" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="EHb-2E-db2"/>
-                        <viewControllerLayoutGuide type="bottom" id="BeC-Bz-6Np"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="O0P-fo-OAJ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Chw-YT-iWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aWx-4U-VwN"/>
+        <segue reference="fDn-iO-ZdP"/>
     </inferredMetricsTieBreakers>
 </document>

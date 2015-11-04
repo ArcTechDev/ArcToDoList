@@ -118,21 +118,6 @@
     cell.isComplete = item.isComplete;
     cell.titleLabel.text = item.itemName;
     
-    /*
-    //color mark
-    UIColor *startColor = cell.startColorMark;
-    UIColor *endColor = cell.endColorMark;
-    float r,g,b,a;
-    const CGFloat *startColorComponent = CGColorGetComponents(startColor.CGColor);
-    const CGFloat *endColorComponent = CGColorGetComponents(endColor.CGColor);
-    r = startColorComponent[0] + ((endColorComponent[0] - startColorComponent[0])/_categoryItems.count) * index;
-    g = startColorComponent[1] + ((endColorComponent[1] - startColorComponent[1])/_categoryItems.count) * index;
-    b = startColorComponent[2] + ((endColorComponent[2] - startColorComponent[2])/_categoryItems.count) * index;
-    a = startColorComponent[3];
-    
-    UIColor *color = [UIColor colorWithRed:r green:g blue:b alpha:a];
-     */
-    
     cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
     
     return cell;
@@ -193,22 +178,7 @@
 //handle panning right
 - (void)onPanningRightWithDelta:(CGFloat)delta AtCellIndex:(NSInteger)index{
     
-    CategoryCell *cell = (CategoryCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
-    
-    
-    [cell.completeLabel setHidden:NO];
-    
-    
-    cell.completeLabel.alpha = delta;
-    
-    if(delta >= 1){
-        
-        cell.completeLabel.textColor = [UIColor greenColor];
-    }
-    else{
-        
-        cell.completeLabel.textColor = [UIColor blackColor];
-    }
+    //we dont have pan right
 }
 
 - (BOOL)canPanLeftAtCellIndex:(NSInteger)index{
@@ -218,7 +188,8 @@
 
 - (BOOL)canPanRightAtCellIndex:(NSInteger)index{
     
-    return YES;
+    //we don't want cell to pan right in category view
+    return NO;
 }
 
 - (void)onPanLeftAtCellIndex:(NSInteger)index{
@@ -238,7 +209,7 @@
 }
 
 - (void)onPanRightAtCellIndex:(NSInteger)index{
-    
+    /*
     CategoryItem *item = [_categoryItems objectAtIndex:index];
     
     if(item.isComplete){
@@ -279,6 +250,7 @@
         NSInteger index = [_tableView indexPathForCell:cell].row;
         cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
     }
+     */
 }
 
 #pragma mark - SingleTap delegate
