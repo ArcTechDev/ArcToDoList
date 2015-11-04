@@ -30,7 +30,7 @@
     }
     else{
         
-        self.backgroundColor = self.notCompleteColor;
+        self.backgroundColor = self.notCompleteBackgroundColor;
     }
     
     _isComplete = isComplete;

@@ -12,8 +12,10 @@
 @interface TaskCell : GenericCell
 
 @property (assign, nonatomic) BOOL isComplete;
-@property (strong, nonatomic) IBInspectable UIColor *completeColor;
-@property (strong, nonatomic) IBInspectable UIColor *notCompleteColor;
+
+@property (strong, nonatomic) IBInspectable UIColor *completeBackgroundColor;
+@property (strong, nonatomic) IBInspectable UIColor *notCompleteBackgroundColor;
+@property (strong, nonatomic) IBInspectable UIColor *completeTextColor;
 
 
 @end

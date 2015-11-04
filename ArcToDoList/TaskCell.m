@@ -24,11 +24,11 @@
     if(isComplete){
         
         self.completeLabel.text = @"\u238b";
-        self.titleLabel.textColor = [UIColor grayColor];
+        self.titleLabel.textColor = self.completeTextColor;
     }
     else{
         
-        self.backgroundColor = self.notCompleteColor;
+        self.backgroundColor = self.notCompleteBackgroundColor;
     }
     
     _isComplete = isComplete;

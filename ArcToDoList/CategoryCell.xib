@@ -82,6 +82,12 @@
                 <userDefinedRuntimeAttribute type="color" keyPath="endColorMark">
                     <color key="value" red="1" green="0.92742772241600546" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="completeBackgroundColor">
+                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="notCompleteBackgroundColor">
+                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="colorView" destination="wGo-vf-g9x" id="z8a-aL-hbh"/>

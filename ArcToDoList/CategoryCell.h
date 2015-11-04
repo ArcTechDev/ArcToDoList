@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIView *colorView;
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;
 @property (assign, nonatomic) BOOL isComplete;
-@property (strong, nonatomic) IBInspectable UIColor *completeColor;
-@property (strong, nonatomic) IBInspectable UIColor *notCompleteColor;
+@property (strong, nonatomic) IBInspectable UIColor *completeBackgroundColor;
+@property (strong, nonatomic) IBInspectable UIColor *notCompleteBackgroundColor;
 
 @end

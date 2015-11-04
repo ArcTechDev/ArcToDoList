@@ -58,6 +58,18 @@
                 <userDefinedRuntimeAttribute type="color" keyPath="startColorMark">
                     <color key="value" red="1" green="0.086338338969999998" blue="0.14787865780000001" alpha="1" colorSpace="calibratedRGB"/>
                 </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="completeTextColor">
+                    <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="notCompleteColor">
+                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="completeBackgroundColor">
+                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="notCompleteBackgroundColor">
+                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="completeLabel" destination="wDx-QN-lSK" id="zPA-Mw-9qe"/>
