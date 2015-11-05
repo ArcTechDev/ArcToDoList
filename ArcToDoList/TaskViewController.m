@@ -19,6 +19,7 @@
     
     NSMutableArray *_dataArray;
     CGFloat taskCellHeight;
+    CGFloat subTaskCellHeight;
 }
 
 @synthesize dayPicker = _dayPicker;
@@ -29,6 +30,7 @@
     // Do any additional setup after loading the view.
     
     taskCellHeight = -1;
+    subTaskCellHeight = -1;
     
     _dataArray = [[NSMutableArray alloc] init];
     
@@ -66,6 +68,7 @@
     PullDownAddNew *pullAddNew = [[PullDownAddNew alloc] initWithTableView:_tableView WithPriority:0];
     pullAddNew.delegate = self;
     [_tableView addGestureComponent:pullAddNew];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -74,6 +77,12 @@
     
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
     [self setupDayPicker];
 }
 
@@ -81,6 +90,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (void)setupDayPicker{
     
@@ -117,7 +127,7 @@
     
     [_dayPicker setStartDate:past7Date endDate:future7Date];
     
-    [_dayPicker setCurrentDate:currentDate animated:YES];
+    [_dayPicker setCurrentDate:currentDate animated:NO];
 }
 
 
@@ -155,7 +165,16 @@
 
 - (UITableViewCell *)tableView:(ParentTableView *)tableView subCellRowUnderParentIndex:(NSInteger)parentIndex{
     
-    return nil;
+    static NSString *subTaskCellId = @"SubTaskCell";
+    
+    SubTaskCell *cell = [tableView dequeueReusableCellWithIdentifier:subTaskCellId];
+    
+    if(cell == nil){
+        
+        cell = (SubTaskCell *)[tableView cellViewFromNib:@"SubTaskCell" atViewIndex:0];
+    }
+    
+    return cell;
 }
 
 
@@ -184,12 +203,24 @@
 
 - (CGFloat)tableView:(ParentTableView *)tableView subCellHeightForRowAtIndex:(NSInteger)index underParentIndex:(NSInteger)parentIndex{
     
-    return 0;
+    if(subTaskCellHeight < 0){
+        
+        SubTaskCell *cell = (SubTaskCell *)[tableView cellViewFromNib:@"SubTaskCell" atViewIndex:0];
+        
+        subTaskCellHeight = cell.bounds.size.height;
+    }
+    
+    return subTaskCellHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView childCellHeightForRowAtChildIndex:(NSInteger)childIndex underParentIndex:(NSInteger)parentIndex{
     
     return 0;
+}
+
+- (BOOL)tableView:(ParentTableView *)tableView canExpandSubCellForRowAtIndex:(NSInteger)index{
+    
+    return YES;
 }
 
 #pragma mark - Internal

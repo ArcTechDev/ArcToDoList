@@ -14,6 +14,8 @@
 		CE35A6B51BE743ED00757A01 /* CategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE35A6B41BE743ED00757A01 /* CategoryItem.m */; };
 		CE7D54571BB27B6F00D5DEA6 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D54561BB27B6F00D5DEA6 /* MainViewController.m */; };
 		CE9DA0421BE9A94C005742D8 /* GenericCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9DA0411BE9A94C005742D8 /* GenericCell.m */; };
+		CE9DA04B1BE9B4BF005742D8 /* SubTaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9DA04A1BE9B4BF005742D8 /* SubTaskCell.m */; };
+		CE9DA04D1BE9B4D1005742D8 /* SubTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9DA04C1BE9B4D1005742D8 /* SubTaskCell.xib */; };
 		CEBB59E01BB3A23D00FBBE6B /* ToDoListModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEBB59DE1BB3A23D00FBBE6B /* ToDoListModel.xcdatamodeld */; };
 		CEC942341BB0F78D0085E6D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942331BB0F78D0085E6D1 /* main.m */; };
 		CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942361BB0F78D0085E6D1 /* AppDelegate.m */; };
@@ -83,6 +85,9 @@
 		CE7D54561BB27B6F00D5DEA6 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		CE9DA0401BE9A94C005742D8 /* GenericCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericCell.h; sourceTree = "<group>"; };
 		CE9DA0411BE9A94C005742D8 /* GenericCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericCell.m; sourceTree = "<group>"; };
+		CE9DA0491BE9B4BF005742D8 /* SubTaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTaskCell.h; sourceTree = "<group>"; };
+		CE9DA04A1BE9B4BF005742D8 /* SubTaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubTaskCell.m; sourceTree = "<group>"; };
+		CE9DA04C1BE9B4D1005742D8 /* SubTaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTaskCell.xib; sourceTree = "<group>"; };
 		CEBB59DF1BB3A23D00FBBE6B /* ToDoListModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoListModel.xcdatamodel; sourceTree = "<group>"; };
 		CEC9422E1BB0F78D0085E6D1 /* ArcToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC942321BB0F78D0085E6D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -509,6 +514,9 @@
 				CEF55B401BE89F2A0061FD50 /* TaskCell.h */,
 				CEF55B411BE89F2A0061FD50 /* TaskCell.m */,
 				CEF55B431BE89F770061FD50 /* TaskCell.xib */,
+				CE9DA0491BE9B4BF005742D8 /* SubTaskCell.h */,
+				CE9DA04A1BE9B4BF005742D8 /* SubTaskCell.m */,
+				CE9DA04C1BE9B4D1005742D8 /* SubTaskCell.xib */,
 			);
 			name = TaskViewController;
 			sourceTree = "<group>";
@@ -618,6 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEF55B251BE88D130061FD50 /* PDANCellHolder.xib in Resources */,
+				CE9DA04D1BE9B4D1005742D8 /* SubTaskCell.xib in Resources */,
 				CEC942601BB0FFDC0085E6D1 /* ReadMe in Resources */,
 				CEF55B2C1BE88D130061FD50 /* ChildTableViewCell.xib in Resources */,
 				CEF55B441BE89F770061FD50 /* TaskCell.xib in Resources */,
@@ -687,6 +696,7 @@
 				CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */,
 				CEF55B231BE88D130061FD50 /* PanLeftRight.m in Sources */,
 				CE35A6B01BE7422200757A01 /* CategoryCell.m in Sources */,
+				CE9DA04B1BE9B4BF005742D8 /* SubTaskCell.m in Sources */,
 				CEF55B1C1BE88D130061FD50 /* GestureComponent.m in Sources */,
 				CEC9426C1BB10B230085E6D1 /* GooglePlusAccount.m in Sources */,
 				CEF55B2B1BE88D130061FD50 /* ChildTableViewCell.m in Sources */,

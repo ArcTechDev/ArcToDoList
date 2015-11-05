@@ -73,9 +73,6 @@
                 <constraint firstItem="piG-Oz-GXb" firstAttribute="leading" secondItem="wKB-Fx-xhe" secondAttribute="trailing" id="jsc-tH-BKa"/>
             </constraints>
             <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="color" keyPath="completeColor">
-                    <color key="value" red="1" green="0.32856738949999997" blue="0.24292615649999999" alpha="1" colorSpace="calibratedRGB"/>
-                </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="startColorMark">
                     <color key="value" red="1" green="0.12986796797030731" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </userDefinedRuntimeAttribute>

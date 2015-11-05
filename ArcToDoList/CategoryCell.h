@@ -9,6 +9,7 @@
 #import "ParentTableViewCell.h"
 #import "GenericCell.h"
 
+IB_DESIGNABLE
 @interface CategoryCell : GenericCell
 
 @property (weak, nonatomic) IBOutlet UIView *colorView;

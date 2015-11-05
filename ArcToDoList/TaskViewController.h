@@ -12,6 +12,7 @@
 #import "ParentTableView.h"
 #import "TaskItem.h"
 #import "TaskCell.h"
+#import "SubTaskCell.h"
 #import "PanLeftRight.h"
 #import "SingleTap.h"
 #import "DoubleTapEdit.h"

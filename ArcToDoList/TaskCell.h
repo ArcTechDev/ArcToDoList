@@ -9,6 +9,7 @@
 #import "ParentTableViewCell.h"
 #import "GenericCell.h"
 
+IB_DESIGNABLE
 @interface TaskCell : GenericCell
 
 @property (assign, nonatomic) BOOL isComplete;
