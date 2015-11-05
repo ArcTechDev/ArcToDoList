@@ -20,6 +20,5 @@
 
 @interface SubTaskCell : SubTableViewCell
 
-@property (assign, nonatomic) NSInteger parentIndex;
 
 @end

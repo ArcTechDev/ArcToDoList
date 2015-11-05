@@ -10,8 +10,6 @@
 
 @implementation SubTaskCell
 
-@synthesize parentIndex = _parentIndex;
-
 - (IBAction)onNotificationTap:(id)sender{
     
 }
