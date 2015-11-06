@@ -64,10 +64,12 @@
         _pullDownInProgress = NO;
     }
     
+    /*
     if(_pullDownInProgress && _tableView.isOnEdit){
         
         [_tableView collapseAllRows];
     }
+     */
     
     if(_pullDownInProgress && defaultRowHeight < 0){
         
@@ -99,6 +101,8 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
     if(_pullDownInProgress && -scrollView.contentOffset.y > defaultRowHeight){
+        
+        [_tableView collapseAllRows];
         
         _onEdit = YES;
         
