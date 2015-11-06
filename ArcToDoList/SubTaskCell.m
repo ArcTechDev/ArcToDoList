@@ -10,20 +10,26 @@
 
 @implementation SubTaskCell
 
+@synthesize theDelegate = _theDelegate;
+
 - (IBAction)onNotificationTap:(id)sender{
     
+    NSLog(@"notification tap %li", self.parentIndex);
 }
 
 - (IBAction)onNoteTap:(id)sender{
     
+    NSLog(@"note tap %li", self.parentIndex);
 }
 
 - (IBAction)onAttachmentTap:(id)sender{
     
+    NSLog(@"attachment tap %li", self.parentIndex);
 }
 
-- (IBAction)onChangeCategoryTap:(id)sender{
+- (IBAction)onCatagorizeTap:(id)sender{
     
+    NSLog(@"change tap %li", self.parentIndex);
 }
 
 /*

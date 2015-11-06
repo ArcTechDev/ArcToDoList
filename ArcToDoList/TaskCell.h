@@ -14,9 +14,12 @@ IB_DESIGNABLE
 
 @property (assign, nonatomic) BOOL isComplete;
 
+
 @property (strong, nonatomic) IBInspectable UIColor *completeBackgroundColor;
 @property (strong, nonatomic) IBInspectable UIColor *notCompleteBackgroundColor;
 @property (strong, nonatomic) IBInspectable UIColor *completeTextColor;
 
+
+- (void)setMaskEnable:(BOOL)yesOrNo;
 
 @end

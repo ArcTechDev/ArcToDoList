@@ -32,11 +32,19 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJi-iq-Dah">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="qJi-iq-Dah" secondAttribute="bottom" id="0rm-LB-ei4"/>
                     <constraint firstItem="zAe-up-wK4" firstAttribute="top" secondItem="1eF-1k-vzQ" secondAttribute="top" id="3Cb-cm-57u"/>
                     <constraint firstAttribute="bottom" secondItem="zAe-up-wK4" secondAttribute="bottom" id="M5j-yE-8Kb"/>
+                    <constraint firstItem="qJi-iq-Dah" firstAttribute="leading" secondItem="wDx-QN-lSK" secondAttribute="trailing" id="OQy-Zt-skd"/>
+                    <constraint firstItem="qJi-iq-Dah" firstAttribute="top" secondItem="1eF-1k-vzQ" secondAttribute="top" id="lai-Pd-HYe"/>
                     <constraint firstAttribute="trailing" secondItem="zAe-up-wK4" secondAttribute="trailing" id="om1-0d-ZVe"/>
+                    <constraint firstItem="cjW-5X-Jiu" firstAttribute="leading" secondItem="qJi-iq-Dah" secondAttribute="trailing" id="rY6-UH-qr4"/>
                     <constraint firstItem="zAe-up-wK4" firstAttribute="leading" secondItem="1eF-1k-vzQ" secondAttribute="leading" id="sR8-ZU-HQd"/>
                 </constraints>
             </tableViewCellContentView>
@@ -68,6 +76,7 @@
             <connections>
                 <outlet property="completeLabel" destination="wDx-QN-lSK" id="zPA-Mw-9qe"/>
                 <outlet property="deleteLabel" destination="cjW-5X-Jiu" id="g2Q-E0-CYL"/>
+                <outlet property="maskView" destination="qJi-iq-Dah" id="OJq-4N-mFW"/>
                 <outlet property="titleLabel" destination="zAe-up-wK4" id="uc0-5z-qOR"/>
             </connections>
         </tableViewCell>

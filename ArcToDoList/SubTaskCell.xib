@@ -16,21 +16,41 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0U1-uW-ghu">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0U1-uW-ghu" userLabel="Button-Catagorize">
                         <rect key="frame" x="247.5" y="-8" width="60" height="60"/>
-                        <state key="normal" image="Notification" backgroundImage="IconBg"/>
+                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" image="Catagorize" backgroundImage="IconBg"/>
+                        <state key="highlighted" image="Catagorize" backgroundImage="IconBg"/>
+                        <connections>
+                            <action selector="onCatagorizeTap:" destination="C6u-jA-T8g" eventType="touchUpInside" id="ysw-Ak-9mQ"/>
+                        </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3u-yo-9l6">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3u-yo-9l6" userLabel="Button-Attachment">
                         <rect key="frame" x="169.5" y="-8" width="60" height="60"/>
-                        <state key="normal" image="Notification" backgroundImage="IconBg"/>
+                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" image="Attachment" backgroundImage="IconBg"/>
+                        <state key="highlighted" image="Attachment" backgroundImage="IconBg"/>
+                        <connections>
+                            <action selector="onAttachmentTap:" destination="C6u-jA-T8g" eventType="touchUpInside" id="fG8-KB-iQH"/>
+                        </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22X-ED-IRm">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22X-ED-IRm" userLabel="Button-Note">
                         <rect key="frame" x="91.5" y="-8" width="60" height="60"/>
-                        <state key="normal" image="Notification" backgroundImage="IconBg"/>
+                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" image="Note" backgroundImage="IconBg"/>
+                        <state key="highlighted" image="Note" backgroundImage="IconBg"/>
+                        <connections>
+                            <action selector="onNoteTap:" destination="C6u-jA-T8g" eventType="touchUpInside" id="XWJ-wc-XuD"/>
+                        </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MhM-Y2-wmI">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MhM-Y2-wmI" userLabel="Button-Notification">
                         <rect key="frame" x="13.5" y="-8" width="60" height="60"/>
+                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <state key="normal" image="Notification" backgroundImage="IconBg"/>
+                        <state key="highlighted" image="Notification" backgroundImage="IconBg"/>
+                        <connections>
+                            <action selector="onNotificationTap:" destination="C6u-jA-T8g" eventType="touchUpInside" id="fB0-e2-0hC"/>
+                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -48,7 +68,10 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Attachment" width="60" height="60"/>
+        <image name="Catagorize" width="60" height="60"/>
         <image name="IconBg" width="60" height="60"/>
+        <image name="Note" width="60" height="60"/>
         <image name="Notification" width="60" height="60"/>
     </resources>
 </document>

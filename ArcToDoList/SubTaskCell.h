@@ -14,11 +14,12 @@
 - (void)onNotificationForTaskIndex:(NSInteger)taskIndex;
 - (void)onNoteForTaskIndex:(NSInteger)taskIndex;
 - (void)onAttachmentForTaskIndex:(NSInteger)taskIndex;
-- (void)onChangeCategoryForTaskIndex:(NSInteger)taskIndex;
+- (void)onCatagorizeForTaskIndex:(NSInteger)taskIndex;
 
 @end
 
 @interface SubTaskCell : SubTableViewCell
 
+@property (weak, nonatomic) id<SubTaskCellDelegate> theDelegate;
 
 @end

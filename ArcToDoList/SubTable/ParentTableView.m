@@ -24,6 +24,8 @@
     
     //determine whether tableView can be interacted
     BOOL _interactionEnable;
+    
+    NSInteger _lastExpendParentIndex;
 }
 
 @synthesize theDelegate = _theDelegate;
@@ -90,9 +92,22 @@
         return;
     }
     
+    //set last expand parent index
+    _lastExpendParentIndex = parentIndex;
+    
+    if([_theDelegate respondsToSelector:@selector(tableView:willExpandForParentCellAtIndex:withSubCellIndex:)]){
+        
+        [_theDelegate tableView:self willExpandForParentCellAtIndex:parentIndex withSubCellIndex:row+1];
+    }
+    
     // update expansionStates so backing data is ready before calling insertRowsAtIndexPaths
     [_expansionStates replaceObjectAtIndex:parentIndex withObject:@"YES"];
     [self insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:(row + 1) inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    
+    if([_theDelegate respondsToSelector:@selector(tableViewWillEnterEditMode:)]){
+        
+        [_theDelegate tableViewWillEnterEditMode:self];
+    }
     
     //set tableView to editing mode
     _isOnEditing = YES;
@@ -106,9 +121,12 @@
         [_theDelegate tableView:self didExpandForParentCellAtIndex:parentIndex withSubCellIndex:row+1];
     }
     
+    
 }
 
 - (void)collapseForParentAtRow:(NSInteger)row {
+    
+    _lastExpendParentIndex = -1;
     
     //return if number of parent cell is less or equal to 0
     if (![_theDelegate numberOfParentCellIsInTableView:self] > 0) {
@@ -123,9 +141,19 @@
         return;
     }
     
+    if([_theDelegate respondsToSelector:@selector(tableView:willCollapseForParentCellAtIndex:withSubCellIndex:)]){
+        
+        [_theDelegate tableView:self willCollapseForParentCellAtIndex:parentIndex withSubCellIndex:row+1];
+    }
+    
     // update expansionStates so backing data is ready before calling deleteRowsAtIndexPaths
     [_expansionStates replaceObjectAtIndex:parentIndex withObject:@"NO"];
     [self deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:(row + 1) inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    
+    if([_theDelegate respondsToSelector:@selector(tableViewWillExitEditMode:)]){
+        
+        [_theDelegate tableViewWillExitEditMode:self];
+    }
     
     //set tableView to not editing mode
     _isOnEditing = NO;
@@ -262,6 +290,11 @@
 
 }
 
+- (NSInteger)getLastExpandParentIndex{
+    
+    return _lastExpendParentIndex;
+}
+
 #pragma mark - setter
 - (void)setInteractionEnable:(BOOL)interactionEnable{
     
@@ -273,13 +306,26 @@
 #pragma mark - public interface
 - (void)collapseAllRows{
     
+    _lastExpendParentIndex = -1;
+    
     if([_expansionStates containsObject:@"YES"]){
         
         NSInteger row = [_expansionStates indexOfObject:@"YES"];
         
+        if([_theDelegate respondsToSelector:@selector(tableView:willCollapseForParentCellAtIndex:withSubCellIndex:)]){
+            
+            [_theDelegate tableView:self willCollapseForParentCellAtIndex:row withSubCellIndex:row+1];
+        }
+        
         [_expansionStates replaceObjectAtIndex:row withObject:@"NO"];
         [self deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:(row + 1) inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
         
+        if([_theDelegate respondsToSelector:@selector(tableViewWillExitEditMode:)]){
+            
+            [_theDelegate tableViewWillExitEditMode:self];
+        }
+        
+        //set tableView not to edit mode
         _isOnEditing = NO;
         
         if([_theDelegate respondsToSelector:@selector(tableView:didCollapseForParentCellAtIndex:withSubCellIndex:)]){

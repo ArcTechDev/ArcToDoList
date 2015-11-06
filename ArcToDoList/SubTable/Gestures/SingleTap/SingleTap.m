@@ -70,7 +70,6 @@
     //if tableView is in edit mode
     if(_tableView.isOnEdit){
         
-        //expand parent cell
         [_tableView expandForParentCellAtIndex:cellIndex];
         
         //this gesture do not began

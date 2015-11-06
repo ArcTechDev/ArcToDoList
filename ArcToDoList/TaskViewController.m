@@ -127,7 +127,7 @@
     
     [_dayPicker setStartDate:past7Date endDate:future7Date];
     
-    [_dayPicker setCurrentDate:currentDate animated:NO];
+    [_dayPicker setCurrentDate:currentDate animated:YES];
 }
 
 
@@ -158,6 +158,23 @@
     
     if(!item.isComplete)
         cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
+    
+    if(_tableView.isOnEdit){
+        
+        if(_tableView.lastExpandParentIndex != index){
+            
+            [cell setMaskEnable:YES];
+        }
+        else{
+            
+            [cell setMaskEnable:NO];
+        }
+    }
+    else{
+        
+        [cell setMaskEnable:NO];
+    }
+
     
     return cell;
 }
@@ -220,7 +237,46 @@
 
 - (BOOL)tableView:(ParentTableView *)tableView canExpandSubCellForRowAtIndex:(NSInteger)index{
     
-    return YES;
+    TaskItem *item = [_dataArray objectAtIndex:index];
+    
+    if(!item.isComplete)
+        return YES;
+    
+    return NO;
+}
+
+- (void)tableView:(ParentTableView *)tableView willExpandForParentCellAtIndex:(NSInteger)index withSubCellIndex:(NSInteger)subIndex{
+    
+   }
+
+- (void)tableView:(ParentTableView *)tableView willCollapseForParentCellAtIndex:(NSInteger)index withSubCellIndex:(NSInteger)subIndex{
+    
+    
+}
+
+- (void)tableViewWillEnterEditMode:(ParentTableView *)tableView{
+    
+    for(TaskCell *cell in tableView.visibleCells){
+        
+        if(cell != nil && [cell isKindOfClass:[TaskCell class]]){
+            
+            if(cell.parentIndex != tableView.lastExpandParentIndex)
+                [cell setMaskEnable:YES];
+            else
+                [cell setMaskEnable:NO];
+        }
+    }
+}
+
+- (void)tableViewWillExitEditMode:(ParentTableView *)tableView{
+    
+    for(TaskCell *cell in tableView.visibleCells){
+        
+        if(cell != nil && [cell isKindOfClass:[TaskCell class]]){
+            
+            [cell setMaskEnable:NO];
+        }
+    }
 }
 
 #pragma mark - Internal

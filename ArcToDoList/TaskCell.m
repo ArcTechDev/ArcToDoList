@@ -8,15 +8,26 @@
 
 #import "TaskCell.h"
 
-@implementation TaskCell
+@interface TaskCell ()
 
+@property (weak, nonatomic) IBOutlet UIView *maskView;
+
+@end
+
+@implementation TaskCell{
+    
+    BOOL _maskEnabled;
+}
+
+@synthesize maskView = _maskView;
 
 - (void)awakeFromNib{
     
+    _maskEnabled = NO;
+    _maskView.hidden = YES;
+    
     self.completeLabel.text = @"\u2713";
     self.deleteLabel.text = @"\u2717";
-    
-    
 }
 
 - (void)setIsComplete:(BOOL)isComplete{
@@ -32,6 +43,25 @@
     }
     
     _isComplete = isComplete;
+}
+
+- (void)setMaskEnable:(BOOL)yesOrNo{
+    
+    _maskEnabled = yesOrNo;
+    
+    if(_maskEnabled){
+        
+        _maskView.hidden = NO;
+    }
+    else{
+        
+        _maskView.hidden = YES;
+    }
+}
+
+- (void)prepareForReuse{
+    
+    [self setMaskEnable:NO];
 }
 
 /*
