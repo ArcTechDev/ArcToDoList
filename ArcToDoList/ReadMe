@@ -10,6 +10,7 @@ target 'ArcToDoList' do
 pod 'google-plus-ios-sdk', '~> 1.7'
 pod 'Facebook-iOS-SDK', '~> 4.1'
 pod 'MagicalRecord'
+pod 'GPUImage'
 
 end
 

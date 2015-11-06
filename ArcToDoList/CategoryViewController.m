@@ -11,6 +11,7 @@
 #import "CategoryItem.h"
 #import "CategoryCell.h"
 
+
 @interface CategoryViewController ()
 
 @property (weak, nonatomic) IBOutlet ParentTableView *tableView;
@@ -21,6 +22,8 @@
     
     NSMutableArray *_categoryItems;
     CGFloat _cellHeight;
+    FPPopoverController *_popoverController;
+    UIView *_blurView;
 }
 
 @synthesize tableView = _tableView;
@@ -84,7 +87,7 @@
     
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu"] style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu"] style:UIBarButtonItemStylePlain target:self action:@selector(onMenuTapped:event:)];
     self.navigationItem.leftBarButtonItems = [NSArray arrayWithObject:leftItem];
 }
 
@@ -92,6 +95,82 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Internal
+- (void)onMenuTapped:(UIBarButtonItem *)sender event:(UIEvent *)event{
+    
+    MenuViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+    controller.title = @"Menu";
+    controller.delegate = self;
+    
+    if(_popoverController != nil){
+        
+        [_popoverController dismissPopoverAnimated:NO];
+        _popoverController = nil;
+    }
+    
+    _popoverController = [[FPPopoverController alloc] initWithViewController:controller delegate:self];
+    _popoverController.arrowDirection = FPPopoverNoArrow;
+    CGSize presentSize = CGSizeMake(self.view.bounds.size.width * 0.7f, self.view.bounds.size.height * 0.75f);
+    _popoverController.contentSize = presentSize;
+    
+    NSArray *windows = [UIApplication sharedApplication].windows;
+    if(windows.count > 0)
+    {
+        UIView *parentView;
+         UIWindow *theWindow = [windows objectAtIndex:0];
+        //keep the first subview
+        if(theWindow.subviews.count > 0)
+        {
+            parentView = [theWindow.subviews lastObject];
+            
+            _blurView = [Helper blurViewFromView:parentView withBlurRadius:2.5f];
+            
+            [parentView addSubview:_blurView];
+        }
+        
+    }
+    
+    [_popoverController presentPopoverFromPoint:CGPointMake(0, 60)];
+}
+
+#pragma mark - FPPopoverController delegate
+- (void)presentedNewPopoverController:(FPPopoverController *)newPopoverController shouldDismissVisiblePopover:(FPPopoverController *)visiblePopoverController{
+    
+    
+}
+
+- (void)popoverControllerDidDismissPopover:(FPPopoverController *)popoverController{
+    
+    [_blurView removeFromSuperview];
+    _popoverController = nil;
+}
+
+#pragma mark - MenuViewControllerDelegate
+- (void)onProfileSelected{
+    
+    [_popoverController dismissPopoverAnimated:YES];
+}
+
+- (void)onColorSelected{
+    
+    [_popoverController dismissPopoverAnimated:YES];
+}
+
+- (void)onPrivacySelected{
+    
+    [_popoverController dismissPopoverAnimated:YES];
+}
+
+- (void)onLanguageSelected{
+    
+    [_popoverController dismissPopoverAnimated:YES];
+}
+
+- (void)onNotificationSelected{
+    
+    [_popoverController dismissPopoverAnimated:YES];
 }
 
 #pragma mark - ParentTableView delegate

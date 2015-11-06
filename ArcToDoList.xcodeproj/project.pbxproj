@@ -49,6 +49,12 @@
 		CED4778B1BEC77A400669902 /* ChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED477771BEC77A400669902 /* ChildTableViewCell.xib */; };
 		CED4778C1BEC77A400669902 /* SubTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477791BEC77A400669902 /* SubTableViewCell.m */; };
 		CED4778D1BEC77A400669902 /* SubTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED4777A1BEC77A400669902 /* SubTableViewCell.xib */; };
+		CED477A31BEC7A9500669902 /* FPPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED4779E1BEC7A9500669902 /* FPPopoverController.m */; };
+		CED477A41BEC7A9500669902 /* FPPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477A01BEC7A9500669902 /* FPPopoverView.m */; };
+		CED477A51BEC7A9500669902 /* FPTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477A21BEC7A9500669902 /* FPTouchView.m */; };
+		CED477A91BEC7B8600669902 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477A81BEC7B8600669902 /* MenuViewController.m */; };
+		CED477AC1BEC7F4A00669902 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477AB1BEC7F4A00669902 /* MenuItem.m */; };
+		CED477AF1BEC822F00669902 /* MenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477AE1BEC822F00669902 /* MenuItemCell.m */; };
 		CEF55AED1BE864290061FD50 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF55AEC1BE864290061FD50 /* QuartzCore.framework */; };
 		CEF55B321BE896050061FD50 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B311BE896050061FD50 /* TaskViewController.m */; };
 		CEF55B3A1BE896B00061FD50 /* MZDay.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B351BE896B00061FD50 /* MZDay.m */; };
@@ -148,6 +154,19 @@
 		CED477781BEC77A400669902 /* SubTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTableViewCell.h; sourceTree = "<group>"; };
 		CED477791BEC77A400669902 /* SubTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubTableViewCell.m; sourceTree = "<group>"; };
 		CED4777A1BEC77A400669902 /* SubTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTableViewCell.xib; sourceTree = "<group>"; };
+		CED4779C1BEC7A9500669902 /* ARCMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacros.h; sourceTree = "<group>"; };
+		CED4779D1BEC7A9500669902 /* FPPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPPopoverController.h; sourceTree = "<group>"; };
+		CED4779E1BEC7A9500669902 /* FPPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPPopoverController.m; sourceTree = "<group>"; };
+		CED4779F1BEC7A9500669902 /* FPPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPPopoverView.h; sourceTree = "<group>"; };
+		CED477A01BEC7A9500669902 /* FPPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPPopoverView.m; sourceTree = "<group>"; };
+		CED477A11BEC7A9500669902 /* FPTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTouchView.h; sourceTree = "<group>"; };
+		CED477A21BEC7A9500669902 /* FPTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTouchView.m; sourceTree = "<group>"; };
+		CED477A71BEC7B8600669902 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		CED477A81BEC7B8600669902 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		CED477AA1BEC7F4A00669902 /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
+		CED477AB1BEC7F4A00669902 /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
+		CED477AD1BEC822F00669902 /* MenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemCell.h; sourceTree = "<group>"; };
+		CED477AE1BEC822F00669902 /* MenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemCell.m; sourceTree = "<group>"; };
 		CEF55AEA1BE863CB0061FD50 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CEF55AEC1BE864290061FD50 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CEF55B301BE896050061FD50 /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
@@ -248,6 +267,7 @@
 		CE9DA0431BE9B179005742D8 /* ThridParty */ = {
 			isa = PBXGroup;
 			children = (
+				CED4779B1BEC7A8500669902 /* FPPopover */,
 				CED4774D1BEC77A400669902 /* SubTable */,
 				CEF55B331BE896B00061FD50 /* MZDayPicker */,
 			);
@@ -285,6 +305,7 @@
 				CEC942611BB101A70085E6D1 /* SinginViewController */,
 				CE9DA03F1BE9A924005742D8 /* GenericCell */,
 				CE35A6AA1BE73ED100757A01 /* CategoryViewController */,
+				CED477A61BEC7B4A00669902 /* MenuViewController */,
 				CEF55B2F1BE895C40061FD50 /* TaskViewController */,
 				CEC942351BB0F78D0085E6D1 /* AppDelegate.h */,
 				CEC942361BB0F78D0085E6D1 /* AppDelegate.m */,
@@ -504,6 +525,33 @@
 			path = ChildCell;
 			sourceTree = "<group>";
 		};
+		CED4779B1BEC7A8500669902 /* FPPopover */ = {
+			isa = PBXGroup;
+			children = (
+				CED4779C1BEC7A9500669902 /* ARCMacros.h */,
+				CED4779D1BEC7A9500669902 /* FPPopoverController.h */,
+				CED4779E1BEC7A9500669902 /* FPPopoverController.m */,
+				CED4779F1BEC7A9500669902 /* FPPopoverView.h */,
+				CED477A01BEC7A9500669902 /* FPPopoverView.m */,
+				CED477A11BEC7A9500669902 /* FPTouchView.h */,
+				CED477A21BEC7A9500669902 /* FPTouchView.m */,
+			);
+			name = FPPopover;
+			sourceTree = "<group>";
+		};
+		CED477A61BEC7B4A00669902 /* MenuViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CED477A71BEC7B8600669902 /* MenuViewController.h */,
+				CED477A81BEC7B8600669902 /* MenuViewController.m */,
+				CED477AA1BEC7F4A00669902 /* MenuItem.h */,
+				CED477AB1BEC7F4A00669902 /* MenuItem.m */,
+				CED477AD1BEC822F00669902 /* MenuItemCell.h */,
+				CED477AE1BEC822F00669902 /* MenuItemCell.m */,
+			);
+			name = MenuViewController;
+			sourceTree = "<group>";
+		};
 		CEF55B2F1BE895C40061FD50 /* TaskViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -697,14 +745,18 @@
 				CE9DA0421BE9A94C005742D8 /* GenericCell.m in Sources */,
 				CED4777F1BEC77A400669902 /* DoubleTap.m in Sources */,
 				CED4778A1BEC77A400669902 /* ChildTableViewCell.m in Sources */,
+				CED477A51BEC7A9500669902 /* FPTouchView.m in Sources */,
 				CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */,
 				CE35A6B01BE7422200757A01 /* CategoryCell.m in Sources */,
 				CE9DA04B1BE9B4BF005742D8 /* SubTaskCell.m in Sources */,
 				CEC9426C1BB10B230085E6D1 /* GooglePlusAccount.m in Sources */,
 				CED477871BEC77A400669902 /* ParentTableViewCell.m in Sources */,
+				CED477AC1BEC7F4A00669902 /* MenuItem.m in Sources */,
+				CED477AF1BEC822F00669902 /* MenuItemCell.m in Sources */,
 				CE35A6B51BE743ED00757A01 /* CategoryItem.m in Sources */,
 				CED477861BEC77A400669902 /* SingleTap.m in Sources */,
 				CED477821BEC77A400669902 /* PanLeftRight.m in Sources */,
+				CED477A91BEC7B8600669902 /* MenuViewController.m in Sources */,
 				CED4777B1BEC77A400669902 /* GestureComponent.m in Sources */,
 				CEC942731BB136BD0085E6D1 /* FacebookAccount.m in Sources */,
 				CE7D54571BB27B6F00D5DEA6 /* MainViewController.m in Sources */,
@@ -719,10 +771,12 @@
 				CEF55B3F1BE89EFE0061FD50 /* TaskItem.m in Sources */,
 				CEC9425E1BB0F8C60085E6D1 /* SigninViewController.m in Sources */,
 				CEC942681BB101D80085E6D1 /* UserAccount.m in Sources */,
+				CED477A41BEC7A9500669902 /* FPPopoverView.m in Sources */,
 				CE35A6AD1BE73EFE00757A01 /* CategoryViewController.m in Sources */,
 				CEC9425B1BB0F8B80085E6D1 /* ExtendNSLog.m in Sources */,
 				CEF55B3B1BE896B00061FD50 /* MZDayPicker.m in Sources */,
 				CEF55B321BE896050061FD50 /* TaskViewController.m in Sources */,
+				CED477A31BEC7A9500669902 /* FPPopoverController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

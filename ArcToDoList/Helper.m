@@ -7,6 +7,7 @@
 //
 
 #import "Helper.h"
+#import "GPUImage.h"
 
 @implementation Helper
 
@@ -23,6 +24,25 @@
     UIColor *color = [UIColor colorWithRed:r green:g blue:b alpha:a];
     
     return color;
+}
+
++ (UIView *)blurViewFromView:(UIView *)fromView withBlurRadius:(CGFloat)radius{
+    
+    // Make an image from the input view.
+    //UIGraphicsBeginImageContextWithOptions(fromView.bounds.size, NO, 1);
+    UIGraphicsBeginImageContext(fromView.bounds.size);
+    [fromView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    GPUImageGaussianBlurFilter *filter = [[GPUImageGaussianBlurFilter alloc] init];
+    filter.blurRadiusInPixels = radius;
+    UIImage *outputImage = [filter imageByFilteringImage:image];
+    
+    UIView *blurView = [[UIImageView alloc] initWithImage:outputImage];
+    
+    return blurView;
+    
 }
 
 /*

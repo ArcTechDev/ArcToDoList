@@ -11,5 +11,6 @@
 @interface Helper : ParentTableViewCell
 
 + (UIColor *)transitColorForItemAtIndex:(NSInteger)index totalItemCount:(NSInteger)itemCount startColor:(UIColor *)startColor endColor:(UIColor *)endColor;
++ (UIView *)blurViewFromView:(UIView *)fromView withBlurRadius:(CGFloat)radius;
 
 @end

@@ -15,7 +15,9 @@
 #import "DoubleTapEdit.h"
 #import "PullDownAddNew.h"
 #import "LongPressMove.h"
+#import "FPPopoverController.h"
+#import "MenuViewController.h"
 
-@interface CategoryViewController : UIViewController<ParentTableViewDelegate, PanLeftRightDelegate, SingleTapDelegate, DoubleTapEditDelegate, PullDownAddNewDelegate, LongPressMoveDelegate>
+@interface CategoryViewController : UIViewController<ParentTableViewDelegate, PanLeftRightDelegate, SingleTapDelegate, DoubleTapEditDelegate, PullDownAddNewDelegate, LongPressMoveDelegate, FPPopoverControllerDelegate, MenuViewControllerDelegate>
 
 @end
