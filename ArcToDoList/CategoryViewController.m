@@ -115,22 +115,9 @@
     CGSize presentSize = CGSizeMake(self.view.bounds.size.width * 0.7f, self.view.bounds.size.height * 0.75f);
     _popoverController.contentSize = presentSize;
     
-    NSArray *windows = [UIApplication sharedApplication].windows;
-    if(windows.count > 0)
-    {
-        UIView *parentView;
-         UIWindow *theWindow = [windows objectAtIndex:0];
-        //keep the first subview
-        if(theWindow.subviews.count > 0)
-        {
-            parentView = [theWindow.subviews lastObject];
-            
-            _blurView = [Helper blurViewFromView:parentView withBlurRadius:2.5f];
-            
-            [parentView addSubview:_blurView];
-        }
-        
-    }
+    //add blur
+    _blurView = [Helper blurViewFromView:_tableView.superview withBlurRadius:2.5f];
+    [_tableView.superview addSubview:_blurView];
     
     [_popoverController presentPopoverFromPoint:CGPointMake(0, 60)];
 }
