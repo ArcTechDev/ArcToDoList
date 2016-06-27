@@ -304,6 +304,34 @@
 }
 
 #pragma mark - public interface
+- (void)reloadTableData{
+
+    NSMutableArray *preExpandStates = [_expansionStates copy];
+    
+    NSUInteger newNumCell = [_theDelegate numberOfParentCellIsInTableView:self];
+    
+    _expansionStates = [[NSMutableArray alloc] initWithArray:preExpandStates];
+    
+    NSInteger diff = preExpandStates.count - newNumCell;
+    
+    if(diff < 0){
+        
+        for(int i=0; i< labs(diff); i++){
+            
+            [_expansionStates addObject:@"NO"];
+        }
+    }
+    else if(diff > 0){
+        
+        for(int i=0; i<labs(diff); i++){
+            
+            [_expansionStates removeLastObject];
+        }
+    }
+    
+    [self reloadData];
+}
+
 - (void)collapseAllRows{
     
     _lastExpendParentIndex = -1;

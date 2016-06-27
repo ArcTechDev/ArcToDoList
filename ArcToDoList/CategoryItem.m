@@ -10,6 +10,7 @@
 
 @implementation CategoryItem
 
+@synthesize itemId = _itemId;
 @synthesize itemName = _itemName;
 @synthesize isComplete = _isComplete;
 

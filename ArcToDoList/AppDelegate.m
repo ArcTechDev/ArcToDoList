@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "AccountManager.h"
+//#import "AccountManager.h"
 
 @interface AppDelegate ()
 
@@ -19,11 +19,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"ToDoListModel"];
+    //[MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"ToDoListModel"];
     
-    [FBSDKLoginButton class];
+    //[FBSDKLoginButton class];
     
-    return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    
+    [FIRApp configure];
+    [GIDSignIn sharedInstance].clientID = [FIRApp defaultApp].options.clientID;
     
     return YES;
 }
@@ -31,9 +35,17 @@
 - (BOOL)application: (UIApplication *)application openURL: (NSURL *)url sourceApplication: (NSString *)sourceApplication annotation: (id)annotation {
     
     BOOL fb = [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
-    BOOL googlePlus = [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+    BOOL google = [[GIDSignIn sharedInstance] handleURL:url sourceApplication:sourceApplication annotation:annotation];
     
-    return (fb & googlePlus);
+    return fb||google;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+    
+    BOOL fb = [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey] annotation:options[UIApplicationLaunchOptionsAnnotationKey]];
+    BOOL google = [[GIDSignIn sharedInstance] handleURL:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey] annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+    
+    return fb||google;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

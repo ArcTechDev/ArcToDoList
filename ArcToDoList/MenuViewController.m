@@ -31,7 +31,8 @@
                  [MenuItem createMenuItemWithTitle:@"Color" withTarget:self withSelector:@selector(onColor)],
                  [MenuItem createMenuItemWithTitle:@"Privacy" withTarget:self withSelector:@selector(onPrivacy)],
                  [MenuItem createMenuItemWithTitle:@"Language" withTarget:self withSelector:@selector(onLanguage)],
-                 [MenuItem createMenuItemWithTitle:@"Notification" withTarget:self withSelector:@selector(onNotification)]
+                 [MenuItem createMenuItemWithTitle:@"Notification" withTarget:self withSelector:@selector(onNotification)],
+                 [MenuItem createMenuItemWithTitle:@"SignOut" withTarget:self withSelector:@selector(onSignOut)]
                  , nil];
 }
 
@@ -116,6 +117,14 @@
     if([_delegate respondsToSelector:@selector(onNotificationSelected)]){
         
         [_delegate onNotificationSelected];
+    }
+}
+
+- (void)onSignOut{
+    
+    if([_delegate respondsToSelector:@selector(onSignOutSelected)]){
+        
+        [_delegate onSignOutSelected];
     }
 }
 

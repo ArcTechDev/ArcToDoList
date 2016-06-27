@@ -10,6 +10,7 @@
 
 @interface CategoryItem : NSObject
 
+@property (copy, nonatomic) NSString *itemId;
 @property (copy, nonatomic) NSString *itemName;
 @property (assign, nonatomic) BOOL isComplete;
 

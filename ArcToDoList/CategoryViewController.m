@@ -10,6 +10,7 @@
 #import "ParentTableView.h"
 #import "CategoryItem.h"
 #import "CategoryCell.h"
+#import "AccountManager.h"
 
 
 @interface CategoryViewController ()
@@ -41,13 +42,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
     _categoryItems = [[NSMutableArray alloc] init];
     
+    /*
     for(int i=0; i<20; i++){
         
         [_categoryItems addObject:[CategoryItem createCategoryItemWithName:[NSString stringWithFormat:@"Thing to do %i", i]]];
     }
+     */
     
     //pan left right gesture
     PanLeftRight *panLeftRight = [[PanLeftRight alloc] initWithTableView:_tableView WithPriority:0];
@@ -78,7 +81,28 @@
     PullDownAddNew *pullAddNew = [[PullDownAddNew alloc] initWithTableView:_tableView WithPriority:0];
     pullAddNew.delegate = self;
     [_tableView addGestureComponent:pullAddNew];
+    
+    //init first time
+    [[ServerInterface sharedInstance] loadCategoryItemOnComplete:^(NSDictionary *values) {
+        
+        for(NSString *key in values.allKeys){
+            
+            CategoryItem *item = [CategoryItem createCategoryItemWithName:((NSDictionary *)values[key])[FPCatItemName]];
+            item.itemId = key;
+            
+            [_categoryItems addObject:item];
+        
+        }
+        
+        if(values.count > 0)
+            [_tableView reloadTableData];
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"unable to load category items");
+    }];
 
+    [self startListeningEvent];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -95,6 +119,114 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc{
+    
+    [[[ServerInterface sharedInstance] refCategoryItems] removeAllObservers];
+}
+
+#pragma mark - Firebase listener
+- (void)startListeningEvent{
+    
+    //Listen child added event
+   [[[ServerInterface sharedInstance] refCategoryItems] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        if(![snapshot.value isEqual:[NSNull null]]){
+            
+            for(CategoryItem *item in _categoryItems){
+                
+                if([item.itemId isEqualToString:snapshot.key])
+                    return;
+            }
+            
+            NSLog(@"child added event new value added key:%@, value:%@", snapshot.key, snapshot.value);
+            
+            
+            NSString *itemName = ((NSDictionary *)snapshot.value)[FPCatItemName];
+            CategoryItem *item = [CategoryItem createCategoryItemWithName:[itemName copy]];
+            item.itemId = [snapshot.key copy];
+            
+            [_categoryItems insertObject:item atIndex:0];
+            
+            [_tableView insertNewRowAtIndex:0 withAnimation:UITableViewRowAnimationTop];
+            
+            for(CategoryCell *cell in _tableView.visibleCells){
+                
+                NSInteger index = [_tableView indexPathForCell:cell].row;
+                cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
+            }
+        }
+        
+    } withCancelBlock:^(NSError * _Nonnull error) {
+       
+        NSLog(@"Listen to child added event error:%@", error);
+    }];
+    
+    //Listen child delete event
+    [[[ServerInterface sharedInstance] refCategoryItems] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        if(![snapshot.value isEqual:[NSNull null]]){
+            
+            NSUInteger index = 0;
+            BOOL shouldRemove = NO;
+            
+            for(CategoryItem *item in _categoryItems){
+                
+                if([item.itemId isEqualToString:snapshot.key]){
+                    
+                    index = [_categoryItems indexOfObject:item];
+                    shouldRemove = YES;
+                    break;
+                }
+            }
+            
+            if(shouldRemove){
+                
+                [_categoryItems removeObjectAtIndex:index];
+                [_tableView deleteRowAtIndex:index withAnimation:UITableViewRowAnimationFade];
+                
+                for(CategoryCell *cell in _tableView.visibleCells){
+                    
+                    NSInteger index = [_tableView indexPathForCell:cell].row;
+                    cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
+                }
+            }
+        }
+        
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        
+        NSLog(@"Listen to child delete event error:%@", error);
+    }];
+    
+    //Listen child change event
+    [[[ServerInterface sharedInstance] refCategoryItems] observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        if(![snapshot.value isEqual:[NSNull null]]){
+            
+            for(CategoryItem *item in _categoryItems){
+                
+                if([item.itemId isEqualToString:snapshot.key]){
+                    
+                    item.itemName = [((NSDictionary *)snapshot.value)[FPCatItemName] copy];
+                    
+                    //will do task count
+                    
+                    NSUInteger index = [_categoryItems indexOfObject:item];
+                    
+                    CategoryCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+                    
+                    cell.titleLabel.text = item.itemName;
+                    
+                    return;
+                }
+            }
+        }
+        
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        
+        NSLog(@"Listen to child change event error:%@", error);
+    }];
 }
 
 #pragma mark - Internal
@@ -158,6 +290,26 @@
 - (void)onNotificationSelected{
     
     [_popoverController dismissPopoverAnimated:YES];
+}
+
+- (void)onSignOutSelected{
+    
+    [_popoverController dismissPopoverAnimated:YES completion:^{
+        
+        
+        [[AccountManager sharedInstance] logoutSuccess:^{
+            
+            [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+            
+        } fail:^(NSError *error) {
+            
+            
+        }];
+        
+        
+    }];
 }
 
 #pragma mark - ParentTableView delegate
@@ -260,18 +412,29 @@
 
 - (void)onPanLeftAtCellIndex:(NSInteger)index{
     
-    NSLog(@"delete at index %li", (long)index);
+    CategoryItem *item = [_categoryItems objectAtIndex:index];
     
-    [_categoryItems removeObjectAtIndex:index];
-    [_tableView deleteRowAtIndex:index withAnimation:UITableViewRowAnimationFade];
-    
-    //[_tableView reloadData];
-    
-    for(CategoryCell *cell in _tableView.visibleCells){
+    [[ServerInterface sharedInstance] deleteCategoryItemWithItemId:item.itemId onComplete:^(NSString *itemId) {
         
-        NSInteger index = [_tableView indexPathForCell:cell].row;
-        cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
-    }
+        NSLog(@"delete at index %li", (long)index);
+        /*
+        [_categoryItems removeObjectAtIndex:index];
+        [_tableView deleteRowAtIndex:index withAnimation:UITableViewRowAnimationFade];
+        
+        //[_tableView reloadData];
+        
+        for(CategoryCell *cell in _tableView.visibleCells){
+            
+            NSInteger index = [_tableView indexPathForCell:cell].row;
+            cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
+        }
+         */
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"unable to delete item server error:%@", error);
+    }];
+    
 }
 
 - (void)onPanRightAtCellIndex:(NSInteger)index{
@@ -354,18 +517,32 @@
 #pragma mark - PullDownAddNew delegate
 - (void)addNewItemWithText:(NSString *)text{
     
-    NSLog(@"add new item %@", text);
-    [_categoryItems insertObject:[CategoryItem createCategoryItemWithName:text] atIndex:0];
-    
-    [_tableView insertNewRowAtIndex:0 withAnimation:UITableViewRowAnimationTop];
-    
-    //[_tableView reloadData];
-    
-    for(CategoryCell *cell in _tableView.visibleCells){
+    [[ServerInterface sharedInstance] addCategoryItemWithText:text onComplete:^(NSString *itemId, NSString *text) {
         
-        NSInteger index = [_tableView indexPathForCell:cell].row;
-        cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
-    }
+        NSLog(@"add new item %@", text);
+        
+        /*
+        CategoryItem *item = [CategoryItem createCategoryItemWithName:text];
+        item.itemId = itemId;
+        
+        [_categoryItems insertObject:item atIndex:0];
+        
+        [_tableView insertNewRowAtIndex:0 withAnimation:UITableViewRowAnimationTop];
+        
+        //[_tableView reloadData];
+        
+        for(CategoryCell *cell in _tableView.visibleCells){
+            
+            NSInteger index = [_tableView indexPathForCell:cell].row;
+            cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
+        }
+         */
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"unable to add item server error:%@", error);
+    }];
+    
 }
 
 #pragma mark - DoubleTapEdit delegate
@@ -383,11 +560,22 @@
 - (void)onDoubleTapEditCompleteAtIndex:(NSInteger)index withItemName:(NSString *)name{
     
     CategoryItem *item = [_categoryItems objectAtIndex:index];
+    
+    [[ServerInterface sharedInstance] modifyCategoryItemWithItemId:item.itemId text:name onComplete:^(NSString *itemId, NSString *text) {
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"unable to modify item server error:%@", error);
+    }];
+    
+    /*
+    CategoryItem *item = [_categoryItems objectAtIndex:index];
     item.itemName = name;
     
     CategoryCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
     
     cell.titleLabel.text = name;
+     */
 }
 
 /*

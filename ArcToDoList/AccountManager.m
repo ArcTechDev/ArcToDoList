@@ -2,183 +2,136 @@
 //  AccountManager.m
 //  ArcToDoList
 //
-//  Created by User on 22/9/15.
-//  Copyright (c) 2015 ArcTech. All rights reserved.
+//  Created by User on 13/6/16.
+//  Copyright © 2016 ArcTech. All rights reserved.
 //
 
 #import "AccountManager.h"
 
+@implementation AccountManager
 
+static AccountManager *_instance;
 
-@implementation AccountManager{
++ (instancetype)sharedInstance{
     
-    UserAccount *currentUserAccount;
-    
-    googlePlusLoginSuccessful googlePlusSigninSuccessful;
-    googlePlusLoginFail googlePlusSigninFail;
-    facebookLoginSuccessful facebookSigninSuccessful;
-    facebookLoginFail facebookSigninFail;
-}
-
-@synthesize userAccount = _userAccount;
-
-static AccountManager *instance;
-
-+ (AccountManager *)sharedManager{
-    
-    if(instance == nil){
+    if(_instance == nil){
         
-        instance = [[AccountManager alloc]  init];
+        _instance = [[AccountManager alloc] init];
     }
     
-    return instance;
+    return _instance;
 }
 
-#pragma mark - Getter
-- (UserAccount *)getCurrentUserAccount{
+- (BOOL)shouldLogin{
     
-    return currentUserAccount;
+    if([FIRAuth auth].currentUser != nil)
+        return NO;
+    else
+        return YES;
 }
 
-#pragma mark - public interface
-
-- (void)tryGoogleAutoLoginWithSuccessful:(googlePlusLoginSuccessful)successful WithLoginFail:(googlePlusLoginFail)fail{
+- (void)facebookLoginSuccess:(void(^)(FIRUser *user))success fail:(void(^)(NSError *error))fail{
     
-    GPPSignIn *signIn = [GPPSignIn sharedInstance];
-    
-    signIn.clientID = kClientId;
-    
-    signIn.shouldFetchGoogleUserEmail = YES;
-    
-    signIn.scopes = [NSArray arrayWithObjects: kGTLAuthScopePlusLogin, nil];
-    
-    signIn.delegate = self;
-    
-    googlePlusSigninSuccessful = successful;
-    googlePlusSigninFail = fail;
-    
-    if(![signIn trySilentAuthentication]){
+    if([FIRAuth auth].currentUser != nil){
         
-        googlePlusSigninFail([NSError errorWithDomain:@"Can not auto login" code:-1 userInfo:nil]);
-    }
-}
-
-- (void)tryFacebookAutoLoginWithSuccessful:(facebookLoginSuccessful)successful WithLoginFail:(facebookLoginFail)fail{
-    
-    facebookSigninSuccessful = successful;
-    facebookSigninFail = fail;
-    
-    //auto sign in
-    if([FBSDKAccessToken currentAccessToken]){
-        
-        FacebookAccount *fAccount = [[FacebookAccount alloc] init];
-        
-        currentUserAccount = fAccount;
-        
-        if(facebookSigninSuccessful != nil)
-            facebookSigninSuccessful(nil, fAccount);
+        //if user already login, logout first
+        [self logoutSuccess:^{
+            
+            [self doFacebookLoginSuccess:success fail:fail];
+            
+        } fail:^(NSError *error) {
+            
+            fail(error);
+        }];
     }
     else{
         
-        facebookSigninFail([NSError errorWithDomain:@"Can not auto login" code:-1 userInfo:nil]);
+        [self doFacebookLoginSuccess:success fail:fail];
     }
-
 }
 
-- (void)googlePlusLoginSetupWithLoginSuccessful:(googlePlusLoginSuccessful)successful WithLoginFail:(googlePlusLoginFail)fail{
+- (void)googleLoginWithUser:(GIDGoogleUser *)user success:(void(^)(FIRUser *user))success fail:(void(^)(NSError *error))fail{
     
-    GPPSignIn *signIn = [GPPSignIn sharedInstance];
-    
-    signIn.clientID = kClientId;
-    
-    signIn.shouldFetchGoogleUserEmail = YES;
-    
-    signIn.scopes = [NSArray arrayWithObjects: kGTLAuthScopePlusLogin, nil];
-    
-    signIn.delegate = self;
-    
-    googlePlusSigninSuccessful = successful;
-    googlePlusSigninFail = fail;
-    
-    /*
-    //uncomment to make auto sign in
-    [signIn trySilentAuthentication];
-     */
-}
-
-- (void)facebookLoginSetupWithButton:(FBSDKLoginButton *)fbButton WithLoginSuccessful:(facebookLoginSuccessful)successful WithLoginFail:(facebookLoginFail)fail{
-
-    if(fbButton != nil){
+    if([FIRAuth auth].currentUser != nil){
         
-        fbButton.delegate = self;
-        fbButton.readPermissions =  @[@"email"];
-    }
-    
-    
-    facebookSigninSuccessful = successful;
-    facebookSigninFail = fail;
-    
-    /*
-    //auto sign in
-    if([FBSDKAccessToken currentAccessToken]){
-        
-        FacebookAccount *fAccount = [[FacebookAccount alloc] init];
-        
-        currentUserAccount = fAccount;
-        
-        if(facebookSigninSuccessful != nil)
-            facebookSigninSuccessful(nil, fAccount);
-    }
-    */
-}
-
-#pragma mark - internal
-
-#pragma mark - Google+ login callback
-- (void)finishedWithAuth: (GTMOAuth2Authentication *)auth error: (NSError *) error{
-    
-    NSLog(@"Google login Received error %@ and auth object %@",error, auth);
-    
-    if(error != nil){
-        
-        if(googlePlusSigninFail != nil)
-            googlePlusSigninFail(error);
+        //if user already login, logout first
+        [self logoutSuccess:^{
+            
+            [self doGoogleLoginWithUser:user success:success fail:fail];
+            
+        } fail:^(NSError *error) {
+            
+            fail(error);
+        }];
     }
     else{
         
-        GooglePlusAccount *gAccount = [[GooglePlusAccount alloc] init];
-        
-        currentUserAccount = gAccount;
-        
-        if(googlePlusSigninSuccessful != nil)
-            googlePlusSigninSuccessful(auth, gAccount);
+        [self doGoogleLoginWithUser:user success:success fail:fail];
     }
+
 }
 
-#pragma mark - Facebook login/logout callback
-- (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error{
+- (void)logoutSuccess:(void(^)(void))success fail:(void(^)(NSError *error))fail{
     
-    NSLog(@"Facebook login Received error %@ and result %@", error, result);
+    NSError *error;
     
-    if(error != nil){
-        
-        if(facebookSigninFail != nil)
-            facebookSigninFail(error);
-    }
-    else{
-        
-        FacebookAccount *fAccount = [[FacebookAccount alloc] init];
-        
-        currentUserAccount = fAccount;
-        
-        if(facebookSigninSuccessful != nil)
-            facebookSigninSuccessful(result, fAccount);
-    }
+    [[[FBSDKLoginManager alloc] init] logOut];
+    [[GIDSignIn sharedInstance] signOut];
+    
+    if([[FIRAuth auth] signOut:&error])
+        success();
+    else
+        fail(error);
+    
     
 }
 
-- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
+- (void)doFacebookLoginSuccess:(void(^)(FIRUser *user))success fail:(void(^)(NSError *error))fail{
     
+    FIRAuthCredential *credential = [FIRFacebookAuthProvider
+                                     credentialWithAccessToken:[FBSDKAccessToken currentAccessToken]
+                                     .tokenString];
+    
+    [[FIRAuth auth] signInWithCredential:credential
+                              completion:^(FIRUser *user, NSError *error) {
+                                  
+                                  if(error == nil){
+                                      
+                                      NSLog(@"Facebook login with user id:%@", user.uid);
+                                      
+                                      success(user);
+                                  }else{
+                                      
+                                      fail(error);
+                                      
+                                      NSLog(error.description);
+                                  }
+                                  
+                              }];
+
+}
+
+- (void)doGoogleLoginWithUser:(GIDGoogleUser *)user success:(void(^)(FIRUser *user))success fail:(void(^)(NSError *error))fail{
+    
+    GIDAuthentication *authentication = user.authentication;
+    FIRAuthCredential *credential = [FIRGoogleAuthProvider credentialWithIDToken:authentication.idToken accessToken:authentication.accessToken];
+    
+    [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser *user, NSError *error) {
+        
+        if(error == nil){
+            
+            NSLog(@"Google login with user id:%@", user.uid);
+            
+            success(user);
+            
+        }else{
+            
+            fail(error);
+            
+            NSLog(error.description);
+            
+        }
+    }];
 }
 
 @end

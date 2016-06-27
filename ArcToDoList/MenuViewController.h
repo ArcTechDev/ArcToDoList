@@ -16,6 +16,7 @@
 - (void)onPrivacySelected;
 - (void)onLanguageSelected;
 - (void)onNotificationSelected;
+- (void)onSignOutSelected;
 
 @end
 

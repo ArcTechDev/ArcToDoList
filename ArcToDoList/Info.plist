@@ -23,11 +23,9 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>ArcTech.ArcToDoList</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>ArcTech.ArcToDoList</string>
+				<string>fb545850398898036</string>
 			</array>
 		</dict>
 		<dict>
@@ -35,7 +33,15 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb545850398898036</string>
+				<string>com.googleusercontent.apps.919324215919-g815upg19m2eqs5q6q5roqdmuv6t7pho</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ArcTech.ArcToDoList</string>
 			</array>
 		</dict>
 	</array>
@@ -43,6 +49,13 @@
 	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>545850398898036</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

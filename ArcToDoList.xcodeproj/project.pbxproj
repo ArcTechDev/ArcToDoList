@@ -7,16 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C44AE5B509AF62C60FD6A96E /* libPods-ArcToDoList.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF99D740E9A48D7D462414E4 /* libPods-ArcToDoList.a */; };
+		340A95D3AD0F11889B3F6A89 /* libPods-ArcToDoListTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C6DA4A79907469DE6E99B8 /* libPods-ArcToDoListTests.a */; };
+		99292976F3D29990E0EA3B71 /* libPods-ArcToDoList.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 129BB54BBC87DF0E9B327C4C /* libPods-ArcToDoList.a */; };
 		CE35A6AD1BE73EFE00757A01 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE35A6AC1BE73EFE00757A01 /* CategoryViewController.m */; };
 		CE35A6B01BE7422200757A01 /* CategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE35A6AF1BE7422200757A01 /* CategoryCell.m */; };
 		CE35A6B21BE7423600757A01 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE35A6B11BE7423600757A01 /* CategoryCell.xib */; };
 		CE35A6B51BE743ED00757A01 /* CategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE35A6B41BE743ED00757A01 /* CategoryItem.m */; };
+		CE74303E1D18D924002107D9 /* ServerInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = CE74303D1D18D924002107D9 /* ServerInterface.m */; };
 		CE7D54571BB27B6F00D5DEA6 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D54561BB27B6F00D5DEA6 /* MainViewController.m */; };
 		CE9DA0421BE9A94C005742D8 /* GenericCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9DA0411BE9A94C005742D8 /* GenericCell.m */; };
 		CE9DA04B1BE9B4BF005742D8 /* SubTaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9DA04A1BE9B4BF005742D8 /* SubTaskCell.m */; };
 		CE9DA04D1BE9B4D1005742D8 /* SubTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9DA04C1BE9B4D1005742D8 /* SubTaskCell.xib */; };
 		CEBB59E01BB3A23D00FBBE6B /* ToDoListModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEBB59DE1BB3A23D00FBBE6B /* ToDoListModel.xcdatamodeld */; };
+		CEC54E271D0EA02F00E9AF13 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC54E261D0EA02F00E9AF13 /* AccountManager.m */; };
 		CEC942341BB0F78D0085E6D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942331BB0F78D0085E6D1 /* main.m */; };
 		CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942361BB0F78D0085E6D1 /* AppDelegate.m */; };
 		CEC9423D1BB0F78D0085E6D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC9423B1BB0F78D0085E6D1 /* Main.storyboard */; };
@@ -26,10 +29,6 @@
 		CEC9425B1BB0F8B80085E6D1 /* ExtendNSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9425A1BB0F8B80085E6D1 /* ExtendNSLog.m */; };
 		CEC9425E1BB0F8C60085E6D1 /* SigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */; };
 		CEC942601BB0FFDC0085E6D1 /* ReadMe in Resources */ = {isa = PBXBuildFile; fileRef = CEC9425F1BB0FFDC0085E6D1 /* ReadMe */; };
-		CEC942651BB101CA0085E6D1 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942641BB101CA0085E6D1 /* AccountManager.m */; };
-		CEC942681BB101D80085E6D1 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942671BB101D80085E6D1 /* UserAccount.m */; };
-		CEC9426C1BB10B230085E6D1 /* GooglePlusAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9426B1BB10B230085E6D1 /* GooglePlusAccount.m */; };
-		CEC942731BB136BD0085E6D1 /* FacebookAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC942721BB136BD0085E6D1 /* FacebookAccount.m */; };
 		CED4777B1BEC77A400669902 /* GestureComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477501BEC77A400669902 /* GestureComponent.m */; };
 		CED4777C1BEC77A400669902 /* DoubleTapEdit.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477541BEC77A400669902 /* DoubleTapEdit.m */; };
 		CED4777D1BEC77A400669902 /* DTECellHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477561BEC77A400669902 /* DTECellHolder.m */; };
@@ -55,6 +54,7 @@
 		CED477A91BEC7B8600669902 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477A81BEC7B8600669902 /* MenuViewController.m */; };
 		CED477AC1BEC7F4A00669902 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477AB1BEC7F4A00669902 /* MenuItem.m */; };
 		CED477AF1BEC822F00669902 /* MenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477AE1BEC822F00669902 /* MenuItemCell.m */; };
+		CEE246771D0FDFE20057A101 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE246761D0FDFE20057A101 /* GoogleService-Info.plist */; };
 		CEF55AED1BE864290061FD50 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF55AEC1BE864290061FD50 /* QuartzCore.framework */; };
 		CEF55B321BE896050061FD50 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B311BE896050061FD50 /* TaskViewController.m */; };
 		CEF55B3A1BE896B00061FD50 /* MZDay.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B351BE896B00061FD50 /* MZDay.m */; };
@@ -77,9 +77,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		59422C454A690F9FA3A47030 /* Pods-ArcToDoList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcToDoList.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArcToDoList/Pods-ArcToDoList.release.xcconfig"; sourceTree = "<group>"; };
-		77D99613F979AB47B0EDA6BD /* Pods-ArcToDoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcToDoList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArcToDoList/Pods-ArcToDoList.debug.xcconfig"; sourceTree = "<group>"; };
-		AF99D740E9A48D7D462414E4 /* libPods-ArcToDoList.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArcToDoList.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		09773287E4D46BFB959DE96A /* Pods-ArcToDoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcToDoList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArcToDoList/Pods-ArcToDoList.debug.xcconfig"; sourceTree = "<group>"; };
+		129BB54BBC87DF0E9B327C4C /* libPods-ArcToDoList.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArcToDoList.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A8CB5CE0A90963B4E464EB7 /* Pods-ArcToDoListTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcToDoListTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArcToDoListTests/Pods-ArcToDoListTests.release.xcconfig"; sourceTree = "<group>"; };
+		85C6DA4A79907469DE6E99B8 /* libPods-ArcToDoListTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArcToDoListTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BB3C90A1980D34927EC2B94 /* Pods-ArcToDoList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcToDoList.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArcToDoList/Pods-ArcToDoList.release.xcconfig"; sourceTree = "<group>"; };
 		CE35A6AB1BE73EFE00757A01 /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
 		CE35A6AC1BE73EFE00757A01 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		CE35A6AE1BE7422200757A01 /* CategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryCell.h; sourceTree = "<group>"; };
@@ -87,6 +89,8 @@
 		CE35A6B11BE7423600757A01 /* CategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
 		CE35A6B31BE743ED00757A01 /* CategoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItem.h; sourceTree = "<group>"; };
 		CE35A6B41BE743ED00757A01 /* CategoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItem.m; sourceTree = "<group>"; };
+		CE74303C1D18D924002107D9 /* ServerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerInterface.h; sourceTree = "<group>"; };
+		CE74303D1D18D924002107D9 /* ServerInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerInterface.m; sourceTree = "<group>"; };
 		CE7D54551BB27B6F00D5DEA6 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		CE7D54561BB27B6F00D5DEA6 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		CE9DA0401BE9A94C005742D8 /* GenericCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericCell.h; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 		CE9DA04A1BE9B4BF005742D8 /* SubTaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubTaskCell.m; sourceTree = "<group>"; };
 		CE9DA04C1BE9B4D1005742D8 /* SubTaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTaskCell.xib; sourceTree = "<group>"; };
 		CEBB59DF1BB3A23D00FBBE6B /* ToDoListModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoListModel.xcdatamodel; sourceTree = "<group>"; };
+		CEC54E251D0EA02F00E9AF13 /* AccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
+		CEC54E261D0EA02F00E9AF13 /* AccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
 		CEC9422E1BB0F78D0085E6D1 /* ArcToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArcToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC942321BB0F78D0085E6D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEC942331BB0F78D0085E6D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -113,14 +119,6 @@
 		CEC9425C1BB0F8C60085E6D1 /* SigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigninViewController.h; sourceTree = "<group>"; };
 		CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigninViewController.m; sourceTree = "<group>"; };
 		CEC9425F1BB0FFDC0085E6D1 /* ReadMe */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe; sourceTree = "<group>"; };
-		CEC942631BB101CA0085E6D1 /* AccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
-		CEC942641BB101CA0085E6D1 /* AccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
-		CEC942661BB101D80085E6D1 /* UserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccount.h; sourceTree = "<group>"; };
-		CEC942671BB101D80085E6D1 /* UserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccount.m; sourceTree = "<group>"; };
-		CEC9426A1BB10B230085E6D1 /* GooglePlusAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglePlusAccount.h; sourceTree = "<group>"; };
-		CEC9426B1BB10B230085E6D1 /* GooglePlusAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglePlusAccount.m; sourceTree = "<group>"; };
-		CEC942711BB136BD0085E6D1 /* FacebookAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookAccount.h; sourceTree = "<group>"; };
-		CEC942721BB136BD0085E6D1 /* FacebookAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookAccount.m; sourceTree = "<group>"; };
 		CED4774F1BEC77A400669902 /* GestureComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureComponent.h; sourceTree = "<group>"; };
 		CED477501BEC77A400669902 /* GestureComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureComponent.m; sourceTree = "<group>"; };
 		CED477531BEC77A400669902 /* DoubleTapEdit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleTapEdit.h; sourceTree = "<group>"; };
@@ -167,6 +165,7 @@
 		CED477AB1BEC7F4A00669902 /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
 		CED477AD1BEC822F00669902 /* MenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemCell.h; sourceTree = "<group>"; };
 		CED477AE1BEC822F00669902 /* MenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemCell.m; sourceTree = "<group>"; };
+		CEE246761D0FDFE20057A101 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEF55AEA1BE863CB0061FD50 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CEF55AEC1BE864290061FD50 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CEF55B301BE896050061FD50 /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
@@ -184,6 +183,7 @@
 		CEF55B431BE89F770061FD50 /* TaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
 		CEF55B461BE8BA2A0061FD50 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		CEF55B471BE8BA2A0061FD50 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
+		EBFC1119E840FC36CF766A69 /* Pods-ArcToDoListTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArcToDoListTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArcToDoListTests/Pods-ArcToDoListTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,7 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEF55AED1BE864290061FD50 /* QuartzCore.framework in Frameworks */,
-				C44AE5B509AF62C60FD6A96E /* libPods-ArcToDoList.a in Frameworks */,
+				99292976F3D29990E0EA3B71 /* libPods-ArcToDoList.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,17 +200,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				340A95D3AD0F11889B3F6A89 /* libPods-ArcToDoListTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1CD14832F352BF5702DB8B6F /* Pods */ = {
+		11FD7EC395F74730C9DEDF36 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				77D99613F979AB47B0EDA6BD /* Pods-ArcToDoList.debug.xcconfig */,
-				59422C454A690F9FA3A47030 /* Pods-ArcToDoList.release.xcconfig */,
+				09773287E4D46BFB959DE96A /* Pods-ArcToDoList.debug.xcconfig */,
+				8BB3C90A1980D34927EC2B94 /* Pods-ArcToDoList.release.xcconfig */,
+				EBFC1119E840FC36CF766A69 /* Pods-ArcToDoListTests.debug.xcconfig */,
+				2A8CB5CE0A90963B4E464EB7 /* Pods-ArcToDoListTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -220,7 +223,8 @@
 			children = (
 				CEF55AEC1BE864290061FD50 /* QuartzCore.framework */,
 				CEF55AEA1BE863CB0061FD50 /* CoreGraphics.framework */,
-				AF99D740E9A48D7D462414E4 /* libPods-ArcToDoList.a */,
+				129BB54BBC87DF0E9B327C4C /* libPods-ArcToDoList.a */,
+				85C6DA4A79907469DE6E99B8 /* libPods-ArcToDoListTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -274,14 +278,23 @@
 			name = ThridParty;
 			sourceTree = "<group>";
 		};
+		CEC54E241D0EA01400E9AF13 /* AccountManager */ = {
+			isa = PBXGroup;
+			children = (
+				CEC54E251D0EA02F00E9AF13 /* AccountManager.h */,
+				CEC54E261D0EA02F00E9AF13 /* AccountManager.m */,
+			);
+			name = AccountManager;
+			sourceTree = "<group>";
+		};
 		CEC942251BB0F78D0085E6D1 = {
 			isa = PBXGroup;
 			children = (
 				CEC942301BB0F78D0085E6D1 /* ArcToDoList */,
 				CEC9424A1BB0F78D0085E6D1 /* ArcToDoListTests */,
 				CEC9422F1BB0F78D0085E6D1 /* Products */,
-				1CD14832F352BF5702DB8B6F /* Pods */,
 				9109BAC8A5625744EE3C1112 /* Frameworks */,
+				11FD7EC395F74730C9DEDF36 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -300,7 +313,7 @@
 				CE9DA0431BE9B179005742D8 /* ThridParty */,
 				CEF55B451BE8BA130061FD50 /* Helper */,
 				CE7D545B1BB2A46000D5DEA6 /* CoreDataClass */,
-				CEC942621BB101B50085E6D1 /* AccountManager */,
+				CEC54E241D0EA01400E9AF13 /* AccountManager */,
 				CE7D54541BB27B4E00D5DEA6 /* MainViewController */,
 				CEC942611BB101A70085E6D1 /* SinginViewController */,
 				CE9DA03F1BE9A924005742D8 /* GenericCell */,
@@ -311,8 +324,8 @@
 				CEC942361BB0F78D0085E6D1 /* AppDelegate.m */,
 				CEC9423B1BB0F78D0085E6D1 /* Main.storyboard */,
 				CEC9423E1BB0F78D0085E6D1 /* Images.xcassets */,
-				CEC942401BB0F78D0085E6D1 /* LaunchScreen.xib */,
 				CEC942311BB0F78D0085E6D1 /* Supporting Files */,
+				CEC942401BB0F78D0085E6D1 /* LaunchScreen.xib */,
 			);
 			path = ArcToDoList;
 			sourceTree = "<group>";
@@ -320,6 +333,7 @@
 		CEC942311BB0F78D0085E6D1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CEE246761D0FDFE20057A101 /* GoogleService-Info.plist */,
 				CEC942581BB0F8B80085E6D1 /* ToDoList-Prefix.pch */,
 				CEC942591BB0F8B80085E6D1 /* ExtendNSLog.h */,
 				CEC9425A1BB0F8B80085E6D1 /* ExtendNSLog.m */,
@@ -356,37 +370,6 @@
 				CEC9425D1BB0F8C60085E6D1 /* SigninViewController.m */,
 			);
 			name = SinginViewController;
-			sourceTree = "<group>";
-		};
-		CEC942621BB101B50085E6D1 /* AccountManager */ = {
-			isa = PBXGroup;
-			children = (
-				CEC942631BB101CA0085E6D1 /* AccountManager.h */,
-				CEC942641BB101CA0085E6D1 /* AccountManager.m */,
-				CEC942661BB101D80085E6D1 /* UserAccount.h */,
-				CEC942671BB101D80085E6D1 /* UserAccount.m */,
-				CEC942691BB10B040085E6D1 /* Google+ */,
-				CEC942701BB1367F0085E6D1 /* Facebook */,
-			);
-			name = AccountManager;
-			sourceTree = "<group>";
-		};
-		CEC942691BB10B040085E6D1 /* Google+ */ = {
-			isa = PBXGroup;
-			children = (
-				CEC9426A1BB10B230085E6D1 /* GooglePlusAccount.h */,
-				CEC9426B1BB10B230085E6D1 /* GooglePlusAccount.m */,
-			);
-			name = "Google+";
-			sourceTree = "<group>";
-		};
-		CEC942701BB1367F0085E6D1 /* Facebook */ = {
-			isa = PBXGroup;
-			children = (
-				CEC942711BB136BD0085E6D1 /* FacebookAccount.h */,
-				CEC942721BB136BD0085E6D1 /* FacebookAccount.m */,
-			);
-			name = Facebook;
 			sourceTree = "<group>";
 		};
 		CED4774D1BEC77A400669902 /* SubTable */ = {
@@ -587,6 +570,8 @@
 			children = (
 				CEF55B461BE8BA2A0061FD50 /* Helper.h */,
 				CEF55B471BE8BA2A0061FD50 /* Helper.m */,
+				CE74303C1D18D924002107D9 /* ServerInterface.h */,
+				CE74303D1D18D924002107D9 /* ServerInterface.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -598,11 +583,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEC942511BB0F78D0085E6D1 /* Build configuration list for PBXNativeTarget "ArcToDoList" */;
 			buildPhases = (
-				848A5DCDABD50752FBF603AA /* Check Pods Manifest.lock */,
+				0DCED33E42243C6C124400F4 /* [CP] Check Pods Manifest.lock */,
 				CEC9422A1BB0F78D0085E6D1 /* Sources */,
 				CEC9422B1BB0F78D0085E6D1 /* Frameworks */,
 				CEC9422C1BB0F78D0085E6D1 /* Resources */,
-				A5BA20216B2B8AB4D4CF82DF /* Copy Pods Resources */,
+				6F72E4936FDB422854B0C660 /* [CP] Embed Pods Frameworks */,
+				1DA8E22B65009F021054EA10 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -617,9 +603,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEC942541BB0F78D0085E6D1 /* Build configuration list for PBXNativeTarget "ArcToDoListTests" */;
 			buildPhases = (
+				51C7FD5D163DE201148E5CE4 /* [CP] Check Pods Manifest.lock */,
 				CEC942431BB0F78D0085E6D1 /* Sources */,
 				CEC942441BB0F78D0085E6D1 /* Frameworks */,
 				CEC942451BB0F78D0085E6D1 /* Resources */,
+				0257DE7C16F4D3509B732723 /* [CP] Embed Pods Frameworks */,
+				9F8A6481E171475E25BDC96B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -642,6 +631,7 @@
 				TargetAttributes = {
 					CEC9422D1BB0F78D0085E6D1 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = D7S3BX6UT5;
 					};
 					CEC942461BB0F78D0085E6D1 = {
 						CreatedOnToolsVersion = 6.4;
@@ -673,6 +663,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE246771D0FDFE20057A101 /* GoogleService-Info.plist in Resources */,
 				CE9DA04D1BE9B4D1005742D8 /* SubTaskCell.xib in Resources */,
 				CED4778B1BEC77A400669902 /* ChildTableViewCell.xib in Resources */,
 				CEC942601BB0FFDC0085E6D1 /* ReadMe in Resources */,
@@ -698,14 +689,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		848A5DCDABD50752FBF603AA /* Check Pods Manifest.lock */ = {
+		0257DE7C16F4D3509B732723 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ArcToDoListTests/Pods-ArcToDoListTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0DCED33E42243C6C124400F4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -713,19 +719,64 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		A5BA20216B2B8AB4D4CF82DF /* Copy Pods Resources */ = {
+		1DA8E22B65009F021054EA10 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ArcToDoList/Pods-ArcToDoList-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		51C7FD5D163DE201148E5CE4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6F72E4936FDB422854B0C660 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ArcToDoList/Pods-ArcToDoList-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F8A6481E171475E25BDC96B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ArcToDoListTests/Pods-ArcToDoListTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -749,19 +800,17 @@
 				CEC942371BB0F78D0085E6D1 /* AppDelegate.m in Sources */,
 				CE35A6B01BE7422200757A01 /* CategoryCell.m in Sources */,
 				CE9DA04B1BE9B4BF005742D8 /* SubTaskCell.m in Sources */,
-				CEC9426C1BB10B230085E6D1 /* GooglePlusAccount.m in Sources */,
 				CED477871BEC77A400669902 /* ParentTableViewCell.m in Sources */,
 				CED477AC1BEC7F4A00669902 /* MenuItem.m in Sources */,
 				CED477AF1BEC822F00669902 /* MenuItemCell.m in Sources */,
 				CE35A6B51BE743ED00757A01 /* CategoryItem.m in Sources */,
 				CED477861BEC77A400669902 /* SingleTap.m in Sources */,
 				CED477821BEC77A400669902 /* PanLeftRight.m in Sources */,
+				CEC54E271D0EA02F00E9AF13 /* AccountManager.m in Sources */,
 				CED477A91BEC7B8600669902 /* MenuViewController.m in Sources */,
 				CED4777B1BEC77A400669902 /* GestureComponent.m in Sources */,
-				CEC942731BB136BD0085E6D1 /* FacebookAccount.m in Sources */,
 				CE7D54571BB27B6F00D5DEA6 /* MainViewController.m in Sources */,
 				CED4777D1BEC77A400669902 /* DTECellHolder.m in Sources */,
-				CEC942651BB101CA0085E6D1 /* AccountManager.m in Sources */,
 				CED477801BEC77A400669902 /* LongPress.m in Sources */,
 				CEF55B3C1BE896B00061FD50 /* MZDayPickerCell.m in Sources */,
 				CED477891BEC77A400669902 /* ParentTableView.m in Sources */,
@@ -770,10 +819,10 @@
 				CEF55B421BE89F2A0061FD50 /* TaskCell.m in Sources */,
 				CEF55B3F1BE89EFE0061FD50 /* TaskItem.m in Sources */,
 				CEC9425E1BB0F8C60085E6D1 /* SigninViewController.m in Sources */,
-				CEC942681BB101D80085E6D1 /* UserAccount.m in Sources */,
 				CED477A41BEC7A9500669902 /* FPPopoverView.m in Sources */,
 				CE35A6AD1BE73EFE00757A01 /* CategoryViewController.m in Sources */,
 				CEC9425B1BB0F8B80085E6D1 /* ExtendNSLog.m in Sources */,
+				CE74303E1D18D924002107D9 /* ServerInterface.m in Sources */,
 				CEF55B3B1BE896B00061FD50 /* MZDayPicker.m in Sources */,
 				CEF55B321BE896050061FD50 /* TaskViewController.m in Sources */,
 				CED477A31BEC7A9500669902 /* FPPopoverController.m in Sources */,
@@ -903,36 +952,43 @@
 		};
 		CEC942521BB0F78D0085E6D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 77D99613F979AB47B0EDA6BD /* Pods-ArcToDoList.debug.xcconfig */;
+			baseConfigurationReference = 09773287E4D46BFB959DE96A /* Pods-ArcToDoList.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "ArcToDoList/ToDoList-Prefix.pch";
 				INFOPLIST_FILE = ArcToDoList/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ArcTech.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = ArcTech.ArcToDoList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		CEC942531BB0F78D0085E6D1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 59422C454A690F9FA3A47030 /* Pods-ArcToDoList.release.xcconfig */;
+			baseConfigurationReference = 8BB3C90A1980D34927EC2B94 /* Pods-ArcToDoList.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "ArcToDoList/ToDoList-Prefix.pch";
 				INFOPLIST_FILE = ArcToDoList/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ArcTech.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = ArcTech.ArcToDoList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
 		CEC942551BB0F78D0085E6D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBFC1119E840FC36CF766A69 /* Pods-ArcToDoListTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -953,6 +1009,7 @@
 		};
 		CEC942561BB0F78D0085E6D1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A8CB5CE0A90963B4E464EB7 /* Pods-ArcToDoListTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
