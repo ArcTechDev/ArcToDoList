@@ -30,6 +30,7 @@
 + (instancetype)sharedInstance;
 
 - (FIRDatabaseReference *)refTaskItemsUnderCategoryItem:(NSString *)catId;
+- (FIRDatabaseReference *)refCategoryItemUnderTasks;
 
 /**
  * Load all items from category

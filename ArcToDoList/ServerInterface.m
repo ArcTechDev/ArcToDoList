@@ -47,6 +47,10 @@ static ServerInterface *_instance;
     return [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@/%@",FTaskItems, [FIRAuth auth].currentUser.uid, catId]];
 }
 
+- (FIRDatabaseReference *)refCategoryItemUnderTasks{
+    
+    return [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@",FTaskItems, [FIRAuth auth].currentUser.uid]];
+}
 
 - (void)loadCategoryItemOnComplete:(void(^)(NSDictionary *values))complete fail:(void(^)(NSError *error))fail{
     
@@ -120,26 +124,34 @@ static ServerInterface *_instance;
             return;
         }
         
-        [self updateCategoryItemCount:^{ 
+        [self deleteAllTaskUnderCategoryItemId:itemId onComplete:^{
             
-            complete(itemId);
-            
-            [self sortCategoryItemWithStartPriority:priority ignoreItemId:itemId incrementPriority:-1 complete:^{
+            [self updateCategoryItemCount:^{
                 
                 complete(itemId);
+                
+                [self sortCategoryItemWithStartPriority:priority ignoreItemId:itemId incrementPriority:-1 complete:^{
+                    
+                    complete(itemId);
+                    
+                } fail:^(NSError *error) {
+                    
+                    fail(error);
+                }];
                 
             } fail:^(NSError *error) {
                 
                 fail(error);
             }];
             
+            
         } fail:^(NSError *error) {
             
             fail(error);
+            
         }];
-    }];
-    
         
+    }];
     
 }
 
@@ -497,6 +509,23 @@ static ServerInterface *_instance;
     }];
     
     
+}
+
+- (void)deleteAllTaskUnderCategoryItemId:(NSString *)catId onComplete:(void(^)(void))complete fail:(void(^)(NSError *error))fail{
+    
+    FIRDatabaseReference *catItemRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@/%@",FTaskItems, [FIRAuth auth].currentUser.uid, catId]];
+    
+    [catItemRef removeValueWithCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        
+        if(error != nil){
+            
+            fail(error);
+            
+            return;
+        }
+       
+        complete();
+    }];
 }
 
 

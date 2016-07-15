@@ -125,6 +125,7 @@
 - (void)dealloc{
     
     [[[ServerInterface sharedInstance] refTaskItemsUnderCategoryItem:_underCategoryItemId] removeAllObservers];
+    [[[ServerInterface sharedInstance] refCategoryItemUnderTasks] removeAllObservers];
 }
 
 #pragma mark - Firebase listener
@@ -255,6 +256,31 @@
     } withCancelBlock:^(NSError * _Nonnull error) {
         
         NSLog(@"Listen to child change event error:%@", error);
+    }];
+    
+    //Listen category item delete event
+    [[[ServerInterface sharedInstance] refCategoryItemUnderTasks] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        if([snapshot.key isEqualToString:_underCategoryItemId]){
+           
+            if(self.navigationController){
+                
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning" message:@"All data that are under this category item has been removed! \n you will return to category items" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                }];
+                
+                [alertController addAction:confirmAction];
+                
+                [self presentViewController:alertController animated:YES completion:nil];
+            }
+        }
+        
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        
+        
     }];
 }
 
