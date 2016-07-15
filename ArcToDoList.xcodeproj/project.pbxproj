@@ -54,6 +54,7 @@
 		CED477A91BEC7B8600669902 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477A81BEC7B8600669902 /* MenuViewController.m */; };
 		CED477AC1BEC7F4A00669902 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477AB1BEC7F4A00669902 /* MenuItem.m */; };
 		CED477AF1BEC822F00669902 /* MenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED477AE1BEC822F00669902 /* MenuItemCell.m */; };
+		CEDB280F1D38877900886AC8 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB280E1D38877900886AC8 /* DateHelper.m */; };
 		CEE246771D0FDFE20057A101 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE246761D0FDFE20057A101 /* GoogleService-Info.plist */; };
 		CEF55AED1BE864290061FD50 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF55AEC1BE864290061FD50 /* QuartzCore.framework */; };
 		CEF55B321BE896050061FD50 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF55B311BE896050061FD50 /* TaskViewController.m */; };
@@ -165,6 +166,8 @@
 		CED477AB1BEC7F4A00669902 /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
 		CED477AD1BEC822F00669902 /* MenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemCell.h; sourceTree = "<group>"; };
 		CED477AE1BEC822F00669902 /* MenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemCell.m; sourceTree = "<group>"; };
+		CEDB280D1D38877900886AC8 /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
+		CEDB280E1D38877900886AC8 /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
 		CEE246761D0FDFE20057A101 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEF55AEA1BE863CB0061FD50 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CEF55AEC1BE864290061FD50 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -572,6 +575,8 @@
 				CEF55B471BE8BA2A0061FD50 /* Helper.m */,
 				CE74303C1D18D924002107D9 /* ServerInterface.h */,
 				CE74303D1D18D924002107D9 /* ServerInterface.m */,
+				CEDB280D1D38877900886AC8 /* DateHelper.h */,
+				CEDB280E1D38877900886AC8 /* DateHelper.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -803,6 +808,7 @@
 				CED477871BEC77A400669902 /* ParentTableViewCell.m in Sources */,
 				CED477AC1BEC7F4A00669902 /* MenuItem.m in Sources */,
 				CED477AF1BEC822F00669902 /* MenuItemCell.m in Sources */,
+				CEDB280F1D38877900886AC8 /* DateHelper.m in Sources */,
 				CE35A6B51BE743ED00757A01 /* CategoryItem.m in Sources */,
 				CED477861BEC77A400669902 /* SingleTap.m in Sources */,
 				CED477821BEC77A400669902 /* PanLeftRight.m in Sources */,

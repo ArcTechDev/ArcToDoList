@@ -21,4 +21,6 @@
 
 @interface TaskViewController : UIViewController<MZDayPickerDataSource, MZDayPickerDelegate, ParentTableViewDelegate, PanLeftRightDelegate, SingleTapDelegate, DoubleTapEditDelegate, PullDownAddNewDelegate, LongPressMoveDelegate>
 
+@property (copy,nonatomic) NSString *underCategoryItemId;
+
 @end

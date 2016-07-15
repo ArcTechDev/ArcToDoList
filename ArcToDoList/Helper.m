@@ -11,6 +11,7 @@
 
 @implementation Helper
 
+
 + (UIColor *)transitColorForItemAtIndex:(NSInteger)index totalItemCount:(NSInteger)itemCount startColor:(UIColor *)startColor endColor:(UIColor *)endColor{
     
     float r,g,b,a;
@@ -44,6 +45,8 @@
     return blurView;
     
 }
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

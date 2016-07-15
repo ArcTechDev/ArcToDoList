@@ -7,6 +7,8 @@
 //
 
 #import "TaskViewController.h"
+#import "DateHelper.h"
+#import "ServerInterface.h"
 
 @interface TaskViewController ()
 
@@ -17,7 +19,8 @@
 
 @implementation TaskViewController{
     
-    NSMutableArray *_dataArray;
+    NSMutableDictionary *dateOfTask;
+    NSString *pickedDate;
     CGFloat taskCellHeight;
     CGFloat subTaskCellHeight;
 }
@@ -32,12 +35,16 @@
     taskCellHeight = -1;
     subTaskCellHeight = -1;
     
-    _dataArray = [[NSMutableArray alloc] init];
+    dateOfTask = [[NSMutableDictionary alloc] init];
     
+    pickedDate = [DateHelper stringFromDate:[NSDate date] withFormate:DateFormateString];
+    
+    /*
     for(int i=0; i<20; i++){
         
         [_dataArray addObject:[TaskItem createTaskItemWithName:[NSString stringWithFormat:@"Task%i", i]]];
     }
+     */
     
     //pan left right gesture
     PanLeftRight *panLeftRight = [[PanLeftRight alloc] initWithTableView:_tableView WithPriority:0];
@@ -69,6 +76,30 @@
     pullAddNew.delegate = self;
     [_tableView addGestureComponent:pullAddNew];
     
+    [[ServerInterface sharedInstance] loadTaskItemUnderCategoryItem:_underCategoryItemId withDate:pickedDate complete:^(NSDictionary *values, NSString *queryDate) {
+        
+        
+        NSMutableArray *tasks = [[NSMutableArray alloc] init];
+        
+        for(NSString *key in values.allKeys){
+            
+            TaskItem *item = [TaskItem createTaskItemWithName:values[key][FPTaskItemName] withDate:[DateHelper dateFromString:values[key][FPTaskItemDate] withFormate:DateFormateString]];
+            item.itemId = key;
+            
+            [tasks addObject:item];
+        }
+        
+        dateOfTask[queryDate] = tasks;
+        
+        [_tableView reloadTableData];
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"unable to load task items");
+    }];
+    
+    [self startListeningEvent];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -91,7 +122,64 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc{
+    
+    [[[ServerInterface sharedInstance] refTaskItemsUnderCategoryItem:_underCategoryItemId] removeAllObservers];
+}
 
+#pragma mark - Firebase listener
+- (void)startListeningEvent{
+    
+    //Listen child added event
+    [[[ServerInterface sharedInstance] refTaskItemsUnderCategoryItem:_underCategoryItemId] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        if(![snapshot.value isEqual:[NSNull null]]){
+            
+            NSString *date = snapshot.value[FPTaskItemDate];
+            NSMutableArray *tasks = dateOfTask[date];
+            
+            if(tasks == nil){
+                
+                tasks = [[NSMutableArray alloc] init];
+                dateOfTask[date] = tasks;
+            }
+            
+            for(TaskItem *task in tasks){
+                
+                if([task.itemId isEqualToString:snapshot.key])
+                    return;
+            }
+            
+            NSLog(@"child added event new value added key:%@, value:%@", snapshot.key, snapshot.value);
+            
+            
+            TaskItem *item = [TaskItem createTaskItemWithName:snapshot.value[FPTaskItemName] withDate:[DateHelper dateFromString:snapshot.value[FPTaskItemDate] withFormate:DateFormateString]];
+            item.itemId = [snapshot.key copy];
+            
+            [tasks insertObject:item atIndex:0];
+            
+            //we dont insert into table view when selected date is not equal to data's date
+            if(![ pickedDate isEqualToString:date])
+                return;
+            
+            [_tableView insertNewRowAtIndex:0 withAnimation:UITableViewRowAnimationTop];
+            
+            for(TaskCell *cell in _tableView.visibleCells){
+                
+                NSInteger index = [_tableView indexPathForCell:cell].row;
+                
+                if(!cell.isComplete)
+                    cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
+            }
+        }
+        
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        
+        NSLog(@"Listen to child added event error:%@", error);
+    }];
+}
+
+#pragma mark - setup day picker
 - (void)setupDayPicker{
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
@@ -135,7 +223,15 @@
 
 - (NSInteger)numberOfParentCellIsInTableView:(ParentTableView *)tableView{
     
-    return _dataArray.count;
+    if(dateOfTask == nil)
+        return 0;
+    
+    NSMutableArray*tasks = dateOfTask[pickedDate];
+    
+    if(tasks == nil)
+        return 0;
+    
+    return tasks.count;
 }
 
 
@@ -150,7 +246,9 @@
         cell = (TaskCell *)[tableView cellViewFromNib:@"TaskCell" atViewIndex:0];
     }
     
-    TaskItem *item = [_dataArray objectAtIndex:index];
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    TaskItem *item = [tasks objectAtIndex:index];
     
     cell.titleLabel.text = item.taskItemName;
     cell.isComplete = item.isComplete;
@@ -237,7 +335,9 @@
 
 - (BOOL)tableView:(ParentTableView *)tableView canExpandSubCellForRowAtIndex:(NSInteger)index{
     
-    TaskItem *item = [_dataArray objectAtIndex:index];
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    TaskItem *item = [tasks objectAtIndex:index];
     
     if(!item.isComplete)
         return YES;
@@ -284,9 +384,11 @@
     
     int retVal = 0;
     
-    if(_dataArray != nil){
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    if(tasks != nil){
         
-        for(TaskItem *item in _dataArray){
+        for(TaskItem *item in tasks){
             
             if(!item.isComplete){
                 
@@ -300,6 +402,45 @@
     }
     
     return retVal;
+}
+
+#pragma mark - MZDayPicker delegate
+- (void)dayPicker:(MZDayPicker *)dayPicker didSelectDay:(MZDay *)day{
+    
+    pickedDate = [DateHelper stringFromDate:dayPicker.currentDate withFormate:DateFormateString];
+    
+    NSMutableArray *data = dateOfTask[pickedDate];
+    
+    if(data != nil){
+        
+        [_tableView reloadTableData];
+        return;
+    }
+    
+    
+    [[ServerInterface sharedInstance] loadTaskItemUnderCategoryItem:_underCategoryItemId withDate:pickedDate complete:^(NSDictionary *values, NSString *queryDate) {
+        
+        NSMutableArray *tasks = dateOfTask[queryDate];
+        
+        if(tasks == nil)
+            tasks = [[NSMutableArray alloc] init];
+        
+        for(NSString *key in values.allKeys){
+            
+            TaskItem *item = [TaskItem createTaskItemWithName:values[key][FPTaskItemName] withDate:[DateHelper dateFromString:values[key][FPTaskItemDate] withFormate:DateFormateString]];
+            
+            [tasks addObject:item];
+        }
+        
+        dateOfTask[queryDate] = tasks;
+        
+        if([pickedDate isEqualToString:queryDate])
+            [_tableView reloadTableData];
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"unable to load task items");
+    }];
 }
 
 #pragma mark - PanleftRight delegate
@@ -359,7 +500,9 @@
     
     NSLog(@"delete at index %li", (long)index);
     
-    [_dataArray removeObjectAtIndex:index];
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    [tasks removeObjectAtIndex:index];
     [_tableView deleteRowAtIndex:index withAnimation:UITableViewRowAnimationFade];
     
     //[_tableView reloadData];
@@ -375,7 +518,9 @@
 
 - (void)onPanRightAtCellIndex:(NSInteger)index{
     
-    TaskItem *item = [_dataArray objectAtIndex:index];
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    TaskItem *item = [tasks objectAtIndex:index];
     
     if(item.isComplete){
         
@@ -383,29 +528,29 @@
         
         item.isComplete = NO;
         
-        [_dataArray removeObjectAtIndex:index];
+        [tasks removeObjectAtIndex:index];
         
-        [_dataArray insertObject:item atIndex:0];
+        [tasks insertObject:item atIndex:0];
         
         TaskCell *visualCell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
         visualCell.isComplete = NO;
         
-        [_tableView moveRowAtIndex:index toIndex:0];
+        [_tableView moveRowAtIndex:index toIndex:0 onComplete:nil];
     }
     else{
         
         NSLog(@"complete at index %li", (long)index);
         
-        id obj = [_dataArray objectAtIndex:index];
+        id obj = [tasks objectAtIndex:index];
         ((TaskItem *)obj).isComplete = YES;
-        [_dataArray removeObjectAtIndex:index];
-        [_dataArray addObject:obj];
+        [tasks removeObjectAtIndex:index];
+        [tasks addObject:obj];
         
         TaskCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
         cell.isComplete = YES;
         
         
-        [_tableView moveRowAtIndex:index toIndex:[_dataArray count]-1];
+        [_tableView moveRowAtIndex:index toIndex:[tasks count]-1 onComplete:nil];
     }
     
     //[_tableView reloadData];
@@ -429,8 +574,10 @@
 #pragma mark - LongPressMove delegate
 - (BOOL)canMoveItemFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex{
     
-    TaskItem *item1 = [_dataArray objectAtIndex:fromIndex];
-    TaskItem *item2 = [_dataArray objectAtIndex:toIndex];
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    TaskItem *item1 = [tasks objectAtIndex:fromIndex];
+    TaskItem *item2 = [tasks objectAtIndex:toIndex];
     
     if(item1.isComplete == item2.isComplete)
         return YES;
@@ -440,14 +587,37 @@
 
 - ( void)willMoveItemFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex{
     
-    [_dataArray exchangeObjectAtIndex:fromIndex withObjectAtIndex:toIndex];
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    [tasks exchangeObjectAtIndex:fromIndex withObjectAtIndex:toIndex];
 }
 
 #pragma mark - PullDownAddNew delegate
 - (void)addNewItemWithText:(NSString *)text{
     
-    NSLog(@"add new item %@", text);
-    [_dataArray insertObject:[TaskItem createTaskItemWithName:text] atIndex:0];
+    [[ServerInterface sharedInstance] addTaskItemUnderCategoryItemId:_underCategoryItemId withText:text withDate:pickedDate onComplete:^(NSString *taskId, NSString *text, NSString *date) {
+        
+        NSLog(@"add new task %@, %@, %@", taskId, text, date);
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"unable to add task server error:%@", error);
+    }];
+    
+    /*
+    TaskItem *item = [TaskItem createTaskItemWithName:text withDate:[_dayPicker.currentDate copy]];
+    
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    if(tasks == nil){
+        
+        tasks = [[NSMutableArray alloc] init];
+        dateOfTask[pickedDate] = tasks;
+    }
+    
+    [tasks insertObject:item atIndex:0];
+    
+    NSLog(@"add new item %@ with date:%@", item.taskItemName, item.date);
     
     [_tableView insertNewRowAtIndex:0 withAnimation:UITableViewRowAnimationTop];
     
@@ -460,23 +630,30 @@
         if(!cell.isComplete)
             cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
     }
+     */
 }
 
 #pragma mark - DoubleTapEdit delegate
 - (BOOL)canStartEditAtIndex:(NSInteger)index{
     
-    TaskItem *item = [_dataArray objectAtIndex:index];
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    TaskItem *item = [tasks objectAtIndex:index];
     
     return !item.isComplete;
 }
 - (NSString *)nameForItemAtIndex:(NSInteger)index{
     
-    return ((TaskItem *)[_dataArray objectAtIndex:index]).taskItemName;
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    return ((TaskItem *)[tasks objectAtIndex:index]).taskItemName;
 }
 
 - (void)onDoubleTapEditCompleteAtIndex:(NSInteger)index withItemName:(NSString *)name{
     
-    TaskItem *item = [_dataArray objectAtIndex:index];
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    TaskItem *item = [tasks objectAtIndex:index];
     item.taskItemName = name;
     
     TaskCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];

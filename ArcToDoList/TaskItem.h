@@ -10,9 +10,13 @@
 
 @interface TaskItem : NSObject
 
+@property (copy, nonatomic) NSString *itemId;
 @property (copy, nonatomic) NSString *taskItemName;
 @property (assign, nonatomic) BOOL isComplete;
+@property (nonatomic) NSDate *date;
 
 + (id)createTaskItemWithName:(NSString *)name;
++ (id)createTaskItemWithName:(NSString *)name withDate:(NSDate *)date;
+- (NSString *)stringOfDate;
 
 @end

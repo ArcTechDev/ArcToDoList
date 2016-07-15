@@ -13,6 +13,7 @@
 @synthesize itemId = _itemId;
 @synthesize itemName = _itemName;
 @synthesize isComplete = _isComplete;
+@synthesize priority = _priority;
 
 + (id)createCategoryItemWithName:(NSString *)name{
     

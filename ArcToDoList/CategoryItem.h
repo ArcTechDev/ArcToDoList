@@ -13,6 +13,7 @@
 @property (copy, nonatomic) NSString *itemId;
 @property (copy, nonatomic) NSString *itemName;
 @property (assign, nonatomic) BOOL isComplete;
+@property (assign, nonatomic) NSInteger priority;
 
 + (id)createCategoryItemWithName:(NSString *)name;
 

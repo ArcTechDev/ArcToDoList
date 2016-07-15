@@ -129,7 +129,7 @@
     _lastExpendParentIndex = -1;
     
     //return if number of parent cell is less or equal to 0
-    if (![_theDelegate numberOfParentCellIsInTableView:self] > 0) {
+    if (!([_theDelegate numberOfParentCellIsInTableView:self] > 0)) {
         return;
     }
     
@@ -616,10 +616,11 @@
     [self deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:anim];
 }
 
-- (void)moveRowAtIndex:(NSInteger)targetIndex toIndex:(NSInteger)destIndex{
+- (void)moveRowAtIndex:(NSInteger)targetIndex toIndex:(NSInteger)destIndex onComplete:(void(^)(NSInteger fromIndex, NSInteger toIndex))onComplete{
     
     [self collapseAllRows];
     
+
     int offset = 0;
     if(targetIndex < destIndex){
         
@@ -649,12 +650,25 @@
     }
     
     
-    
     ParentTableViewCell *targetCell = [self cellForRowAtIndexPath:[NSIndexPath indexPathForRow:targetIndex inSection:0]];
     targetCell.parentIndex = destIndex;
     
     
+    [CATransaction begin];
+    
+    [self beginUpdates];
+    
+    [CATransaction setCompletionBlock:^{
+       
+        if(onComplete != nil)
+            onComplete(targetIndex, destIndex);
+    }];
+    
     [self moveRowAtIndexPath:[NSIndexPath indexPathForRow:targetIndex inSection:0] toIndexPath:[NSIndexPath indexPathForRow:destIndex inSection:0]];
+    
+    [self endUpdates];
+    
+    [CATransaction commit];
     
 }
 
@@ -666,7 +680,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if(![_theDelegate numberOfParentCellIsInTableView:self] > 0){
+    if(!([_theDelegate numberOfParentCellIsInTableView:self] > 0)){
         
         return 0;
     }

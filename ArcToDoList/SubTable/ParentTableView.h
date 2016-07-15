@@ -210,6 +210,6 @@
  */
 - (void)deleteRowAtIndex:(NSInteger)index withAnimation:(UITableViewRowAnimation)anim;
 
-- (void)moveRowAtIndex:(NSInteger)targetIndex toIndex:(NSInteger)destIndex;
+- (void)moveRowAtIndex:(NSInteger)targetIndex toIndex:(NSInteger)destIndex onComplete:(void(^)(NSInteger fromIndex, NSInteger toIndex))onComplete;
 
 @end

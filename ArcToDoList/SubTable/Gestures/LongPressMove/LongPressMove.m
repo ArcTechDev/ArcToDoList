@@ -14,6 +14,8 @@
     UIView *_snapshot;
     NSInteger _sourceIndex;
     BOOL _canMove;
+    NSInteger _finalSourceIndex;
+    NSInteger _finalDestIndex;
 }
 
 - (id)initWithTableView:(ParentTableView *)tableView WithPriority:(NSInteger)priority{
@@ -71,7 +73,7 @@
             
             ParentTableViewCell *cell = [_tableView findCellByTouchPoint:location];
             _sourceIndex = cell.parentIndex;
-            
+            _finalSourceIndex = _finalDestIndex = _sourceIndex;
             
             _snapshot = [self customSnapshoFromView:cell];
             
@@ -115,6 +117,7 @@
             if(cell != nil){
                 
                 destIndex = cell.parentIndex;
+                _finalDestIndex = destIndex;
             }
             
             if(_sourceIndex != cell.parentIndex && destIndex >= 0){
@@ -128,7 +131,10 @@
                             
                             [self.delegate willMoveItemFromIndex:_sourceIndex toIndex:destIndex];
                             
-                            [_tableView moveRowAtIndex:_sourceIndex toIndex:destIndex];
+                            [_tableView moveRowAtIndex:_sourceIndex toIndex:destIndex onComplete:^(NSInteger fromIndex, NSInteger toIndex){
+                            
+                                _finalDestIndex = toIndex;
+                            }];
                             
                             _sourceIndex = destIndex;
                             
@@ -145,6 +151,11 @@
         }
             
         default:{
+            
+            if([self.delegate respondsToSelector:@selector(didMoveItemFromIndex:toIndex:)]){
+                
+                [self.delegate didMoveItemFromIndex:_finalSourceIndex toIndex:_finalDestIndex];
+            }
             
             
             ParentTableViewCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_sourceIndex inSection:0]];

@@ -39,6 +39,7 @@
     }
     else{
         
+        self.completeLabel.text = @"\u2713";
         self.backgroundColor = self.notCompleteBackgroundColor;
     }
     

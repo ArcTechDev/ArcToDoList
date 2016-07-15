@@ -11,6 +11,7 @@
 #import "CategoryItem.h"
 #import "CategoryCell.h"
 #import "AccountManager.h"
+#import "TaskViewController.h"
 
 
 @interface CategoryViewController ()
@@ -43,7 +44,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    _categoryItems = [[NSMutableArray alloc] init];
+     _categoryItems = [[NSMutableArray alloc] init];
     
     /*
     for(int i=0; i<20; i++){
@@ -89,13 +90,30 @@
             
             CategoryItem *item = [CategoryItem createCategoryItemWithName:((NSDictionary *)values[key])[FPCatItemName]];
             item.itemId = key;
+            item.priority = [(values[key])[FCategoryItemPriority] integerValue];
             
             [_categoryItems addObject:item];
         
         }
         
-        if(values.count > 0)
+        if(values.count > 0){
+            
+            [_categoryItems sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                
+                CategoryItem *item1 = obj1;
+                CategoryItem *item2 = obj2;
+                
+                if(item1.priority > item2.priority)
+                    return NSOrderedDescending;
+                else if(item1.priority < item2.priority)
+                    return NSOrderedAscending;
+                else
+                    return NSOrderedSame;
+            }];
+            
+            
             [_tableView reloadTableData];
+        }
         
     } fail:^(NSError *error) {
         
@@ -126,6 +144,9 @@
     [[[ServerInterface sharedInstance] refCategoryItems] removeAllObservers];
 }
 
+#pragma mark - Sort array
+
+
 #pragma mark - Firebase listener
 - (void)startListeningEvent{
     
@@ -146,6 +167,7 @@
             NSString *itemName = ((NSDictionary *)snapshot.value)[FPCatItemName];
             CategoryItem *item = [CategoryItem createCategoryItemWithName:[itemName copy]];
             item.itemId = [snapshot.key copy];
+            item.priority = [snapshot.value[FCategoryItemPriority] integerValue];
             
             [_categoryItems insertObject:item atIndex:0];
             
@@ -208,7 +230,14 @@
                 
                 if([item.itemId isEqualToString:snapshot.key]){
                     
+                    BOOL reloadTableData = NO;
+                    
                     item.itemName = [((NSDictionary *)snapshot.value)[FPCatItemName] copy];
+                    
+                    if(item.priority != [snapshot.value[FCategoryItemPriority] integerValue])
+                        reloadTableData = YES;
+                    
+                    item.priority = [snapshot.value[FCategoryItemPriority] integerValue];
                     
                     //will do task count
                     
@@ -217,6 +246,25 @@
                     CategoryCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
                     
                     cell.titleLabel.text = item.itemName;
+                    
+                    if(reloadTableData){
+                        
+                        [_categoryItems sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                            
+                            CategoryItem *item1 = obj1;
+                            CategoryItem *item2 = obj2;
+                            
+                            if(item1.priority > item2.priority)
+                                return NSOrderedDescending;
+                            else if(item1.priority < item2.priority)
+                                return NSOrderedAscending;
+                            else
+                                return NSOrderedSame;
+                        }];
+                        
+                        
+                        [_tableView reloadTableData];
+                    }
                     
                     return;
                 }
@@ -414,7 +462,7 @@
     
     CategoryItem *item = [_categoryItems objectAtIndex:index];
     
-    [[ServerInterface sharedInstance] deleteCategoryItemWithItemId:item.itemId onComplete:^(NSString *itemId) {
+    [[ServerInterface sharedInstance] deleteCategoryItemWithItemId:item.itemId withItemPriority:item.priority onComplete:^(NSString *itemId) {
         
         NSLog(@"delete at index %li", (long)index);
         /*
@@ -492,7 +540,8 @@
     if(item.isComplete)
         return;
     
-    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskViewController"];
+    TaskViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskViewController"];
+    controller.underCategoryItemId = item.itemId;
     
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -511,7 +560,61 @@
 
 - ( void)willMoveItemFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex{
     
+    //swap priority
+    CategoryItem *item1 = [_categoryItems objectAtIndex:fromIndex];
+    CategoryItem *item2 = [_categoryItems objectAtIndex:toIndex];
+    
+    NSInteger tempPriority = item1.priority;
+    item1.priority = item2.priority;
+    item2.priority = tempPriority;
+    
     [_categoryItems exchangeObjectAtIndex:fromIndex withObjectAtIndex:toIndex];
+    
+}
+
+- (void)didMoveItemFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex{
+    
+    
+    if(fromIndex == toIndex)
+        return;
+    
+    NSLog(@"...............");
+    for(CategoryItem *i in _categoryItems){
+        
+        NSLog(@"priority:%ld", i.priority);
+        
+    }
+    NSLog(@"...............");
+    
+    NSInteger startIndex = fromIndex;
+    NSInteger endIndex = toIndex;
+    
+    if(startIndex > endIndex){
+        
+        NSInteger tempIndex = startIndex;
+        startIndex = endIndex;
+        endIndex = tempIndex;
+    }
+    
+    NSMutableDictionary *dic  = [[NSMutableDictionary alloc] init];
+    
+    
+    for(NSInteger i = 0; i < _categoryItems.count; i++){
+        
+        CategoryItem *item = [_categoryItems objectAtIndex:i];
+        
+        [dic setValue:[NSNumber numberWithInteger:item.priority] forKey:item.itemId];
+        
+    }
+    
+    
+    [[ServerInterface sharedInstance] updateCategoryItemPriority:dic complete:^{
+        
+    } fail:^(NSError *error) {
+       
+        NSLog(@"unable to update category item priority");
+    }];
+    
 }
 
 #pragma mark - PullDownAddNew delegate
