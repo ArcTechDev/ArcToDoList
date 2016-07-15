@@ -177,6 +177,47 @@
         
         NSLog(@"Listen to child added event error:%@", error);
     }];
+    
+    //Listen child delete event
+    [[[ServerInterface sharedInstance] refTaskItemsUnderCategoryItem:_underCategoryItemId] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        if(![snapshot.value isEqual:[NSNull null]]){
+            
+            NSUInteger index = 0;
+            BOOL shouldRemove = NO;
+            
+            NSMutableArray *tasks = dateOfTask[pickedDate];
+            
+            for(TaskItem *item in tasks){
+                
+                if([item.itemId isEqualToString:snapshot.key]){
+                    
+                    index = [tasks indexOfObject:item];
+                    shouldRemove = YES;
+                    break;
+                }
+            }
+            
+            if(shouldRemove){
+                
+                [tasks removeObjectAtIndex:index];
+                
+                [_tableView deleteRowAtIndex:index withAnimation:UITableViewRowAnimationFade];
+                
+                for(TaskCell *cell in _tableView.visibleCells){
+                    
+                    NSInteger index = [_tableView indexPathForCell:cell].row;
+                    
+                    if(!cell.isComplete)
+                        cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
+                }
+            }
+        }
+        
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        
+        NSLog(@"Listen to child delete event error:%@", error);
+    }];
 }
 
 #pragma mark - setup day picker
@@ -498,6 +539,20 @@
 
 - (void)onPanLeftAtCellIndex:(NSInteger)index{
     
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    TaskItem *task = [tasks objectAtIndex:index];
+    
+    [[ServerInterface sharedInstance] deleteTaskItemUnderCategoryItemId:_underCategoryItemId withTaskId:task.itemId withDate:[DateHelper stringFromDate:task.date withFormate:DateFormateString] onComplete:^(NSString *taskId, NSString *date) {
+        
+        NSLog(@"delete task %@, %@", taskId, date);
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"delete task fail");
+    }];
+    
+    /*
     NSLog(@"delete at index %li", (long)index);
     
     NSMutableArray *tasks = dateOfTask[pickedDate];
@@ -514,6 +569,7 @@
         if(!cell.isComplete)
             cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
     }
+     */
 }
 
 - (void)onPanRightAtCellIndex:(NSInteger)index{

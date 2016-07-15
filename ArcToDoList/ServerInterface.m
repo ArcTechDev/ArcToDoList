@@ -275,6 +275,30 @@ static ServerInterface *_instance;
     }];
 }
 
+- (void)deleteTaskItemUnderCategoryItemId:(NSString *)catId withTaskId:(NSString *)taskId withDate:(NSString *)date onComplete:(void(^)(NSString *taskId, NSString *date))complete fail:(void(^)(NSError *error))fail{
+    
+    FIRDatabaseReference *taskItemRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@/%@/%@",FTaskItems, [FIRAuth auth].currentUser.uid, catId, taskId]];
+    
+    [taskItemRef removeValueWithCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref){
+    
+        if(error != nil){
+            
+            fail(error);
+            
+            return;
+        }
+        
+        [self updateCategoryItemTaskCountWithItemId:catId WithOffset:-1 onComplete:^{
+            
+            complete(taskId, date);
+            
+        } fail:^(NSError *error) {
+            
+            fail(error);
+        }];
+    }];
+}
+
 #pragma mark - Internal
 - (void)updateCategoryItemCount:(void(^)(void))complete fail:(void(^)(NSError *error))fail{
     
