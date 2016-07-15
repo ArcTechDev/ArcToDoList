@@ -14,6 +14,7 @@
 @synthesize itemName = _itemName;
 @synthesize isComplete = _isComplete;
 @synthesize priority = _priority;
+@synthesize taskCount = _taskCount;
 
 + (id)createCategoryItemWithName:(NSString *)name{
     

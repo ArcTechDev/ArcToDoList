@@ -91,6 +91,7 @@
             CategoryItem *item = [CategoryItem createCategoryItemWithName:((NSDictionary *)values[key])[FPCatItemName]];
             item.itemId = key;
             item.priority = [(values[key])[FCategoryItemPriority] integerValue];
+            item.taskCount = [values[key][FPCatItemTaskCount] integerValue];
             
             [_categoryItems addObject:item];
         
@@ -240,12 +241,14 @@
                     item.priority = [snapshot.value[FCategoryItemPriority] integerValue];
                     
                     //will do task count
+                    item.taskCount = [snapshot.value[FPCatItemTaskCount] integerValue];
                     
                     NSUInteger index = [_categoryItems indexOfObject:item];
                     
                     CategoryCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
                     
                     cell.titleLabel.text = item.itemName;
+                    cell.numberLabel.text = [NSString stringWithFormat:@"%ld", item.taskCount];
                     
                     if(reloadTableData){
                         
@@ -383,6 +386,7 @@
     
     cell.isComplete = item.isComplete;
     cell.titleLabel.text = item.itemName;
+    cell.numberLabel.text = [NSString stringWithFormat:@"%ld", item.taskCount];
     
     cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
     

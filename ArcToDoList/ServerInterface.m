@@ -423,7 +423,7 @@ static ServerInterface *_instance;
             
             NSInteger  taskCount = [dic[FPCatItemTaskCount] integerValue];
             
-            taskCount = MIN(0, taskCount + offset);
+            taskCount = MAX(0, taskCount + offset);
             
             
             [catItemRef updateChildValues:@{FPCatItemTaskCount:[NSNumber numberWithInteger:taskCount]} withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {

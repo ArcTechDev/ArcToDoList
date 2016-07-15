@@ -14,6 +14,7 @@
 @property (copy, nonatomic) NSString *itemName;
 @property (assign, nonatomic) BOOL isComplete;
 @property (assign, nonatomic) NSInteger priority;
+@property (assign, nonatomic) NSInteger taskCount;
 
 + (id)createCategoryItemWithName:(NSString *)name;
 
