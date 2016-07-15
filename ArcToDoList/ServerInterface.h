@@ -77,4 +77,9 @@
  */
 - (void)deleteTaskItemUnderCategoryItemId:(NSString *)catId withTaskId:(NSString *)taskId withDate:(NSString *)date onComplete:(void(^)(NSString *taskId, NSString *date))complete fail:(void(^)(NSError *error))fail;
 
+/**
+ * Modify task item under certain category item
+ */
+- (void)modifyTaskItemUnderCatergoryItemId:(NSString *)catId withTaskId:(NSString *)taskId withText:(NSString *)text withDate:(NSString *)date onComplete:(void(^)(NSString *taskId, NSString *date, NSString *text))complete fail:(void(^)(NSError *error))fail;
+
 @end

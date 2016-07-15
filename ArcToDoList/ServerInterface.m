@@ -299,6 +299,24 @@ static ServerInterface *_instance;
     }];
 }
 
+- (void)modifyTaskItemUnderCatergoryItemId:(NSString *)catId withTaskId:(NSString *)taskId withText:(NSString *)text withDate:(NSString *)date onComplete:(void(^)(NSString *taskId, NSString *date, NSString *text))complete fail:(void(^)(NSError *error))fail{
+    
+    FIRDatabaseReference *taskItemRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@/%@/%@",FTaskItems, [FIRAuth auth].currentUser.uid, catId, taskId]];
+    
+    [taskItemRef updateChildValues:@{FPTaskItemName:text} withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        
+        if(error != nil){
+            
+            fail(error);
+            
+            return;
+        }
+        
+        complete(taskId, date, text);
+    }];
+
+}
+
 #pragma mark - Internal
 - (void)updateCategoryItemCount:(void(^)(void))complete fail:(void(^)(NSError *error))fail{
     

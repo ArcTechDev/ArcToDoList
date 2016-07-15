@@ -218,6 +218,44 @@
         
         NSLog(@"Listen to child delete event error:%@", error);
     }];
+    
+    //Listen child change event
+    [[[ServerInterface sharedInstance] refTaskItemsUnderCategoryItem:_underCategoryItemId] observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        if(![snapshot.value isEqual:[NSNull null]]){
+            
+            NSString *date = snapshot.value[FPTaskItemDate];
+            NSMutableArray *tasks = dateOfTask[date];
+            
+            for(TaskItem *item in tasks){
+                
+                if([item.itemId isEqualToString:snapshot.key]){
+                    
+                    item.taskItemName = [((NSDictionary *)snapshot.value)[FPTaskItemName] copy];
+                    item.isComplete = [snapshot.value[FPTaskItemComplete] boolValue];
+                    item.date = [DateHelper dateFromString:snapshot.value[FPTaskItemDate] withFormate:DateFormateString];
+                    
+                    if([date isEqualToString:pickedDate]){
+                        
+                        NSUInteger index = [tasks indexOfObject:item];
+                        
+                        TaskCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+                        
+                        cell.titleLabel.text = item.taskItemName;
+                        cell.isComplete = item.isComplete;
+                        
+                        [_tableView reloadTableData];
+                    }
+                }
+                
+                    return;
+                }
+            }
+        
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        
+        NSLog(@"Listen to child change event error:%@", error);
+    }];
 }
 
 #pragma mark - setup day picker
@@ -710,11 +748,23 @@
     NSMutableArray *tasks = dateOfTask[pickedDate];
     
     TaskItem *item = [tasks objectAtIndex:index];
+    
+    [[ServerInterface sharedInstance] modifyTaskItemUnderCatergoryItemId:_underCategoryItemId withTaskId:item.itemId withText:name withDate:[DateHelper stringFromDate:item.date withFormate:DateFormateString] onComplete:^(NSString *taskId, NSString *date, NSString *text) {
+        
+        NSLog(@"edit task name %@, %@, %@", taskId, date, text);
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"edit task name fail");
+    }];
+    
+    /*
     item.taskItemName = name;
     
     TaskCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
     
     cell.titleLabel.text = name;
+     */
 }
 
 /*
