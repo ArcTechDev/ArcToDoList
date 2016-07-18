@@ -92,8 +92,9 @@ static ServerInterface *_instance;
         
         [self updateCategoryItemCount:^{
             
-            //complete(catItemId, text);
+            complete(catItemId, text);
             
+            /*
             [self sortCategoryItemWithStartPriority:0 ignoreItemId:catItemId incrementPriority:1 complete:^{
                 
                 complete(catItemId, text);
@@ -102,6 +103,7 @@ static ServerInterface *_instance;
                 
                 fail(error);
             }];
+            */
             
         } fail:^(NSError *error) {
             
@@ -130,6 +132,7 @@ static ServerInterface *_instance;
                 
                 complete(itemId);
                 
+                /*
                 [self sortCategoryItemWithStartPriority:priority ignoreItemId:itemId incrementPriority:-1 complete:^{
                     
                     complete(itemId);
@@ -138,6 +141,7 @@ static ServerInterface *_instance;
                     
                     fail(error);
                 }];
+                */
                 
             } fail:^(NSError *error) {
                 
@@ -172,12 +176,19 @@ static ServerInterface *_instance;
     }];
 }
 
-- (void)modifyCategoryItemWithItemId:(NSString *)itemId withNewPriority:(NSInteger)priority onComplete:(void(^)(NSString *itemId, NSInteger newPriority))complete fail:(void(^)(NSError *error))fail{
+- (void)updateCategoryItemPriority:(NSDictionary *)data complete:(void(^)(void))complete fail:(void(^)(NSError *error))fail{
     
-    FIRDatabaseReference *catItemRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@/%@",FCategoryItems, [FIRAuth auth].currentUser.uid, itemId]];
+    FIRDatabaseReference *itemRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@",FCategoryItems, [FIRAuth auth].currentUser.uid]];
     
-    [catItemRef updateChildValues:@{FCategoryItemPriority:[NSNumber numberWithInteger:priority]} withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+    NSMutableDictionary *updates = [[NSMutableDictionary alloc] init];
+    
+    for(NSString *key in data.allKeys){
         
+        [updates setValue:data[key] forKey:[NSString stringWithFormat:@"%@/%@", key, FCategoryItemPriority]];
+    }
+    
+    [itemRef updateChildValues:updates withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+       
         if(error != nil){
             
             fail(error);
@@ -185,56 +196,8 @@ static ServerInterface *_instance;
             return;
         }
         
-        complete(itemId, priority);
-    }];
-
-}
-
-- (void)updateCategoryItemPriority:(NSDictionary *)data complete:(void(^)(void))complete fail:(void(^)(NSError *error))fail{
-    
-    /*
-    FIRDatabaseReference *itemRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@",FCategoryItems, [FIRAuth auth].currentUser.uid]];
-    
-    [itemRef runTransactionBlock:^FIRTransactionResult * _Nonnull(FIRMutableData * _Nonnull currentData) {
-        
-        if([currentData.value isEqual:[NSNull null]]){
-            
-            return [FIRTransactionResult successWithValue:currentData];
-        }
-        
-        NSDictionary *dicData = currentData.value;
-        
-        for(NSString *key in data.allKeys){
-            
-            NSNumber *value  = dicData[key][FCategoryItemPriority];
-            
-            if(value != nil){
-                
-                [dicData[key] setValue:data[key] forKey:FCategoryItemPriority];
-            }
-        }
-        
-        [currentData setValue:dicData];
-        
         complete();
-        
-        return [FIRTransactionResult successWithValue:currentData];
-        
-    } andCompletionBlock:^(NSError * _Nullable error, BOOL committed, FIRDataSnapshot * _Nullable snapshot) {
-        
-        if(error != nil || !committed)
-            fail(error);
     }];
-     */
-    
-    for(NSString *key in data.allKeys){
-        
-        [self modifyCategoryItemWithItemId:key withNewPriority:[data[key] integerValue] onComplete:^(NSString *itemId, NSInteger newPriority) {
-            
-        } fail:^(NSError *error) {
-            
-        }];
-    }
 }
 
 - (void)loadTaskItemUnderCategoryItem:(NSString *)catId withDate:(NSString *)date complete:(void(^)(NSDictionary *values, NSString *queryDate))complete fail:(void(^)(NSError *error))fail{
@@ -267,7 +230,7 @@ static ServerInterface *_instance;
     
     NSString *taskItemId = [taskItemRef childByAutoId].key;
     
-    [taskItemRef updateChildValues:@{taskItemId:@{FPTaskItemName:text, FPTaskItemComplete:[NSNumber numberWithBool:NO], FPTaskItemDate:date}} withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+    [taskItemRef updateChildValues:@{taskItemId:@{FPTaskItemName:text, FPTaskItemComplete:[NSNumber numberWithBool:NO], FPTaskItemDate:date, FPTaskItemPriority:[NSNumber numberWithInteger:0]}} withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
         
         if(error != nil){
             
@@ -327,6 +290,47 @@ static ServerInterface *_instance;
         complete(taskId, date, text);
     }];
 
+}
+
+- (void)updateTaskItemPriority:(NSDictionary *)data underCategoryItemId:(NSString *)catId complete:(void(^)(void))complete fail:(void(^)(NSError *error))fail{
+    
+    FIRDatabaseReference *taskRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@/%@",FTaskItems, [FIRAuth auth].currentUser.uid, catId]];
+    
+    NSMutableDictionary *updates = [[NSMutableDictionary alloc] init];
+    
+    for(NSString *key in data.allKeys){
+        
+        [updates setValue:data[key] forKey:[NSString stringWithFormat:@"%@/%@", key, FPTaskItemPriority]];
+    }
+    
+    [taskRef updateChildValues:updates withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        
+        if(error != nil){
+            
+            fail(error);
+            
+            return;
+        }
+        
+        complete();
+    }];
+}
+
+- (void)changeTaskItemCompleteStateWithTaskId:(NSString *)taskId withState:(BOOL)state underCategoryItemId:(NSString *)catId complete:(void(^)(NSString *taskId))complete fail:(void(^)(NSError *error))fail{
+    
+    FIRDatabaseReference *taskItemRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@/%@/%@",FTaskItems, [FIRAuth auth].currentUser.uid, catId, taskId]];
+    
+    [taskItemRef updateChildValues:@{FPTaskItemComplete:[NSNumber numberWithBool:state]} withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+       
+        if(error != nil){
+            
+            fail(error);
+            
+            return;
+        }
+        
+        complete(taskId);
+    }];
 }
 
 #pragma mark - Internal
@@ -397,87 +401,23 @@ static ServerInterface *_instance;
 
 }
 
-- (void)sortCategoryItemWithStartPriority:(NSInteger)sPriority ignoreItemId:(NSString *)itemId incrementPriority:(NSInteger)pIncrement complete:(void(^)(void))complete fail:(void(^)(NSError *error))fail{
-    
-    FIRDatabaseReference *itemRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@",FCategoryItems, [FIRAuth auth].currentUser.uid]];
-    FIRDatabaseQuery *query = [[itemRef queryOrderedByChild:FCategoryItemPriority] queryStartingAtValue:[NSNumber numberWithInteger:sPriority]];
-    
-    [query observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        
-        if(![snapshot.value isEqual:[NSNull null]]){
-            
-            /*
-            NSDictionary *dic = snapshot.value;
-            
-            for(NSString *key in dic.allKeys){
-                
-                if(![key isEqualToString:itemId]){
-                    
-                    NSDictionary *data = dic[key];
-                    NSInteger p = [data[FCategoryItemPriority] integerValue];
-                    
-                    [[itemRef child:key] updateChildValues:@{FCategoryItemPriority:[NSNumber numberWithInteger:p+pIncrement]}];
-                }
-            }
-             */
-            
-            [itemRef runTransactionBlock:^FIRTransactionResult * _Nonnull(FIRMutableData * _Nonnull currentData) {
-                
-                if([currentData.value isEqual:[NSNull null]]){
-                    
-                    return [FIRTransactionResult successWithValue:currentData];
-                }
-                
-                NSDictionary *dicData = currentData.value;
-                
-                for(NSString *key in dicData.allKeys){
-                    
-                    NSInteger priority = [dicData[key][FCategoryItemPriority] integerValue];
-                    
-                    if(![key isEqualToString:itemId]){
-                        
-                        if(priority >= sPriority)
-                            [dicData[key] setValue:[NSNumber numberWithInteger:priority+pIncrement] forKey:FCategoryItemPriority];
-                    }
-                }
-                
-                [currentData setValue:dicData];
-                
-                complete();
-                
-                return [FIRTransactionResult successWithValue:currentData];
-                
-            } andCompletionBlock:^(NSError * _Nullable error, BOOL committed, FIRDataSnapshot * _Nullable snapshot) {
-                
-                if(error != nil || !committed)
-                    fail(error);
-            }];
-            
-            //complete();
-        }
-        
-    } withCancelBlock:^(NSError * _Nonnull error) {
-        
-        NSLog(@"sort error:%@", error);
-        
-        fail(error);
-    }];
-}
-
 - (void)updateCategoryItemTaskCountWithItemId:(NSString *)catId WithOffset:(NSInteger)offset onComplete:(void(^)(void))complete fail:(void(^)(NSError *error))fail{
     
     FIRDatabaseReference *catItemRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@/%@",FCategoryItems, [FIRAuth auth].currentUser.uid, catId]];
+    FIRDatabaseReference *taskRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@/%@",FTaskItems, [FIRAuth auth].currentUser.uid, catId]];
     
-    [catItemRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [taskRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         if(![snapshot.value isEqual:[NSNull null]]){
             
             
             NSDictionary *dic = snapshot.value;
             
-            NSInteger  taskCount = [dic[FPCatItemTaskCount] integerValue];
+            //NSInteger  taskCount = [dic[FPCatItemTaskCount] integerValue];
             
-            taskCount = MAX(0, taskCount + offset);
+            //taskCount = MAX(0, taskCount + offset);
+            
+            NSInteger taskCount = dic.allKeys.count;
             
             
             [catItemRef updateChildValues:@{FPCatItemTaskCount:[NSNumber numberWithInteger:taskCount]} withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {

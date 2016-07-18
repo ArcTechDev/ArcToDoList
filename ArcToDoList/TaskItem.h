@@ -14,6 +14,7 @@
 @property (copy, nonatomic) NSString *taskItemName;
 @property (assign, nonatomic) BOOL isComplete;
 @property (nonatomic) NSDate *date;
+@property (assign, nonatomic) NSInteger priority;
 
 + (id)createTaskItemWithName:(NSString *)name;
 + (id)createTaskItemWithName:(NSString *)name withDate:(NSDate *)date;

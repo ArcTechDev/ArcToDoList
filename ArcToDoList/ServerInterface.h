@@ -19,6 +19,7 @@
 #define FPTaskItemName @"TaskItemName"
 #define FPTaskItemComplete @"TaskItemComplete"
 #define FPTaskItemDate @"TaskItemDate"
+#define FPTaskItemPriority @"TaskItemPriority"
 
 @interface ServerInterface : NSObject
 
@@ -53,11 +54,6 @@
 - (void)modifyCategoryItemWithItemId:(NSString *)itemId text:(NSString *)text onComplete:(void(^)(NSString *itemId, NSString *text))complete fail:(void(^)(NSError *error))fail;
 
 /**
- * Modify item priority in category
- */
-- (void)modifyCategoryItemWithItemId:(NSString *)itemId withNewPriority:(NSInteger)priority onComplete:(void(^)(NSString *itemId, NSInteger newPriority))complete fail:(void(^)(NSError *error))fail;
-
-/**
  * update item priority in a range in category
  * supply dictionary with itemId as key, priority(NSNumber) as value
  */
@@ -82,5 +78,16 @@
  * Modify task item under certain category item
  */
 - (void)modifyTaskItemUnderCatergoryItemId:(NSString *)catId withTaskId:(NSString *)taskId withText:(NSString *)text withDate:(NSString *)date onComplete:(void(^)(NSString *taskId, NSString *date, NSString *text))complete fail:(void(^)(NSError *error))fail;
+
+/**
+ * update item priority in a range in category
+ * supply dictionary with task id as key, priority(NSNumber) as value
+ */
+- (void)updateTaskItemPriority:(NSDictionary *)data underCategoryItemId:(NSString *)catId complete:(void(^)(void))complete fail:(void(^)(NSError *error))fail;
+
+/**
+ * Change task item completion state
+ */
+- (void)changeTaskItemCompleteStateWithTaskId:(NSString *)taskId withState:(BOOL)state underCategoryItemId:(NSString *)catId complete:(void(^)(NSString *taskId))complete fail:(void(^)(NSError *error))fail;
 
 @end

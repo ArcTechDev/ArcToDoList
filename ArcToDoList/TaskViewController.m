@@ -85,11 +85,15 @@
             
             TaskItem *item = [TaskItem createTaskItemWithName:values[key][FPTaskItemName] withDate:[DateHelper dateFromString:values[key][FPTaskItemDate] withFormate:DateFormateString]];
             item.itemId = key;
+            item.isComplete = [values[key][FPTaskItemComplete] boolValue];
+            item.priority = [values[key][FPTaskItemPriority] integerValue];
             
             [tasks addObject:item];
         }
         
         dateOfTask[queryDate] = tasks;
+        
+        [self sortTaskUnderDate:queryDate];
         
         [_tableView reloadTableData];
         
@@ -186,8 +190,9 @@
             
             NSUInteger index = 0;
             BOOL shouldRemove = NO;
+            NSString *date = snapshot.value[FPTaskItemDate];
             
-            NSMutableArray *tasks = dateOfTask[pickedDate];
+            NSMutableArray *tasks = dateOfTask[date];
             
             for(TaskItem *item in tasks){
                 
@@ -203,15 +208,19 @@
                 
                 [tasks removeObjectAtIndex:index];
                 
-                [_tableView deleteRowAtIndex:index withAnimation:UITableViewRowAnimationFade];
-                
-                for(TaskCell *cell in _tableView.visibleCells){
+                if([pickedDate isEqualToString:date]){
                     
-                    NSInteger index = [_tableView indexPathForCell:cell].row;
+                    [_tableView deleteRowAtIndex:index withAnimation:UITableViewRowAnimationFade];
                     
-                    if(!cell.isComplete)
-                        cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
+                    for(TaskCell *cell in _tableView.visibleCells){
+                        
+                        NSInteger index = [_tableView indexPathForCell:cell].row;
+                        
+                        if(!cell.isComplete)
+                            cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
+                    }
                 }
+                
             }
         }
         
@@ -235,6 +244,9 @@
                     item.taskItemName = [((NSDictionary *)snapshot.value)[FPTaskItemName] copy];
                     item.isComplete = [snapshot.value[FPTaskItemComplete] boolValue];
                     item.date = [DateHelper dateFromString:snapshot.value[FPTaskItemDate] withFormate:DateFormateString];
+                    item.priority = [snapshot.value[FPTaskItemPriority] integerValue];
+                    
+                    [self sortTaskUnderDate:date];
                     
                     if([date isEqualToString:pickedDate]){
                         
@@ -247,11 +259,14 @@
                         
                         [_tableView reloadTableData];
                     }
+                    
+                    break;
                 }
-                
-                    return;
-                }
+
             }
+            
+            
+        }
         
     } withCancelBlock:^(NSError * _Nonnull error) {
         
@@ -259,7 +274,7 @@
     }];
     
     //Listen category item delete event
-    [[[ServerInterface sharedInstance] refCategoryItemUnderTasks] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [[[ServerInterface sharedInstance] refCategoryItems] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         if([snapshot.key isEqualToString:_underCategoryItemId]){
            
@@ -509,6 +524,27 @@
     return retVal;
 }
 
+- (void)sortTaskUnderDate:(NSString *)date{
+    
+    NSMutableArray *tasks = dateOfTask[date];
+    
+    if(tasks == nil || tasks.count <= 0)
+        return;
+        
+    [tasks sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        
+        TaskItem *item1 = obj1;
+        TaskItem *item2 = obj2;
+        
+        if(item1.priority > item2.priority)
+            return NSOrderedDescending;
+        else if(item1.priority < item2.priority)
+            return NSOrderedAscending;
+        else
+            return NSOrderedSame;
+    }];
+}
+
 #pragma mark - MZDayPicker delegate
 - (void)dayPicker:(MZDayPicker *)dayPicker didSelectDay:(MZDay *)day{
     
@@ -534,10 +570,16 @@
             
             TaskItem *item = [TaskItem createTaskItemWithName:values[key][FPTaskItemName] withDate:[DateHelper dateFromString:values[key][FPTaskItemDate] withFormate:DateFormateString]];
             
+            item.itemId = key;
+            item.isComplete = [values[key][FPTaskItemComplete] boolValue];
+            item.priority = [values[key][FPTaskItemPriority] integerValue];
+            
             [tasks addObject:item];
         }
         
         dateOfTask[queryDate] = tasks;
+        
+        [self sortTaskUnderDate:queryDate];
         
         if([pickedDate isEqualToString:queryDate])
             [_tableView reloadTableData];
@@ -607,38 +649,50 @@
     
     TaskItem *task = [tasks objectAtIndex:index];
     
+    NSString *sortDate = pickedDate;
+    
     [[ServerInterface sharedInstance] deleteTaskItemUnderCategoryItemId:_underCategoryItemId withTaskId:task.itemId withDate:[DateHelper stringFromDate:task.date withFormate:DateFormateString] onComplete:^(NSString *taskId, NSString *date) {
         
         NSLog(@"delete task %@, %@", taskId, date);
+        
+        [self sortTaskUnderDate:sortDate];
+        
+        for(int i=0; i<tasks.count; i++){
+            
+            ((TaskItem *)tasks[i]).priority = i;
+        }
+        
+        NSMutableDictionary *dic  = [[NSMutableDictionary alloc] init];
+        
+        for(NSInteger i = 0; i < tasks.count; i++){
+            
+            TaskItem *item = [tasks objectAtIndex:i];
+            
+            [dic setValue:[NSNumber numberWithInteger:item.priority] forKey:item.itemId];
+            
+        }
+        
+        [[ServerInterface sharedInstance] updateTaskItemPriority:dic underCategoryItemId:_underCategoryItemId complete:^{
+            
+            
+        } fail:^(NSError *error) {
+            
+            NSLog(@"unable to update task item after delete an task item");
+        }];
+        
         
     } fail:^(NSError *error) {
         
         NSLog(@"delete task fail");
     }];
-    
-    /*
-    NSLog(@"delete at index %li", (long)index);
-    
-    NSMutableArray *tasks = dateOfTask[pickedDate];
-    
-    [tasks removeObjectAtIndex:index];
-    [_tableView deleteRowAtIndex:index withAnimation:UITableViewRowAnimationFade];
-    
-    //[_tableView reloadData];
-    
-    for(TaskCell *cell in _tableView.visibleCells){
-        
-        NSInteger index = [_tableView indexPathForCell:cell].row;
-        
-        if(!cell.isComplete)
-            cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
-    }
-     */
+
 }
 
 - (void)onPanRightAtCellIndex:(NSInteger)index{
     
     NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    NSString *datePicked = pickedDate;
     
     TaskItem *item = [tasks objectAtIndex:index];
     
@@ -648,31 +702,130 @@
         
         item.isComplete = NO;
         
-        [tasks removeObjectAtIndex:index];
-        
-        [tasks insertObject:item atIndex:0];
-        
         TaskCell *visualCell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
         visualCell.isComplete = NO;
         
-        [_tableView moveRowAtIndex:index toIndex:0 onComplete:nil];
+        
+        
+        
+        
+        [[ServerInterface sharedInstance] changeTaskItemCompleteStateWithTaskId:item.itemId withState:NO underCategoryItemId:_underCategoryItemId complete:^(NSString *taskId) {
+            
+            [tasks removeObjectAtIndex:index];
+            
+            [tasks insertObject:item atIndex:0];
+            
+            
+            for(int i=0; i<tasks.count; i++){
+                
+                ((TaskItem *)tasks[i]).priority = i;
+            }
+            
+            NSMutableDictionary *dic  = [[NSMutableDictionary alloc] init];
+            
+            for(NSInteger i = 0; i < tasks.count; i++){
+                
+                TaskItem *item = [tasks objectAtIndex:i];
+                
+                [dic setValue:[NSNumber numberWithInteger:item.priority] forKey:item.itemId];
+                
+            }
+            
+            if([datePicked isEqualToString:pickedDate]){
+                
+                [_tableView moveRowAtIndex:index toIndex:0 onComplete:nil];
+                
+                for(TaskCell *cell in _tableView.visibleCells){
+                    
+                    NSInteger index = [_tableView indexPathForCell:cell].row;
+                    
+                    if(!cell.isComplete)
+                        cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
+                }
+
+            }
+            
+            [[ServerInterface sharedInstance] updateTaskItemPriority:dic underCategoryItemId:_underCategoryItemId complete:^{
+                
+                
+            } fail:^(NSError *error) {
+                
+                NSLog(@"unable to update task priority");
+            }];
+            
+            
+        } fail:^(NSError *error) {
+            
+            NSLog(@"unable to change task completion state %@", item.itemId);
+        }];
+        
+        
     }
     else{
         
         NSLog(@"complete at index %li", (long)index);
         
-        id obj = [tasks objectAtIndex:index];
-        ((TaskItem *)obj).isComplete = YES;
-        [tasks removeObjectAtIndex:index];
-        [tasks addObject:obj];
+        TaskItem *item = [tasks objectAtIndex:index];
+        item.isComplete = YES;
         
         TaskCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
         cell.isComplete = YES;
         
         
-        [_tableView moveRowAtIndex:index toIndex:[tasks count]-1 onComplete:nil];
+        
+        
+        
+        [[ServerInterface sharedInstance] changeTaskItemCompleteStateWithTaskId:item.itemId withState:YES underCategoryItemId:_underCategoryItemId complete:^(NSString *taskId) {
+            
+            [tasks removeObjectAtIndex:index];
+            [tasks addObject:item];
+            
+            for(int i=0; i<tasks.count; i++){
+                
+                ((TaskItem *)tasks[i]).priority = i;
+            }
+            
+            NSMutableDictionary *dic  = [[NSMutableDictionary alloc] init];
+            
+            for(NSInteger i = 0; i < tasks.count; i++){
+                
+                TaskItem *item = [tasks objectAtIndex:i];
+                
+                [dic setValue:[NSNumber numberWithInteger:item.priority] forKey:item.itemId];
+                
+            }
+            
+            if([datePicked isEqualToString:pickedDate]){
+                
+                [_tableView moveRowAtIndex:index toIndex:[tasks count]-1 onComplete:nil];
+                
+                for(TaskCell *cell in _tableView.visibleCells){
+                    
+                    NSInteger index = [_tableView indexPathForCell:cell].row;
+                    
+                    if(!cell.isComplete)
+                        cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
+                }
+            }
+            
+            
+            [[ServerInterface sharedInstance] updateTaskItemPriority:dic underCategoryItemId:_underCategoryItemId complete:^{
+                
+                
+            } fail:^(NSError *error) {
+                
+                NSLog(@"unable to update task priority");
+            }];
+
+            
+        } fail:^(NSError *error) {
+           
+            NSLog(@"unable to change task completion state %@", item.itemId);
+        }];
+        
     }
     
+    /*
     //[_tableView reloadData];
     
     for(TaskCell *cell in _tableView.visibleCells){
@@ -682,6 +835,7 @@
         if(!cell.isComplete)
             cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
     }
+    */
 }
 
 #pragma mark - SingleTap delegate
@@ -709,48 +863,85 @@
     
     NSMutableArray *tasks = dateOfTask[pickedDate];
     
+    //swap priority
+    TaskItem *item1 = [tasks objectAtIndex:fromIndex];
+    TaskItem *item2 = [tasks objectAtIndex:toIndex];
+    
+    NSInteger tempPriority = item1.priority;
+    item1.priority = item2.priority;
+    item2.priority = tempPriority;
+    
     [tasks exchangeObjectAtIndex:fromIndex withObjectAtIndex:toIndex];
+}
+
+- (void)didMoveItemFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex{
+    
+    if(fromIndex == toIndex)
+        return;
+    
+    NSMutableArray *tasks = dateOfTask[pickedDate];
+    
+    NSMutableDictionary *dic  = [[NSMutableDictionary alloc] init];
+    
+    for(NSInteger i = 0; i < tasks.count; i++){
+        
+        TaskItem *item = [tasks objectAtIndex:i];
+        
+        [dic setValue:[NSNumber numberWithInteger:item.priority] forKey:item.itemId];
+        
+    }
+    
+    
+    [[ServerInterface sharedInstance] updateTaskItemPriority:dic underCategoryItemId:_underCategoryItemId complete:^{
+        
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"unable to update task item priority");
+    }];
 }
 
 #pragma mark - PullDownAddNew delegate
 - (void)addNewItemWithText:(NSString *)text{
     
-    [[ServerInterface sharedInstance] addTaskItemUnderCategoryItemId:_underCategoryItemId withText:text withDate:pickedDate onComplete:^(NSString *taskId, NSString *text, NSString *date) {
-        
-        NSLog(@"add new task %@, %@, %@", taskId, text, date);
-        
-    } fail:^(NSError *error) {
-        
-        NSLog(@"unable to add task server error:%@", error);
-    }];
-    
-    /*
-    TaskItem *item = [TaskItem createTaskItemWithName:text withDate:[_dayPicker.currentDate copy]];
+    [self sortTaskUnderDate:pickedDate];
     
     NSMutableArray *tasks = dateOfTask[pickedDate];
     
-    if(tasks == nil){
+    for(TaskItem *item in tasks){
         
-        tasks = [[NSMutableArray alloc] init];
-        dateOfTask[pickedDate] = tasks;
+        item.priority += 1;
     }
     
-    [tasks insertObject:item atIndex:0];
+    NSMutableDictionary *dic  = [[NSMutableDictionary alloc] init];
     
-    NSLog(@"add new item %@ with date:%@", item.taskItemName, item.date);
     
-    [_tableView insertNewRowAtIndex:0 withAnimation:UITableViewRowAnimationTop];
-    
-    //[_tableView reloadData];
-    
-    for(TaskCell *cell in _tableView.visibleCells){
+    for(NSInteger i = 0; i < tasks.count; i++){
         
-        NSInteger index = [_tableView indexPathForCell:cell].row;
+        TaskItem *item = [tasks objectAtIndex:i];
         
-        if(!cell.isComplete)
-            cell.titleLabel.textColor = [Helper transitColorForItemAtIndex:index totalItemCount:[self nonCompleteTaskCount] startColor:cell.startColorMark endColor:cell.endColorMark];
+        [dic setValue:[NSNumber numberWithInteger:item.priority] forKey:item.itemId];
+        
     }
-     */
+    
+    [[ServerInterface sharedInstance] updateTaskItemPriority:dic underCategoryItemId:_underCategoryItemId complete:^{
+       
+        [[ServerInterface sharedInstance] addTaskItemUnderCategoryItemId:_underCategoryItemId withText:text withDate:pickedDate onComplete:^(NSString *taskId, NSString *text, NSString *date) {
+            
+            NSLog(@"add new task %@, %@, %@", taskId, text, date);
+            
+        } fail:^(NSError *error) {
+            
+            NSLog(@"unable to add task server error:%@", error);
+        }];
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"unable to update task item priority");
+    }];
+    
+    
+    
 }
 
 #pragma mark - DoubleTapEdit delegate

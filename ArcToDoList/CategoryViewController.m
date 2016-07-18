@@ -99,20 +99,8 @@
         
         if(values.count > 0){
             
-            [_categoryItems sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                
-                CategoryItem *item1 = obj1;
-                CategoryItem *item2 = obj2;
-                
-                if(item1.priority > item2.priority)
-                    return NSOrderedDescending;
-                else if(item1.priority < item2.priority)
-                    return NSOrderedAscending;
-                else
-                    return NSOrderedSame;
-            }];
-            
-            
+            [self sortCategoryItem];
+
             [_tableView reloadTableData];
         }
         
@@ -252,19 +240,7 @@
                     
                     if(reloadTableData){
                         
-                        [_categoryItems sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                            
-                            CategoryItem *item1 = obj1;
-                            CategoryItem *item2 = obj2;
-                            
-                            if(item1.priority > item2.priority)
-                                return NSOrderedDescending;
-                            else if(item1.priority < item2.priority)
-                                return NSOrderedAscending;
-                            else
-                                return NSOrderedSame;
-                        }];
-                        
+                        [self sortCategoryItem];
                         
                         [_tableView reloadTableData];
                     }
@@ -303,6 +279,22 @@
     [_tableView.superview addSubview:_blurView];
     
     [_popoverController presentPopoverFromPoint:CGPointMake(0, 60)];
+}
+
+- (void)sortCategoryItem{
+    
+    [_categoryItems sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        
+        CategoryItem *item1 = obj1;
+        CategoryItem *item2 = obj2;
+        
+        if(item1.priority > item2.priority)
+            return NSOrderedDescending;
+        else if(item1.priority < item2.priority)
+            return NSOrderedAscending;
+        else
+            return NSOrderedSame;
+    }];
 }
 
 #pragma mark - FPPopoverController delegate
@@ -469,18 +461,30 @@
     [[ServerInterface sharedInstance] deleteCategoryItemWithItemId:item.itemId withItemPriority:item.priority onComplete:^(NSString *itemId) {
         
         NSLog(@"delete at index %li", (long)index);
-        /*
-        [_categoryItems removeObjectAtIndex:index];
-        [_tableView deleteRowAtIndex:index withAnimation:UITableViewRowAnimationFade];
         
-        //[_tableView reloadData];
+        [self sortCategoryItem];
         
-        for(CategoryCell *cell in _tableView.visibleCells){
+        for(int i=0; i<_categoryItems.count; i++){
             
-            NSInteger index = [_tableView indexPathForCell:cell].row;
-            cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
+            ((CategoryItem *)_categoryItems[i]).priority = i;
         }
-         */
+        
+        NSMutableDictionary *dic  = [[NSMutableDictionary alloc] init];
+        
+        for(NSInteger i = 0; i < _categoryItems.count; i++){
+            
+            CategoryItem *item = [_categoryItems objectAtIndex:i];
+            
+            [dic setValue:[NSNumber numberWithInteger:item.priority] forKey:item.itemId];
+            
+        }
+        
+        [[ServerInterface sharedInstance] updateCategoryItemPriority:dic complete:^{
+            
+        } fail:^(NSError *error) {
+            
+            NSLog(@"unable to update category item after delete an item");
+        }];
         
     } fail:^(NSError *error) {
         
@@ -582,24 +586,6 @@
     if(fromIndex == toIndex)
         return;
     
-    NSLog(@"...............");
-    for(CategoryItem *i in _categoryItems){
-        
-        NSLog(@"priority:%ld", i.priority);
-        
-    }
-    NSLog(@"...............");
-    
-    NSInteger startIndex = fromIndex;
-    NSInteger endIndex = toIndex;
-    
-    if(startIndex > endIndex){
-        
-        NSInteger tempIndex = startIndex;
-        startIndex = endIndex;
-        endIndex = tempIndex;
-    }
-    
     NSMutableDictionary *dic  = [[NSMutableDictionary alloc] init];
     
     
@@ -624,31 +610,42 @@
 #pragma mark - PullDownAddNew delegate
 - (void)addNewItemWithText:(NSString *)text{
     
-    [[ServerInterface sharedInstance] addCategoryItemWithText:text onComplete:^(NSString *itemId, NSString *text) {
+    [self sortCategoryItem];
+    
+    for(CategoryItem *item in _categoryItems){
         
-        NSLog(@"add new item %@", text);
+        item.priority += 1;
+    }
+    
+    NSMutableDictionary *dic  = [[NSMutableDictionary alloc] init];
+    
+    
+    for(NSInteger i = 0; i < _categoryItems.count; i++){
         
-        /*
-        CategoryItem *item = [CategoryItem createCategoryItemWithName:text];
-        item.itemId = itemId;
+        CategoryItem *item = [_categoryItems objectAtIndex:i];
         
-        [_categoryItems insertObject:item atIndex:0];
+        [dic setValue:[NSNumber numberWithInteger:item.priority] forKey:item.itemId];
         
-        [_tableView insertNewRowAtIndex:0 withAnimation:UITableViewRowAnimationTop];
+    }
+    
+    
+    [[ServerInterface sharedInstance] updateCategoryItemPriority:dic complete:^{
         
-        //[_tableView reloadData];
-        
-        for(CategoryCell *cell in _tableView.visibleCells){
+        [[ServerInterface sharedInstance] addCategoryItemWithText:text onComplete:^(NSString *itemId, NSString *text) {
             
-            NSInteger index = [_tableView indexPathForCell:cell].row;
-            cell.colorView.backgroundColor = [Helper transitColorForItemAtIndex:index totalItemCount:_categoryItems.count startColor:cell.startColorMark endColor:cell.endColorMark];
-        }
-         */
+            NSLog(@"add new item %@", text);
+            
+        } fail:^(NSError *error) {
+            
+            NSLog(@"unable to add item server error:%@", error);
+        }];
         
     } fail:^(NSError *error) {
         
-        NSLog(@"unable to add item server error:%@", error);
+        NSLog(@"unable to update category item priority");
     }];
+    
+    
     
 }
 
