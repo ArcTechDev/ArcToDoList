@@ -406,6 +406,58 @@ static ServerInterface *_instance;
     FIRDatabaseReference *catItemRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@/%@",FCategoryItems, [FIRAuth auth].currentUser.uid, catId]];
     FIRDatabaseReference *taskRef = [[[FIRDatabase database] reference] child:[NSString stringWithFormat:@"%@/%@/%@",FTaskItems, [FIRAuth auth].currentUser.uid, catId]];
     
+    [taskRef runTransactionBlock:^FIRTransactionResult * _Nonnull(FIRMutableData * _Nonnull currentData) {
+        
+        NSUInteger taskCount = 0;
+        
+        if(![currentData.value isEqual:[NSNull null]])
+            taskCount = ((NSMutableDictionary *)currentData.value).count;
+        
+        [catItemRef runTransactionBlock:^FIRTransactionResult * _Nonnull(FIRMutableData * _Nonnull currentData) {
+            
+            NSMutableDictionary *itemCountData;
+            
+            if([currentData.value isEqual:[NSNull null]]){
+                
+                return [FIRTransactionResult successWithValue:currentData];
+            }
+            else{
+                
+                itemCountData = currentData.value;
+            }
+            
+            [itemCountData setValue:[NSNumber numberWithUnsignedInteger:taskCount] forKey:FPCatItemTaskCount];
+            
+            [currentData setValue:itemCountData];
+            
+            return [FIRTransactionResult successWithValue:currentData];
+            
+        } andCompletionBlock:^(NSError * _Nullable error, BOOL committed, FIRDataSnapshot * _Nullable snapshot) {
+            
+            if(error != nil || !committed){
+                
+                fail(error);
+                
+                return;
+            }
+            
+            complete();
+        }];
+        
+        return [FIRTransactionResult successWithValue:currentData];
+        
+    } andCompletionBlock:^(NSError * _Nullable error, BOOL committed, FIRDataSnapshot * _Nullable snapshot) {
+        
+        if(error != nil || !committed){
+            
+            fail(error);
+            
+            return;
+        }
+    }];
+    
+    
+    /*
     [taskRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         if(![snapshot.value isEqual:[NSNull null]]){
@@ -448,7 +500,7 @@ static ServerInterface *_instance;
         fail(error);
     }];
     
-    
+    */
 }
 
 - (void)deleteAllTaskUnderCategoryItemId:(NSString *)catId onComplete:(void(^)(void))complete fail:(void(^)(NSError *error))fail{
