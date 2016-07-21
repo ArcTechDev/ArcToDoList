@@ -291,6 +291,53 @@
             </objects>
             <point key="canvasLocation" x="1867" y="1236"/>
         </scene>
+        <!--Notification Setting View Controller-->
+        <scene sceneID="oie-zS-8F6">
+            <objects>
+                <viewController storyboardIdentifier="NotificationSetting" id="MGp-dd-Y3E" customClass="NotificationSettingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="icR-wy-jE6"/>
+                        <viewControllerLayoutGuide type="bottom" id="wgH-Tr-CEv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kC4-Jt-f51">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="xag-p6-DD1">
+                                <rect key="frame" x="0.0" y="300" width="600" height="300"/>
+                                <date key="date" timeIntervalSinceReferenceDate="490679039.881401">
+                                    <!--2016-07-20 03:43:59 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="notificationDateChanged:" destination="MGp-dd-Y3E" eventType="valueChanged" id="7yp-qN-Hlc"/>
+                                </connections>
+                            </datePicker>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wmh-S2-CBK">
+                                <rect key="frame" x="276" y="261" width="51" height="31"/>
+                                <connections>
+                                    <action selector="notificationStateChanged:" destination="MGp-dd-Y3E" eventType="valueChanged" id="5Ya-nP-uc9"/>
+                                </connections>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wmh-S2-CBK" firstAttribute="centerX" secondItem="kC4-Jt-f51" secondAttribute="centerX" id="FGX-vL-5J7"/>
+                            <constraint firstItem="wgH-Tr-CEv" firstAttribute="top" secondItem="xag-p6-DD1" secondAttribute="bottom" id="MH0-P0-lMa"/>
+                            <constraint firstItem="xag-p6-DD1" firstAttribute="top" secondItem="wmh-S2-CBK" secondAttribute="bottom" constant="8" id="Slc-Oe-FbI"/>
+                            <constraint firstItem="xag-p6-DD1" firstAttribute="height" secondItem="kC4-Jt-f51" secondAttribute="height" multiplier="0.5" id="rHf-Am-sm3"/>
+                            <constraint firstAttribute="trailing" secondItem="xag-p6-DD1" secondAttribute="trailing" id="x3G-Hs-lan"/>
+                            <constraint firstItem="xag-p6-DD1" firstAttribute="leading" secondItem="kC4-Jt-f51" secondAttribute="leading" id="yg8-jK-1rL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="xag-p6-DD1" id="e4H-0Z-K4A"/>
+                        <outlet property="notificationSwitcher" destination="wmh-S2-CBK" id="oIt-32-YMg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MMV-PR-cEn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2569" y="1236"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="FaN-5P-un9">
             <objects>

@@ -14,8 +14,12 @@ static NSDateFormatter *dateFormatter;
 
 + (NSString *)stringFromDate:(NSDate *)date withFormate:(NSString *)formate{
     
-    if(dateFormatter == nil)
+    if(dateFormatter == nil){
+        
         dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.timeZone = [NSTimeZone localTimeZone];
+    }
+    
     
     [dateFormatter setDateFormat:formate];
     
@@ -24,12 +28,22 @@ static NSDateFormatter *dateFormatter;
 
 + (NSDate *)dateFromString:(NSString *)dateStr withFormate:(NSString *)formate{
     
-    if(dateFormatter == nil)
+    if(dateFormatter == nil){
+        
         dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.timeZone = [NSTimeZone localTimeZone];
+    }
     
     [dateFormatter setDateFormat:formate];
     
     return [dateFormatter dateFromString:dateStr];
+}
+
++ (NSDate *)dateToGMT:(NSDate *)sourceDate {
+    NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate];
+    NSDate* destinationDate = [[NSDate alloc] initWithTimeInterval:destinationGMTOffset sinceDate:sourceDate];
+    return destinationDate;
 }
 
 @end

@@ -15,6 +15,8 @@
 		CE35A6B51BE743ED00757A01 /* CategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE35A6B41BE743ED00757A01 /* CategoryItem.m */; };
 		CE74303E1D18D924002107D9 /* ServerInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = CE74303D1D18D924002107D9 /* ServerInterface.m */; };
 		CE7D54571BB27B6F00D5DEA6 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D54561BB27B6F00D5DEA6 /* MainViewController.m */; };
+		CE8A7AC71D3F1DEE0070CFB9 /* LPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8A7AC61D3F1DEE0070CFB9 /* LPNManager.m */; };
+		CE8A7ACB1D3F2A6A0070CFB9 /* NotificationSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8A7ACA1D3F2A6A0070CFB9 /* NotificationSettingViewController.m */; };
 		CE9DA0421BE9A94C005742D8 /* GenericCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9DA0411BE9A94C005742D8 /* GenericCell.m */; };
 		CE9DA04B1BE9B4BF005742D8 /* SubTaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9DA04A1BE9B4BF005742D8 /* SubTaskCell.m */; };
 		CE9DA04D1BE9B4D1005742D8 /* SubTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9DA04C1BE9B4D1005742D8 /* SubTaskCell.xib */; };
@@ -94,6 +96,10 @@
 		CE74303D1D18D924002107D9 /* ServerInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerInterface.m; sourceTree = "<group>"; };
 		CE7D54551BB27B6F00D5DEA6 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		CE7D54561BB27B6F00D5DEA6 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		CE8A7AC51D3F1DEE0070CFB9 /* LPNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPNManager.h; sourceTree = "<group>"; };
+		CE8A7AC61D3F1DEE0070CFB9 /* LPNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPNManager.m; sourceTree = "<group>"; };
+		CE8A7AC91D3F2A6A0070CFB9 /* NotificationSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSettingViewController.h; sourceTree = "<group>"; };
+		CE8A7ACA1D3F2A6A0070CFB9 /* NotificationSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSettingViewController.m; sourceTree = "<group>"; };
 		CE9DA0401BE9A94C005742D8 /* GenericCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericCell.h; sourceTree = "<group>"; };
 		CE9DA0411BE9A94C005742D8 /* GenericCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericCell.m; sourceTree = "<group>"; };
 		CE9DA0491BE9B4BF005742D8 /* SubTaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTaskCell.h; sourceTree = "<group>"; };
@@ -262,6 +268,24 @@
 			name = CoreDataClass;
 			sourceTree = "<group>";
 		};
+		CE8A7AC41D3F1DBF0070CFB9 /* LocalPushNotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				CE8A7AC51D3F1DEE0070CFB9 /* LPNManager.h */,
+				CE8A7AC61D3F1DEE0070CFB9 /* LPNManager.m */,
+			);
+			name = LocalPushNotificationManager;
+			sourceTree = "<group>";
+		};
+		CE8A7AC81D3F2A230070CFB9 /* NotificationSettingController */ = {
+			isa = PBXGroup;
+			children = (
+				CE8A7AC91D3F2A6A0070CFB9 /* NotificationSettingViewController.h */,
+				CE8A7ACA1D3F2A6A0070CFB9 /* NotificationSettingViewController.m */,
+			);
+			name = NotificationSettingController;
+			sourceTree = "<group>";
+		};
 		CE9DA03F1BE9A924005742D8 /* GenericCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +340,7 @@
 				CE9DA0431BE9B179005742D8 /* ThridParty */,
 				CEF55B451BE8BA130061FD50 /* Helper */,
 				CE7D545B1BB2A46000D5DEA6 /* CoreDataClass */,
+				CE8A7AC41D3F1DBF0070CFB9 /* LocalPushNotificationManager */,
 				CEC54E241D0EA01400E9AF13 /* AccountManager */,
 				CE7D54541BB27B4E00D5DEA6 /* MainViewController */,
 				CEC942611BB101A70085E6D1 /* SinginViewController */,
@@ -323,6 +348,7 @@
 				CE35A6AA1BE73ED100757A01 /* CategoryViewController */,
 				CED477A61BEC7B4A00669902 /* MenuViewController */,
 				CEF55B2F1BE895C40061FD50 /* TaskViewController */,
+				CE8A7AC81D3F2A230070CFB9 /* NotificationSettingController */,
 				CEC942351BB0F78D0085E6D1 /* AppDelegate.h */,
 				CEC942361BB0F78D0085E6D1 /* AppDelegate.m */,
 				CEC9423B1BB0F78D0085E6D1 /* Main.storyboard */,
@@ -797,6 +823,7 @@
 				CED477831BEC77A400669902 /* PDANCellHolder.m in Sources */,
 				CED477811BEC77A400669902 /* LongPressMove.m in Sources */,
 				CED477851BEC77A400669902 /* PullDownAddNew.m in Sources */,
+				CE8A7AC71D3F1DEE0070CFB9 /* LPNManager.m in Sources */,
 				CEF55B481BE8BA2A0061FD50 /* Helper.m in Sources */,
 				CE9DA0421BE9A94C005742D8 /* GenericCell.m in Sources */,
 				CED4777F1BEC77A400669902 /* DoubleTap.m in Sources */,
@@ -832,6 +859,7 @@
 				CEF55B3B1BE896B00061FD50 /* MZDayPicker.m in Sources */,
 				CEF55B321BE896050061FD50 /* TaskViewController.m in Sources */,
 				CED477A31BEC7A9500669902 /* FPPopoverController.m in Sources */,
+				CE8A7ACB1D3F2A6A0070CFB9 /* NotificationSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

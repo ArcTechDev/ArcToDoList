@@ -19,7 +19,7 @@
 #import "PullDownAddNew.h"
 #import "LongPressMove.h"
 
-@interface TaskViewController : UIViewController<MZDayPickerDataSource, MZDayPickerDelegate, ParentTableViewDelegate, PanLeftRightDelegate, SingleTapDelegate, DoubleTapEditDelegate, PullDownAddNewDelegate, LongPressMoveDelegate>
+@interface TaskViewController : UIViewController<MZDayPickerDataSource, MZDayPickerDelegate, ParentTableViewDelegate, PanLeftRightDelegate, SingleTapDelegate, DoubleTapEditDelegate, PullDownAddNewDelegate, LongPressMoveDelegate, SubTaskCellDelegate>
 
 @property (copy,nonatomic) NSString *underCategoryItemId;
 

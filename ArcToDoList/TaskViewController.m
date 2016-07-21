@@ -9,6 +9,7 @@
 #import "TaskViewController.h"
 #import "DateHelper.h"
 #import "ServerInterface.h"
+#import "NotificationSettingViewController.h"
 
 @interface TaskViewController ()
 
@@ -409,6 +410,8 @@
         cell = (SubTaskCell *)[tableView cellViewFromNib:@"SubTaskCell" atViewIndex:0];
     }
     
+    cell.theDelegate = self;
+    
     return cell;
 }
 
@@ -543,6 +546,31 @@
         else
             return NSOrderedSame;
     }];
+}
+
+#pragma mark - SubTaskCell delegate
+- (void)onNotificationForTaskIndex:(NSInteger)taskIndex{
+    
+    NSArray *tasks = dateOfTask[pickedDate];
+    TaskItem *task = tasks[taskIndex];
+    
+    NotificationSettingViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"NotificationSetting"];
+    controller.task = task;
+    controller.categoryId = _underCategoryItemId;
+    
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)onNoteForTaskIndex:(NSInteger)taskIndex{
+    
+}
+
+- (void)onAttachmentForTaskIndex:(NSInteger)taskIndex{
+    
+}
+
+- (void)onCatagorizeForTaskIndex:(NSInteger)taskIndex{
+    
 }
 
 #pragma mark - MZDayPicker delegate

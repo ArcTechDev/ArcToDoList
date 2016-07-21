@@ -15,21 +15,41 @@
 - (IBAction)onNotificationTap:(id)sender{
     
     NSLog(@"notification tap %li", self.parentIndex);
+    
+    if([_theDelegate respondsToSelector:@selector(onNotificationForTaskIndex:)]){
+        
+        [_theDelegate onNotificationForTaskIndex:self.parentIndex];
+    }
 }
 
 - (IBAction)onNoteTap:(id)sender{
     
     NSLog(@"note tap %li", self.parentIndex);
+    
+    if([_theDelegate respondsToSelector:@selector(onNoteForTaskIndex:)]){
+        
+        [_theDelegate onNoteForTaskIndex:self.parentIndex];
+    }
 }
 
 - (IBAction)onAttachmentTap:(id)sender{
     
     NSLog(@"attachment tap %li", self.parentIndex);
+    
+    if([_theDelegate respondsToSelector:@selector(onAttachmentForTaskIndex:)]){
+        
+        [_theDelegate onAttachmentForTaskIndex:self.parentIndex];
+    }
 }
 
 - (IBAction)onCatagorizeTap:(id)sender{
     
     NSLog(@"change tap %li", self.parentIndex);
+    
+    if([_theDelegate respondsToSelector:@selector(onCatagorizeForTaskIndex:)]){
+        
+        [_theDelegate onCatagorizeForTaskIndex:self.parentIndex];
+    }
 }
 
 /*
