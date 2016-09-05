@@ -15,11 +15,11 @@ To use:
 - Loggin to app by using facebook or google plus account. This is authentication from Firebase, which I use it as service to store item or task that belong to perticular user.
 
 - After login successful the view that is presented is item view, the view where you can manage item. Each item can have many of task. While in item management view you can:
-- Pull dwon:Add new item
-- Pan left on item:Remove item
-- Double tap on item:Rename
-- Tap on item:Show all task under this item
-- Long press on item:Move item up/down
+        - Pull dwon:Add new item
+        - Pan left on item:Remove item
+        - Double tap on item:Rename
+        - Tap on item:Show all task under this item
+        - Long press on item:Move item up/down
 
 - All tasks will be presented while go to certain item. All tasks are orgnized by day, you can add task to certain day, however, 7 days can only be presented from the day you launch app and cunting forward and backward. In task management view you can:
         - Pull dwon:Add new task
