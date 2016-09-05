@@ -13,10 +13,7 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-//#import "GooglePlus.h"
 #import <GoogleSignIn/GoogleSignIn.h>
-//#import <GoogleOpenSource/GoogleOpenSource.h>
-//#import <GooglePlus/GooglePlus.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKLoginKit/FBSDKLoginManager.h>
