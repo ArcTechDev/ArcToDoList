@@ -15,6 +15,7 @@ To use:
 - Loggin to app by using facebook or google plus account. This is authentication from Firebase, which I use it as service to store item or task that belong to perticular user.
 
 - After login successful the view that is presented is item view, the view where you can manage item. Each item can have many of task. While in item management view you can:
+
         - Pull dwon:Add new item
         - Pan left on item:Remove item
         - Double tap on item:Rename
